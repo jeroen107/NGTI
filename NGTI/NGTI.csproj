@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>aspnet-NGTI-CECB1182-A99F-434D-B657-791A6CEFC50B</UserSecretsId>
+    <UserSecretsId>aspnet-NGTI-153BC2AA-5F64-4DAE-8892-D91751ED9A30</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
