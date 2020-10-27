@@ -5697,19 +5697,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jeroe\\.nuget\\packages\\": {}
+    "C:\\Users\\ertug\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jeroe\\source\\repos\\NGTI\\NGTI\\NGTI.csproj",
+      "projectUniqueName": "C:\\Users\\ertug\\Source\\Repos\\NGTI\\NGTI\\NGTI.csproj",
       "projectName": "NGTI",
-      "projectPath": "C:\\Users\\jeroe\\source\\repos\\NGTI\\NGTI\\NGTI.csproj",
-      "packagesPath": "C:\\Users\\jeroe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jeroe\\source\\repos\\NGTI\\NGTI\\obj\\",
+      "projectPath": "C:\\Users\\ertug\\Source\\Repos\\NGTI\\NGTI\\NGTI.csproj",
+      "packagesPath": "C:\\Users\\ertug\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ertug\\Source\\Repos\\NGTI\\NGTI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jeroe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ertug\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
