@@ -186,3 +186,4 @@ C:\Users\jeroe\Source\Repos\NGTI\obj\Debug\netcoreapp3.1\staticwebassets\NGTI.St
 C:\Users\jeroe\Source\Repos\NGTI\obj\Debug\netcoreapp3.1\NGTI.dll
 C:\Users\jeroe\Source\Repos\NGTI\obj\Debug\netcoreapp3.1\NGTI.pdb
 C:\Users\jeroe\Source\Repos\NGTI\obj\Debug\netcoreapp3.1\NGTI.genruntimeconfig.cache
+C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Create.cshtml.g.cs
