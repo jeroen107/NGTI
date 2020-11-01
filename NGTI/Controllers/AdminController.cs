@@ -25,7 +25,7 @@ namespace NGTI.Controllers
         {
             // Sql connection
             SqlConnection conn = new SqlConnection(connectionString);
-            string sql = "SELECT * FROM SoloReservations";
+            string sql = "SELECT * FROM SoloReservations ORDER BY Date ASC";
             SqlCommand cmd = new SqlCommand(sql, conn);
             var model = new List<SoloReservation>();
             conn.Open();
@@ -49,7 +49,34 @@ namespace NGTI.Controllers
             conn.Close();
             return View(model);
         }
+        public IActionResult Details(int id)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            string sql = "SELECT * FROM SoloReservations WHERE IdSoloReservation = " + id;
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            var model = new SoloReservation();
+            conn.Open();
+            using (conn)
+            {
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var soloRes = new SoloReservation();
+                    soloRes.IdSoloReservation = (int)rdr["IdSoloReservation"];
+                    soloRes.Name = (string)rdr["Name"];
+                    soloRes.Date = (DateTime)rdr["Date"];
+                    soloRes.StartTime = (DateTime)rdr["StartTime"];
+                    soloRes.EndTime = (DateTime)rdr["EndTime"];
+                    soloRes.Reason = (string)rdr["Reason"];
+                    soloRes.TableId = (int)rdr["TableId"];
+                    model = soloRes;
+                }
+            }
+            conn.Close();
+            return View(model);
+        }
 
+        
         // GET: /<controller>/
         public IActionResult Delete(int id)
         {
@@ -77,6 +104,7 @@ namespace NGTI.Controllers
             conn.Close();
             return View(model);
         }
+        // POST: /<controller>/
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
