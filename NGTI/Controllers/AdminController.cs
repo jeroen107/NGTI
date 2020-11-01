@@ -27,6 +27,10 @@ namespace NGTI.Controllers
             };
             return View(reservationList);
         }
+
+
+
+
         public IActionResult Delete()
         {
             return View();
