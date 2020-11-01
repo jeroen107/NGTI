@@ -1,7 +1,9 @@
+using System;
+
 namespace NGTI
 {
 
-    public class Reservations
+    public class Reservation
     {
         
         public string name;
@@ -11,18 +13,18 @@ namespace NGTI
 
         public Reservation(string Name, DateTime StartTime, DateTime EndTime)
         {
-            this.Name = name;
+            this.name = Name;
             this.startTime = StartTime;
             this.endTime = EndTime;
             this.bhv = false;
         }
     }
 
-    public class SoloReservation : Reservations
+    public class SoloReservation : Reservation
     {
         public Seat seat;
 
-        public SoloReservation(Seat Seat) : base(name, startTime, endTime)
+        public SoloReservation(string name, DateTime startTime, DateTime endTime, Seat Seat) :base(name, startTime, endTime)
         {
             this.seat = Seat;
         }
@@ -34,12 +36,12 @@ namespace NGTI
               }
         }
     }
-    public class GroupReservation : Reservations
+    public class GroupReservation : Reservation
     {
         public Table table;
         public int groupSize;
 
-        public GroupReservation(Table Table) : base(name, startTime, endTime)
+        public GroupReservation(string name, DateTime startTime, DateTime endTime, Table Table) : base(name, startTime, endTime)
         {
             this.table = Table;
         }
@@ -47,7 +49,7 @@ namespace NGTI
         public void endReservation()
         {
               if(DateTime.Now >= endTime){
-                  seat.clear();
+                table.clear();
               }
         }
     }
