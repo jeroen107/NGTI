@@ -8,7 +8,7 @@ namespace NGTI
         public bool taken;
         public Seat(int number, string Type, bool Taken)
         {
-            this.Nr = LastID;
+            this.Nr = LastNr;
             this.type = Type;
             this.taken = Taken;
             LastNr++;
@@ -17,6 +17,23 @@ namespace NGTI
         public bool isReservered()
         {
             return taken;
+        }
+        
+        public string getType()
+        {
+            return type;
+        }
+
+        public void reserve()
+        {
+            if(!isReservered()){
+                taken = true;
+            }
+        }
+
+        public void clear()
+        {
+            taken = false;
         }
     }
 
