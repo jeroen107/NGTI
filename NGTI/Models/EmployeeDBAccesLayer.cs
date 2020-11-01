@@ -1,7 +1,8 @@
-﻿using Microsoft.Data.SqlClient;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace NGTI.Models
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("sp_Employee_Add", con);
+                SqlCommand cmd = new SqlCommand("AddNewEmpdetails", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Email", employeeEntities.Email);
                 cmd.Parameters.AddWithValue("@Name", employeeEntities.Name);
