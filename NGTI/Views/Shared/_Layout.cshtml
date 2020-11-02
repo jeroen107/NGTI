@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - NGTI</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+<<<<<<< HEAD
 
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="1013616790261-uc1b0io06jusji319pihjnbrcdmld36d.apps.googleusercontent.com">
@@ -65,20 +66,46 @@
             </div>
         </nav>
     </header>
+=======
+    <link rel="stylesheet" href="~/css/layout.css" />
+</head>
+<body>
+    <nav class="menu" tabindex="0">
+        <div class="smartphone-menu-trigger"></div>
+        <header class="avatar">
+
+            @*Profile Picture of user*@
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" />
+
+            @*Name of user*@
+            <h2>John D.</h2>
+
+
+        </header>
+        <ul>
+            <li tabindex="0" class="icon-dashboard"><span>Dashboard</span></li>
+            <li tabindex="0" class="icon-customers"><span>Planner</span></li>
+            <li tabindex="0" class="icon-users"><span>Agenda</span></li>
+            <li tabindex="0" class="icon-settings"><span>Admin</span></li>
+        </ul>
+    </nav>
+
+    <main>
+        
+    </main>
+
+>>>>>>> upstream/Ertu
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - NGTI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/js/app.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+    @RenderBody()
 </body>
 </html>
