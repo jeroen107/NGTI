@@ -78,7 +78,23 @@ namespace NGTI.Controllers
             var model = new ReservationsViewModel() { soloList = solo, groupList = group };
             return View(model);
         }
-        public IActionResult Details(int id, string type)
+        public IActionResult Details(int id, string type) //check if obj is solo or group and redirect
+        {
+            if (type == "Solo")
+            {
+                return RedirectToAction("DetailsSolo", new { id = id });
+            }
+            else if (type == "Group")
+            {               
+               return RedirectToAction("DetailsGroup", new { id = id });
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        // Details of solo or group model
+        public IActionResult DetailsSolo(int id)
         {
             SqlConnection conn = new SqlConnection(connectionString);
             string sql = "SELECT * FROM SoloReservations WHERE IdSoloReservation = " + id;
@@ -104,13 +120,54 @@ namespace NGTI.Controllers
             conn.Close();
             return View(model);
         }
+        public IActionResult DetailsGroup(int id)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            string sql = "SELECT * FROM GroupReservations WHERE IdGroupReservation = " + id;
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            var model = new GroupReservation();
+            conn.Open();
+            using (conn)
+            {
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var res = new GroupReservation();
+                    res.IdGroupReservation = (int)rdr["IdGroupReservation"];
+                    res.Teamname = (string)rdr["Teamname"];
+                    res.Name = (string)rdr["Name"];
+                    res.Date = (DateTime)rdr["Date"];
+                    res.StartTime = (DateTime)rdr["StartTime"];
+                    res.EndTime = (DateTime)rdr["EndTime"];
+                    res.Reason = (string)rdr["Reason"];
+                    res.TableId = (int)rdr["TableId"];
+                    model = res;
+                }
+            }
+            conn.Close();
+            return View(model);
+        }
 
-        
         // GET: /<controller>/
         public IActionResult Delete(int id, string type)
         {
+            if (type == "Solo")
+            {
+                return RedirectToAction("DeleteSolo", new { id = id, type = type });
+            }
+            else if (type == "Group")
+            {
+                return RedirectToAction("DeleteGroup", new { id = id, type = type });
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        public IActionResult DeleteSolo(int id, string type)
+        {
             SqlConnection conn = new SqlConnection(connectionString);
-            string sql = "SELECT * FROM SoloReservations WHERE IdSoloReservation = "+ id;
+            string sql = "SELECT * FROM SoloReservations WHERE IdSoloReservation = " + id;
             SqlCommand cmd = new SqlCommand(sql, conn);
             var model = new SoloReservation();
             conn.Open();
@@ -133,19 +190,62 @@ namespace NGTI.Controllers
             conn.Close();
             return View(model);
         }
-        // POST: /<controller>/
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id, int type)
+        public IActionResult DeleteGroup(int id, string type)
         {
             SqlConnection conn = new SqlConnection(connectionString);
-            string sql = "DELETE FROM SoloReservations WHERE IdSoloReservation = " + id;
+            string sql = "SELECT * FROM GroupReservations WHERE IdGroupReservation = " + id;
             SqlCommand cmd = new SqlCommand(sql, conn);
+            var model = new GroupReservation();
             conn.Open();
             using (conn)
             {
                 SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var soloRes = new GroupReservation();
+                    soloRes.IdGroupReservation = (int)rdr["IdGroupReservation"];
+                    soloRes.Name = (string)rdr["Name"];
+                    soloRes.Teamname = (string)rdr["Teamname"];
+                    soloRes.Date = (DateTime)rdr["Date"];
+                    soloRes.StartTime = (DateTime)rdr["StartTime"];
+                    soloRes.EndTime = (DateTime)rdr["EndTime"];
+                    soloRes.Reason = (string)rdr["Reason"];
+                    soloRes.TableId = (int)rdr["TableId"];
+                    model = soloRes;
+                }
             }
             conn.Close();
+            return View(model);
+        }
+
+        // POST: /<controller>/
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id, string type)
+        {
+            if (type == "Solo")
+            {
+                SqlConnection conn = new SqlConnection(connectionString);
+                string sql = "DELETE FROM SoloReservations WHERE IdSoloReservation = " + id;
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                conn.Open();
+                using (conn)
+                {
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                }
+                conn.Close();
+            }
+            else if (type == "Group")
+            {
+                SqlConnection conn = new SqlConnection(connectionString);
+                string sql = "DELETE FROM GroupReservations WHERE IdGroupReservation = " + id;
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                conn.Open();
+                using (conn)
+                {
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                }
+                conn.Close();
+            }
             return RedirectToAction("Reservations");
         }
     }

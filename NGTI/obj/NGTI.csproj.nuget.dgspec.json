@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj": {}
+    "C:\\Users\\m_cel\\source\\repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj": {
+    "C:\\Users\\m_cel\\source\\repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj",
+        "projectUniqueName": "C:\\Users\\m_cel\\source\\repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj",
         "projectName": "NGTI",
-        "projectPath": "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj",
+        "projectPath": "C:\\Users\\m_cel\\source\\repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj",
         "packagesPath": "C:\\Users\\m_cel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\obj\\",
+        "outputPath": "C:\\Users\\m_cel\\source\\repos\\jeroen107\\NGTI\\NGTI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\m_cel\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -57,6 +57,10 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[3.1.8, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.4, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
