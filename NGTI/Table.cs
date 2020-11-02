@@ -1,5 +1,6 @@
 namespace NGTI
 {
+    /*
     public class Table
     {
         
@@ -18,4 +19,5 @@ namespace NGTI
             taken = false;
         }
     }
+    */
 }
