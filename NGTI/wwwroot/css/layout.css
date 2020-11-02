@@ -1,7 +1,7 @@
 ﻿body {
     background: #F0F3F5;
     margin: 0;
-    font-family: Inter,sans-serif;
+    font-family: "Open Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
     color: #fff;
     padding-left: 240px;
 }
@@ -13,7 +13,7 @@ main {
 
     main .helper {
         background: rgba(0, 0, 0, 0.2);
-        color: #F0F3F5;
+        color: #ffea92;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -68,7 +68,7 @@ main {
     }
 
         .menu ul li {
-            padding: 2em 1em 2em 4em;
+            padding: 2.5em 1em 2.5em 4em;
             font-size: 0.95em;
             font-weight: regular;
             background-repeat: no-repeat;
@@ -79,23 +79,19 @@ main {
         }
 
             .menu ul li.icon-dashboard {
-                background-image: url("http://www.entypo.com/images//gauge.svg");
+                background-image: url("../img/homeIcon.png");
             }
 
             .menu ul li.icon-customers {
-                background-image: url("http://www.entypo.com/images//briefcase.svg");
+                background-image: url("../img/workIcon.png");
             }
 
             .menu ul li.icon-users {
-                background-image: url("http://www.entypo.com/images//users.svg");
+                background-image: url("../img/agendaIcon.png");
             }
 
             .menu ul li.icon-settings {
-                background-image: url("http://www.entypo.com/images//tools.svg");
-            }
-
-            .menu ul li.icon-log-out {
-                background-image: url("http://www.entypo.com/images//cross.svg");
+                background-image: url("../img/adminIcon.png");
             }
 
             .menu ul li:hover {
@@ -105,16 +101,6 @@ main {
             .menu ul li:focus {
                 outline: none;
             }
-
-.link {
-    color: white;
-    text-decoration: none;
-    text-underline: none;
-}
-
-.lower {
-    margin-top: 131%;
-}
 
 @media screen and (max-width: 900px) and (min-width: 400px) {
     body {
@@ -172,7 +158,7 @@ main {
             }
 
                 .menu ul li span:before {
-                    content: "";
+                    content: '';
                     width: 0;
                     height: 0;
                     position: absolute;
@@ -188,10 +174,6 @@ main {
                 opacity: 1;
                 transform: translate3d(0px, -50%, 0);
             }
-
-    .lower {
-        margin-top: 240%;
-    }
 }
 
 @media screen and (max-width: 400px) {
@@ -216,7 +198,7 @@ main {
 
             .menu .smartphone-menu-trigger:before,
             .menu .smartphone-menu-trigger:after {
-                content: "";
+                content: '';
                 width: 50%;
                 height: 2px;
                 background: #fff;
@@ -233,7 +215,7 @@ main {
             }
 
         .menu ul li {
-            padding: 1em 1em 1em 3em;
+            padding: 2em 1em 2em 3em;
             font-size: 1.2em;
         }
 
@@ -245,8 +227,4 @@ main {
             .menu:focus .smartphone-menu-trigger {
                 pointer-events: none;
             }
-
-    .lower {
-        margin-top: 100%;
-    }
 }

@@ -9,47 +9,41 @@
     <link rel="stylesheet" href="~/css/layout.css" />
 </head>
 <body>
-
     <nav class="menu" tabindex="0">
         <div class="smartphone-menu-trigger"></div>
         <header class="avatar">
-            <img src="https://res-5.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco/v1469463557/nswj9f0e9o268twigaxl.png" />
-            <h2>
-                [UserName]
-        </h2>
-    </header>
-    <ul>
-        <a class="link" href="">
+
+            @*Profile Picture of user*@
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" />
+
+            @*Name of user*@
+            <h2>John D.</h2>
+
+
+        </header>
+        <ul>
             <li tabindex="0" class="icon-dashboard"><span>Dashboard</span></li>
-        </a>
-        <a class="link" href="">
             <li tabindex="0" class="icon-customers"><span>Planner</span></li>
-        </a>
-        <a class="link" href="">
             <li tabindex="0" class="icon-users"><span>Agenda</span></li>
-        </a>
-        <a class="link" href="">
             <li tabindex="0" class="icon-settings"><span>Admin</span></li>
-        </a>
-        <a class="link lower" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <li tabindex="0" class="icon-log-out lower"><span>LogOut</span></li>
-        </a>
-        <form id="logout-form" action="" method="POST" style="display: none;">
-           
-        </form>
-    </ul>
-</nav>
+        </ul>
+    </nav>
 
-<div class="container">
-    <main role="main" class="pb-3">
-        @RenderBody()
+    <main>
+        
     </main>
-</div>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="/js/app.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-@RenderSection("Scripts", required: false)
+    <div class="container">
+        <main role="main" class="pb-3">
+
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+    @RenderBody()
 </body>
 </html>
