@@ -2,7 +2,7 @@ using System;
 
 namespace NGTI
 {
-
+    /*
     public class Reservation
     {
         
@@ -53,5 +53,5 @@ namespace NGTI
               }
         }
     }
-
+    */
 }
