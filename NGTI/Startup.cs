@@ -30,10 +30,25 @@ namespace NGTI
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = "1013616790261-uc1b0io06jusji319pihjnbrcdmld36d.apps.googleusercontent.com";
+                    options.ClientSecret = "ID_ZSHiH8PRppMNCmmqBDWSL";
+                    /*
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
+                    
+                     options.ClientId = googleAuthNSection["1013616790261-uc1b0io06jusji319pihjnbrcdmld36d.apps.googleusercontent.com"];
+                     options.ClientSecret = googleAuthNSection["ID_ZSHiH8PRppMNCmmqBDWSL"];
+                    */
+                });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
