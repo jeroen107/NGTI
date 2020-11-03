@@ -10,6 +10,24 @@
     <Compile Remove="Data\Migrations\20201025142527_Employee.Designer.cs" />
     <Compile Remove="Data\Migrations\20201025143114_Employee.cs" />
     <Compile Remove="Data\Migrations\20201025143114_Employee.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201103190802_Soloreservation.cs" />
+    <Compile Remove="Data\Migrations\20201103190802_Soloreservation.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201103191209_Soloreservation.cs" />
+    <Compile Remove="Data\Migrations\20201103191209_Soloreservation.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201103192601_Soloreservation.cs" />
+    <Compile Remove="Data\Migrations\20201103192601_Soloreservation.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201103192653_Groupreservation.cs" />
+    <Compile Remove="Data\Migrations\20201103192653_Groupreservation.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201103194106_Groupreservation.cs" />
+    <Compile Remove="Data\Migrations\20201103194106_Groupreservation.Designer.cs" />
+    <Compile Remove="Migrations\20201103200609_Soloreservation.cs" />
+    <Compile Remove="Migrations\20201103200609_Soloreservation.Designer.cs" />
+    <Compile Remove="Migrations\20201103200643_Groupreservation.cs" />
+    <Compile Remove="Migrations\20201103200643_Groupreservation.Designer.cs" />
+    <Compile Remove="Migrations\20201103201502_Groupreservation.cs" />
+    <Compile Remove="Migrations\20201103201502_Groupreservation.Designer.cs" />
+    <Compile Remove="Migrations\20201103201748_Soloreservation.cs" />
+    <Compile Remove="Migrations\20201103201748_Soloreservation.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +42,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 </Project>

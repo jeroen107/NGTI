@@ -19,7 +19,6 @@ namespace NGTI.Models
                 cmd.Parameters.AddWithValue("@IdGroupReservation", GroupReservationEntities.IdGroupReservation);
                 cmd.Parameters.AddWithValue("@Name", GroupReservationEntities.Name);
                 cmd.Parameters.AddWithValue("@TeamName", GroupReservationEntities.Teamname);
-                cmd.Parameters.AddWithValue("@Date", GroupReservationEntities.Date);
                 cmd.Parameters.AddWithValue("@StartTime", GroupReservationEntities.StartTime);
                 cmd.Parameters.AddWithValue("@EndTime", GroupReservationEntities.EndTime);
                 cmd.Parameters.AddWithValue("@Reason", GroupReservationEntities.Reason);
