@@ -41,7 +41,7 @@ namespace NGTI.Controllers
                 for (int x = 0; x < 2; x++) {
                     SqlCommand cmd = new SqlCommand(sqls[x], conn);
                     SqlDataReader rdr = cmd.ExecuteReader();
-                    if(x == 0)
+                    if (x == 0)
                     {
                         while (rdr.Read())
                         {
@@ -54,9 +54,9 @@ namespace NGTI.Controllers
                             res.Reason = (string)rdr["Reason"];
                             res.TableId = (int)rdr["TableId"];
                             solo.Add(res);
-                        }      
+                        }
                     }
-                    else if(x == 1)
+                    else if (x == 1)
                     {
                         while (rdr.Read())
                         {
@@ -72,7 +72,7 @@ namespace NGTI.Controllers
                             group.Add(res);
                         }
                     }
-                }             
+                }
             }
             conn.Close();
             var model = new ReservationsViewModel() { soloList = solo, groupList = group };
@@ -85,8 +85,8 @@ namespace NGTI.Controllers
                 return RedirectToAction("DetailsSolo", new { id = id });
             }
             else if (type == "Group")
-            {               
-               return RedirectToAction("DetailsGroup", new { id = id });
+            {
+                return RedirectToAction("DetailsGroup", new { id = id });
             }
             else
             {
@@ -166,6 +166,7 @@ namespace NGTI.Controllers
         }
         public IActionResult DeleteSolo(int id, string type)
         {
+            System.Diagnostics.Debug.WriteLine("deleteSolo : [" + id + "] [" + type + "]");
             SqlConnection conn = new SqlConnection(connectionString);
             string sql = "SELECT * FROM SoloReservations WHERE IdSoloReservation = " + id;
             SqlCommand cmd = new SqlCommand(sql, conn);
@@ -192,6 +193,8 @@ namespace NGTI.Controllers
         }
         public IActionResult DeleteGroup(int id, string type)
         {
+            System.Diagnostics.Debug.WriteLine("deleteGroup : [" + id + "] [" + type + "]");
+
             SqlConnection conn = new SqlConnection(connectionString);
             string sql = "SELECT * FROM GroupReservations WHERE IdGroupReservation = " + id;
             SqlCommand cmd = new SqlCommand(sql, conn);
@@ -218,10 +221,12 @@ namespace NGTI.Controllers
             return View(model);
         }
 
-        // POST: /<controller>/
-        [HttpPost, ActionName("Delete")]
+        // POST: /<controller>/   
+        [HttpPost]
         public IActionResult DeleteConfirmed(int id, string type)
         {
+            System.Diagnostics.Debug.WriteLine("deleteConfirmed : [" + id + "] [" + type + "]");
+
             if (type == "Solo")
             {
                 SqlConnection conn = new SqlConnection(connectionString);

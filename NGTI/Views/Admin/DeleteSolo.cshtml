@@ -54,7 +54,7 @@
         </dd>
     </dl>
 
-    <form asp-action="Delete">
+    <form asp-action="DeleteConfirmed" asp-route-id="@Model.IdSoloReservation" asp-route-type="Solo">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Reservations">Back to List</a>
     </form>

@@ -55,7 +55,7 @@
         </dd class>
     </dl>
     
-    <form asp-action="Delete">
+    <form asp-action="DeleteConfirmed" asp-route-id="@Model.IdGroupReservation" asp-route-type="Group">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Reservations">Back to List</a>
     </form>
