@@ -2,17 +2,16 @@
 
 @{
     ViewData["Title"] = "Index";
-
 }
 
-<h3>All reservations here (single/group). Click on delete for delete row.</h3>
+<h1>Index</h1>
 
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdSoloReservation)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -23,18 +22,17 @@
                 @Html.DisplayNameFor(model => model.EndTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TableId)
+                @Html.DisplayNameFor(model => model.Reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Table)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
+@foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdSoloReservation)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -45,14 +43,17 @@
                 @Html.DisplayFor(modelItem => item.EndTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TableId)
+                @Html.DisplayFor(modelItem => item.Reason)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.IdSoloReservation }) |
-                @Html.ActionLink("Details", "Details", new { id = item.IdSoloReservation }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IdSoloReservation })
+                @Html.DisplayFor(modelItem => item.Table.TableId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdSoloReservation">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdSoloReservation">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdSoloReservation">Delete</a>
             </td>
         </tr>
-        }
+}
     </tbody>
 </table>

@@ -293,3 +293,8 @@ C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\GroupR
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\GroupReservations\Details.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\GroupReservations\Edit.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\GroupReservations\Index.cshtml.g.cs
+C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\SoloReservations\Create.cshtml.g.cs
+C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\SoloReservations\Delete.cshtml.g.cs
+C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\SoloReservations\Details.cshtml.g.cs
+C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\SoloReservations\Edit.cshtml.g.cs
+C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\SoloReservations\Index.cshtml.g.cs
