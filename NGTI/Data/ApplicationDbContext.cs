@@ -17,9 +17,13 @@ namespace NGTI.Data
         public DbSet<Table> Tables { get; set; }
         public DbSet<GroupReservation> GroupReservations { get; set; }
         public DbSet<SoloReservation> SoloReservations { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<GroupReservation>().HasOne(groupreservation => groupreservation.Table).WithMany(table => table.GroupReservations); }
+            modelBuilder.Entity<GroupReservation>().HasOne(groupreservation => groupreservation.Table).WithMany(table => table.GroupReservations);
+            modelBuilder.Entity<SoloReservation>().HasOne(soloreservation => soloreservation.Table).WithMany(table => table.SoloReservations);
+        }
+
         // dit is voor de zekerheid dat de verbinding vast staat
     }
 }
