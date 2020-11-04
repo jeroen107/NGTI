@@ -253,5 +253,9 @@ namespace NGTI.Controllers
             }
             return RedirectToAction("Reservations");
         }
+        public string Edit(int id)
+        {
+            return "Hello, "+id;
+        }
     }
 }
