@@ -12,6 +12,8 @@ using NGTI.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.OAuth;
 
 namespace NGTI
 {
@@ -38,15 +40,17 @@ namespace NGTI
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
-                    options.ClientId = "1013616790261-uc1b0io06jusji319pihjnbrcdmld36d.apps.googleusercontent.com";
-                    options.ClientSecret = "ID_ZSHiH8PRppMNCmmqBDWSL";
-                    /*
-                    IConfigurationSection googleAuthNSection =
-                        Configuration.GetSection("Authentication:Google");
                     
-                     options.ClientId = googleAuthNSection["1013616790261-uc1b0io06jusji319pihjnbrcdmld36d.apps.googleusercontent.com"];
-                     options.ClientSecret = googleAuthNSection["ID_ZSHiH8PRppMNCmmqBDWSL"];
-                    */
+                   options.ClientId = "1013616790261-uc1b0io06jusji319pihjnbrcdmld36d.apps.googleusercontent.com";
+                   options.ClientSecret = "ID_ZSHiH8PRppMNCmmqBDWSL";
+                    /*
+                   IConfigurationSection googleAuthNSection =
+                       Configuration.GetSection("Authentication:Google");
+
+                    options.ClientId = googleAuthNSection["1013616790261-uc1b0io06jusji319pihjnbrcdmld36d.apps.googleusercontent.com"];
+                    options.ClientSecret = googleAuthNSection["ID_ZSHiH8PRppMNCmmqBDWSL"];
+                   */
+
                 });
             
         }
