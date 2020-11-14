@@ -48,7 +48,6 @@ namespace NGTI.Controllers
                             var res = new SoloReservation();
                             res.IdSoloReservation = (int)rdr["IdSoloReservation"];
                             res.Name = (string)rdr["Name"];
-                            res.Date = (DateTime)rdr["Date"];
                             res.StartTime = (DateTime)rdr["StartTime"];
                             res.EndTime = (DateTime)rdr["EndTime"];
                             res.Reason = (string)rdr["Reason"];
@@ -64,7 +63,6 @@ namespace NGTI.Controllers
                             res.IdGroupReservation = (int)rdr["IdGroupReservation"];
                             res.Teamname = (string)rdr["Teamname"];
                             res.Name = (string)rdr["Name"];
-                            res.Date = (DateTime)rdr["Date"];
                             res.StartTime = (DateTime)rdr["StartTime"];
                             res.EndTime = (DateTime)rdr["EndTime"];
                             res.Reason = (string)rdr["Reason"];
@@ -109,7 +107,6 @@ namespace NGTI.Controllers
                     var soloRes = new SoloReservation();
                     soloRes.IdSoloReservation = (int)rdr["IdSoloReservation"];
                     soloRes.Name = (string)rdr["Name"];
-                    soloRes.Date = (DateTime)rdr["Date"];
                     soloRes.StartTime = (DateTime)rdr["StartTime"];
                     soloRes.EndTime = (DateTime)rdr["EndTime"];
                     soloRes.Reason = (string)rdr["Reason"];
@@ -136,7 +133,6 @@ namespace NGTI.Controllers
                     res.IdGroupReservation = (int)rdr["IdGroupReservation"];
                     res.Teamname = (string)rdr["Teamname"];
                     res.Name = (string)rdr["Name"];
-                    res.Date = (DateTime)rdr["Date"];
                     res.StartTime = (DateTime)rdr["StartTime"];
                     res.EndTime = (DateTime)rdr["EndTime"];
                     res.Reason = (string)rdr["Reason"];
@@ -180,7 +176,6 @@ namespace NGTI.Controllers
                     var soloRes = new SoloReservation();
                     soloRes.IdSoloReservation = (int)rdr["IdSoloReservation"];
                     soloRes.Name = (string)rdr["Name"];
-                    soloRes.Date = (DateTime)rdr["Date"];
                     soloRes.StartTime = (DateTime)rdr["StartTime"];
                     soloRes.EndTime = (DateTime)rdr["EndTime"];
                     soloRes.Reason = (string)rdr["Reason"];
@@ -209,7 +204,6 @@ namespace NGTI.Controllers
                     soloRes.IdGroupReservation = (int)rdr["IdGroupReservation"];
                     soloRes.Name = (string)rdr["Name"];
                     soloRes.Teamname = (string)rdr["Teamname"];
-                    soloRes.Date = (DateTime)rdr["Date"];
                     soloRes.StartTime = (DateTime)rdr["StartTime"];
                     soloRes.EndTime = (DateTime)rdr["EndTime"];
                     soloRes.Reason = (string)rdr["Reason"];
