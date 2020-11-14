@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj": {}
+    "C:\\Users\\zoon_\\Source\\Repos\\NGTI\\NGTI\\NGTI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj": {
+    "C:\\Users\\zoon_\\Source\\Repos\\NGTI\\NGTI\\NGTI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj",
+        "projectUniqueName": "C:\\Users\\zoon_\\Source\\Repos\\NGTI\\NGTI\\NGTI.csproj",
         "projectName": "NGTI",
-        "projectPath": "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj",
-        "packagesPath": "C:\\Users\\m_cel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\obj\\",
+        "projectPath": "C:\\Users\\zoon_\\Source\\Repos\\NGTI\\NGTI\\NGTI.csproj",
+        "packagesPath": "C:\\Users\\zoon_\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\zoon_\\Source\\Repos\\NGTI\\NGTI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\m_cel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\zoon_\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -38,23 +38,23 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[3.1.8, )"
-            },
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[3.1.8, )"
-            },
-            "Microsoft.AspNetCore.Identity.UI": {
-              "target": "Package",
-              "version": "[3.1.8, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
               "version": "[3.1.9, )"
             },
-            "Microsoft.EntityFrameworkCore.Sqlite": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[3.1.9, )"
             },
@@ -63,14 +63,6 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[3.1.9, )"
-            },
-            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
-              "target": "Package",
-              "version": "[3.1.4, )"
-            },
-            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
-              "target": "Package",
-              "version": "[3.1.4, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
