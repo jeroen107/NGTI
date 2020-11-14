@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "tjLdbDZlgnpvZke/pZiTq4cg9qit0xllF5YhWmiLlsrLudtCg323N++vaVdR0KOi3eMcLmmdAceSEkRrPUFhkA==",
+  "dgSpecHash": "9JNZau9+/HiSa3jIn8IcH70ZB9vd0OrZkeW9cuHYi0KLlTarwUHnUARcYo83dcnESeTXHhl4pkkULvITLZy0CA==",
   "success": true,
   "projectFilePath": "C:\\Users\\zoon_\\Source\\Repos\\NGTI\\NGTI\\NGTI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\zoon_\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\3.1.9\\microsoft.aspnetcore.authentication.google.3.1.9.nupkg.sha512",
     "C:\\Users\\zoon_\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.9\\microsoft.aspnetcore.cryptography.internal.3.1.9.nupkg.sha512",
     "C:\\Users\\zoon_\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.9\\microsoft.aspnetcore.cryptography.keyderivation.3.1.9.nupkg.sha512",
     "C:\\Users\\zoon_\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\3.1.9\\microsoft.aspnetcore.diagnostics.entityframeworkcore.3.1.9.nupkg.sha512",
