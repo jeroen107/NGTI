@@ -1,32 +1,35 @@
-﻿@model NGTI.Models.ReservationsViewModel;
-@{ 
+﻿@model IEnumerable<NGTI.Models.SoloReservation>
+
+@{
+    ViewData["Title"] = "Index";
+
 }
+
+<h3>All reservations here (single/group). Click on delete for delete row.</h3>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                IdSoloList
+                @Html.DisplayNameFor(model => model.IdSoloReservation)
             </th>
             <th>
-                Name
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                Date
+                @Html.DisplayNameFor(model => model.StartTime)
             </th>
             <th>
-                StartTime
+                @Html.DisplayNameFor(model => model.EndTime)
             </th>
             <th>
-                EndTime
-            </th>
-            <th>
-                TableId
+                @Html.DisplayNameFor(model => model.TableId)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.soloList)
+        @foreach (var item in Model)
         {
         <tr>
             <td>
@@ -45,70 +48,11 @@
                 @Html.DisplayFor(modelItem => item.TableId)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.IdSoloReservation, type = "Solo" }) |
-                @Html.ActionLink("Details", "Details", new { id = item.IdSoloReservation, type = "Solo" }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IdSoloReservation, type = "Solo" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdSoloReservation }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IdSoloReservation }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdSoloReservation })
             </td>
         </tr>
-        }
-    </tbody>
-</table>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                IdGroupReservation
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                TeamName
-            </th>
-            <th>
-                Date
-            </th>
-            <th>
-                StartTime
-            </th>
-            <th>
-                EndTime
-            </th>
-            <th>
-                TableId
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.groupList)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdGroupReservation)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Teamname)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TableId)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.IdGroupReservation, type = "Group" }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.IdGroupReservation, type = "Group" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.IdGroupReservation, type = "Group" })
-                </td>
-            </tr>
         }
     </tbody>
 </table>
