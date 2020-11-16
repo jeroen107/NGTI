@@ -45,29 +45,29 @@
         <header class="avatar">
 
             @*Profile Picture of user*@
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" />
+            <img src="~/img/ngti_logo.svg" />
             @if (SignInManager.IsSignedIn(User))
             { 
-                <span>@User.Identity.Name.</span>
+                <span>@User.Identity.Name</span>
                 <span class="nav-item">
-                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-                    </form>
+                    <span class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <span type="submit" class="nav-link btn btn-link text-dark">Logout</span>
+                    </span>
                 </span>
             }
             else
             {
-                <li class="nav-item">
+                <span class="nav-item">
                     <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-                </li>
+                </span>
             }
 
         </header>
         <ul>
-            <li tabindex="0" class="icon-dashboard"><span>Dashboard</span></li>
-            <li tabindex="0" class="icon-customers"><span>Planner</span></li>
-            <li tabindex="0" class="icon-users"><span>Agenda</span></li>
-            <li tabindex="0" class="icon-settings"><span>Admin</span></li>
+            <li tabindex="0" class="icon-dashboard"><a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Dashboard">Dashboard</a></li>
+            <li tabindex="0" class="icon-customers"><a class="nav-link text-dark" asp-area="" asp-controller="Reservations" asp-action="Planner">Planner</a></li>
+            <li tabindex="0" class="icon-users"><a class="nav-link text-dark" href="https://calendar.google.com/calendar/" target="_blank"> <span>Agenda</span></li></a>
+            <li tabindex="0" class="icon-settings"><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
         </ul>
     </nav>
 
