@@ -1,0 +1,52 @@
+﻿@model NGTI.Models.SoloReservation
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Solo Reservation";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/create.css" />
+</head>
+<h2 class="top">SOLO RESERVATION</h2>
+<hr />
+<form asp-action="Create" class="form-horizontal">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StartTime" class="control-label"></label>
+        <input asp-for="StartTime" class="form-control" />
+        <span asp-validation-for="StartTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EndTime" class="control-label"></label>
+        <input asp-for="EndTime" class="form-control" />
+        <span asp-validation-for="EndTime" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Reason" class="control-label"></label>
+        <input asp-for="Reason" class="form-control" />
+        <span asp-validation-for="Reason" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label class="control-label">TableId</label>
+        <input asp-for="TableId" class="form-control" />
+        <span asp-validation-for="TableId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="CREATE" class="btn subres" />
+    </div>
+</form>
+@{
+    if (@TempData["Msg"] != null)
+    {
+        <script>
+                alert('@TempData["msg"]')
+        </script>
+    }
+}
