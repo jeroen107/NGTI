@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 using NGTI.Models;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.AspNetCore.Http;
+using NGTI.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,8 +31,8 @@ namespace NGTI.Controllers
         {
             // Sql connection
             SqlConnection conn = new SqlConnection(connectionString);
-            string sql = "SELECT * FROM SoloReservations ORDER BY Date ASC";
-            string sql2 = "SELECT * FROM GroupReservations ORDER BY Date ASC";
+            string sql = "SELECT * FROM SoloReservations ORDER BY starttime ASC";
+            string sql2 = "SELECT * FROM GroupReservations ORDER BY starttime ASC";
             string[] sqls = new string[2] { sql, sql2 };
 
             var solo = new List<SoloReservation>();
@@ -38,7 +42,8 @@ namespace NGTI.Controllers
             using (conn)
             {
                 //read all reservations and add them to tuple<solo,group>
-                for (int x = 0; x < 2; x++) {
+                for (int x = 0; x < 2; x++)
+                {
                     SqlCommand cmd = new SqlCommand(sqls[x], conn);
                     SqlDataReader rdr = cmd.ExecuteReader();
                     if (x == 0)
@@ -48,7 +53,6 @@ namespace NGTI.Controllers
                             var res = new SoloReservation();
                             res.IdSoloReservation = (int)rdr["IdSoloReservation"];
                             res.Name = (string)rdr["Name"];
-                            res.Date = (DateTime)rdr["Date"];
                             res.StartTime = (DateTime)rdr["StartTime"];
                             res.EndTime = (DateTime)rdr["EndTime"];
                             res.Reason = (string)rdr["Reason"];
@@ -64,7 +68,6 @@ namespace NGTI.Controllers
                             res.IdGroupReservation = (int)rdr["IdGroupReservation"];
                             res.Teamname = (string)rdr["Teamname"];
                             res.Name = (string)rdr["Name"];
-                            res.Date = (DateTime)rdr["Date"];
                             res.StartTime = (DateTime)rdr["StartTime"];
                             res.EndTime = (DateTime)rdr["EndTime"];
                             res.Reason = (string)rdr["Reason"];
@@ -109,7 +112,6 @@ namespace NGTI.Controllers
                     var soloRes = new SoloReservation();
                     soloRes.IdSoloReservation = (int)rdr["IdSoloReservation"];
                     soloRes.Name = (string)rdr["Name"];
-                    soloRes.Date = (DateTime)rdr["Date"];
                     soloRes.StartTime = (DateTime)rdr["StartTime"];
                     soloRes.EndTime = (DateTime)rdr["EndTime"];
                     soloRes.Reason = (string)rdr["Reason"];
@@ -136,7 +138,6 @@ namespace NGTI.Controllers
                     res.IdGroupReservation = (int)rdr["IdGroupReservation"];
                     res.Teamname = (string)rdr["Teamname"];
                     res.Name = (string)rdr["Name"];
-                    res.Date = (DateTime)rdr["Date"];
                     res.StartTime = (DateTime)rdr["StartTime"];
                     res.EndTime = (DateTime)rdr["EndTime"];
                     res.Reason = (string)rdr["Reason"];
@@ -180,7 +181,6 @@ namespace NGTI.Controllers
                     var soloRes = new SoloReservation();
                     soloRes.IdSoloReservation = (int)rdr["IdSoloReservation"];
                     soloRes.Name = (string)rdr["Name"];
-                    soloRes.Date = (DateTime)rdr["Date"];
                     soloRes.StartTime = (DateTime)rdr["StartTime"];
                     soloRes.EndTime = (DateTime)rdr["EndTime"];
                     soloRes.Reason = (string)rdr["Reason"];
@@ -209,7 +209,6 @@ namespace NGTI.Controllers
                     soloRes.IdGroupReservation = (int)rdr["IdGroupReservation"];
                     soloRes.Name = (string)rdr["Name"];
                     soloRes.Teamname = (string)rdr["Teamname"];
-                    soloRes.Date = (DateTime)rdr["Date"];
                     soloRes.StartTime = (DateTime)rdr["StartTime"];
                     soloRes.EndTime = (DateTime)rdr["EndTime"];
                     soloRes.Reason = (string)rdr["Reason"];
@@ -253,9 +252,85 @@ namespace NGTI.Controllers
             }
             return RedirectToAction("Reservations");
         }
-        public string Edit(int id)
+        public ActionResult EditSolo(int id)
         {
-            return "Hello, "+id;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditSolo(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        private readonly ApplicationDbContext _context;
+
+        public AdminController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        public async Task<IActionResult> EditGroup(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var groupReservation = await _context.GroupReservations.FindAsync(id);
+            if (groupReservation == null)
+            {
+                return NotFound();
+            }
+            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
+            return View(groupReservation);
+        }
+
+        // POST: GroupReservations/Edit/5
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditGroup(int id, [Bind("IdGroupReservation,Name,Teamname,StartTime,EndTime,Reason,TableId")] GroupReservation groupReservation)
+        {
+            if (id != groupReservation.IdGroupReservation)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(groupReservation);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!GroupReservationExists(groupReservation.IdGroupReservation))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
+            return View(groupReservation);
+        }
+
+        private bool GroupReservationExists(int id)
+        {
+            return _context.GroupReservations.Any(e => e.IdGroupReservation == id);
         }
     }
 }

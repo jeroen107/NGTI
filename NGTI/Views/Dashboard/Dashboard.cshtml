@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model NGTI.Models.ReservationsViewModel;
+@{
+    ViewData["Title"] = "Dashboard";
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+</head>
+<body>
+    <div class="all">
+        <h2 class="top">UPCOMING RESERVATIONS</h2>
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Table ID</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.soloList)
+                {
+                    if (item.Name == @User.Identity.Name)
+                    {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdSoloReservation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndTime)
+                    </td>
+                    <td class="tableid">
+                        @Html.DisplayFor(modelItem => item.TableId)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdSoloReservation">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.IdSoloReservation">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdSoloReservation">Delete</a>
+                    </td>
+                </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

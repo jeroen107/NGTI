@@ -1,0 +1,24 @@
+﻿.top {
+    font: "sans-serif";
+    font-weight: 700;
+    color: #000;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.form-horizontal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.subres {
+    color: white;
+    background-color: #0B7A75;
+    left: 0%;
+}

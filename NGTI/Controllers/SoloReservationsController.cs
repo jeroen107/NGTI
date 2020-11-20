@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using NGTI.Models;
 
 namespace NGTI.Controllers
 {
-    public class SoloReservationController : Controller
+    public class SoloReservationsController : Controller
     {
         // GET: SoloReservationController
         public ActionResult Index()
@@ -89,5 +90,37 @@ namespace NGTI.Controllers
                 return View();
             }
         }
+
+        public ActionResult ReservationCheck()
+        {
+            SqlConnection con = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true");
+            string sql = "SELECT StartTime, COUNT(StartTime) AS totaal FROM SoloReservations GROUP BY StartTime HAVING COUNT('totaal') < 10";
+
+            var totals = new List<int>();
+
+            con.Open();
+            using (con) ;
+            {
+                SqlCommand cmd = new SqlCommand(sql, con);
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    int total = (int)rdr["totaal"];
+                    totals.Add(total);
+                }
+            }
+            con.Close();
+
+            foreach (int total in totals)
+            {
+                if (total > 5)
+                {
+                    return NotFound();
+                }
+            }
+            return Index();
+        }
     }
 }
+
+
