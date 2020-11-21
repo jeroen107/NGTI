@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -6,53 +11,81 @@
     <title>@ViewData["Title"] - NGTI</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
+
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="1013616790261-uc1b0io06jusji319pihjnbrcdmld36d.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        gapi.load('auth2', function () {
+            gapi.auth2.init();
+        });
+    </script>
+    <script>
+        function onSignIn(googleUser) {
+            // Useful data for your client-side scripts:
+            var profile = googleUser.getBasicProfile();
+            console.log("ID: " + profile.getId());
+            console.log('Full Name: ' + profile.getName());
+            console.log("Image URL: " + profile.getImageUrl());
+            console.log("Email: " + profile.getEmail());
+            // The ID token you need to pass to your backend:
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log("ID Token: " + id_token);
+
+            document.getElementById('output').innerHTML = profile.getName;
+        }
+    </script>
+
+    <link rel="stylesheet" href="~/css/layout.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">NGTI</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Create">Add Employee</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SoloReservations" asp-action="Create">Add SoloReservation</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="GroupReservations" asp-action="Create">Add GroupReservation</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <nav class="menu" tabindex="0">
+        <div class="smartphone-menu-trigger"></div>
+        <header class="avatar">
+
+            @*Profile Picture of user*@
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" />
+            @if (SignInManager.IsSignedIn(User))
+            { 
+                <span>@User.Identity.Name.</span>
+                <span class="nav-item">
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button type="submit" class="nav-link btn btn-link text-light">Logout</button>
+                    </form>
+                </span>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                </li>
+            }
+
+        </header>
+        <ul>
+            <li tabindex="0" class="icon-dashboard"><span>Dashboard</span></li>
+            <li tabindex="0" class="icon-customers"><a class="nav-link text-light" asp-area="" asp-controller="SoloReservation" asp-action="Create">Planner</a></li>
+            <li tabindex="0" class="icon-users"><span>Agenda</span></li>
+            <li tabindex="0" class="icon-settings"><a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+        </ul>
+    </nav>
+
+    <main>
+
+    </main>
+
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - NGTI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/js/app.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+    @RenderBody()
 </body>
 </html>
