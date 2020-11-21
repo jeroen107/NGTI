@@ -23,6 +23,7 @@ namespace NGTI.Data
             modelBuilder.Entity<GroupReservation>().HasOne(groupreservation => groupreservation.Table).WithMany(table => table.GroupReservations);
             modelBuilder.Entity<SoloReservation>().HasOne(soloreservation => soloreservation.Table).WithMany(table => table.SoloReservations);
         }
+        public DbSet<NGTI.Models.Team> Team { get; set; }
 
         // dit is voor de zekerheid dat de verbinding vast staat
     }

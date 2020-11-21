@@ -332,5 +332,10 @@ namespace NGTI.Controllers
         {
             return _context.GroupReservations.Any(e => e.IdGroupReservation == id);
         }
+
+        public ActionResult covidmeasure()
+        {
+            return View();
+        }
     }
 }
