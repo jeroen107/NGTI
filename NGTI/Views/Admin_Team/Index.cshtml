@@ -19,9 +19,11 @@
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.TeamName)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Members)
                 </th>
-                <th></th>
+                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -30,12 +32,15 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.TeamName)
+                        
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.Members)
                     </td>
                     <td>
-                        <a asp-action="EditTeam" asp-route-id="@item.TeamName">Edit</a> |
-                        <a asp-action="DetailsTeam" asp-route-id="@item.TeamName">Details</a> |
-                        <a asp-action="DeleteTeam" asp-route-id="@item.TeamName">Delete</a>
+                        <a asp-action="EditTeam" asp-route-name="@item.TeamName">Edit</a> |
+                        <a asp-action="DetailsTeam" asp-route-name="@item.TeamName">Details</a> |
+                        <a asp-action="DeleteTeam" asp-route-name="@item.TeamName">Delete</a>
                     </td>
                 </tr>
             }

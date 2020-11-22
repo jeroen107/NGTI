@@ -70,7 +70,7 @@ namespace NGTI.Controllers
             }
             return View();
         }
-        public IActionResult AddTeamMembers(int teamId)
+        public IActionResult AddTeamMembers()
         {
             SqlConnection conn = new SqlConnection(connectionString);
             string sql = "SELECT * FROM AspNetUsers";
@@ -92,17 +92,18 @@ namespace NGTI.Controllers
                 }
             }
             conn.Close();
-            return View();
+            return View(model);
         }
         public IActionResult DetailsTeam(string name)
         {
             Team model = GetTeam(name);
             return View(model);
         }
-
+        [HttpGet]
         public IActionResult DeleteTeam(string name)
         {
             Team model = GetTeam(name);
+            //List<Employee> model = GetMembers(name);
             return View(model);
         }
 
@@ -122,6 +123,29 @@ namespace NGTI.Controllers
                     obj.TeamName = (string)rdr["TeamName"];
                     obj.Members = (int)rdr["count"];
                     model = obj;
+                }
+            }
+            conn.Close();
+            return model;
+        }
+        public List<Employee> GetMembers(string name)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            string sql = "SELECT * FROM Employees JOIN TeamMembers tm ON Email = tm.EmpEmail WHERE tm.TeamName = '" + name + "'";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            var model = new List<Employee>();
+            conn.Open();
+            using (conn)
+            {
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var obj = new Employee();
+                    obj.Name = (string)rdr["Name"];
+                    obj.Email = (string)rdr["Email"];
+                    obj.BHV = (bool)rdr["BHV"];
+                    obj.Admin = (bool)rdr["Admin"];
+                    model.Add(obj);
                 }
             }
             conn.Close();
