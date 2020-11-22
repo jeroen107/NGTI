@@ -18,8 +18,8 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Id)
                     @Html.DisplayNameFor(model => model.TeamName)
+                    @Html.DisplayNameFor(model => model.Members)
                 </th>
                 <th></th>
             </tr>
@@ -29,13 +29,13 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Id)
                         @Html.DisplayFor(modelItem => item.TeamName)
+                        @Html.DisplayFor(modelItem => item.Members)
                     </td>
                     <td>
-                        <a asp-action="EditTeam" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="DetailsTeam" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="DeleteTeam" asp-route-id="@item.Id">Delete</a>
+                        <a asp-action="EditTeam" asp-route-id="@item.TeamName">Edit</a> |
+                        <a asp-action="DetailsTeam" asp-route-id="@item.TeamName">Details</a> |
+                        <a asp-action="DeleteTeam" asp-route-id="@item.TeamName">Delete</a>
                     </td>
                 </tr>
             }

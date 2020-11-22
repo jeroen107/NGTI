@@ -407,6 +407,7 @@ C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.csp
 C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\Index.cshtml.g.cs
-C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\CreateTeam.cshtml.g.cs
 C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\DeleteTeam.cshtml.g.cs
 C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\DetailsTeam.cshtml.g.cs
+C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\AddTeamMembers.cshtml.g.cs
+C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\CreateTeam.cshtml.g.cs

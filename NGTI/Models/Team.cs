@@ -8,13 +8,13 @@ namespace NGTI.Models
 {
     public class Team
     {
-        [Key]
-        public int Id { get; set; }
+        [Key][Required]
         public string TeamName { get; set; }
+        public int Members { get; set; }
     }
     public class TeamMembers
     {
-        public int TeamId { get; set; }
+        public string EmpEmail { get; set; }
         public string Name { get; set; }
     }
 }

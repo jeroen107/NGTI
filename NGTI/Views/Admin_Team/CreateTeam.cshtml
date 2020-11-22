@@ -2,6 +2,12 @@
 
 @{
     ViewData["Title"] = "CreateTeam";
+    if (TempData["msg"] != null)
+    {
+        <script>
+                alert('@TempData["msg"]')
+        </script>
+    }
 }
 
 <h1>CreateTeam</h1>
