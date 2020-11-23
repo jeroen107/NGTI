@@ -1,52 +1,52 @@
 ﻿@model NGTI.Models.SoloReservation
-@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+
 @{
-    ViewData["Title"] = "Solo Reservation";
+    ViewData["Title"] = "Create";
 }
 
-<head>
-    <link rel="stylesheet" href="~/css/create.css" />
-</head>
-<h2 class="top">SOLO RESERVATION</h2>
+<h1>Create</h1>
+
+<h4>SoloReservation</h4>
 <hr />
-<form asp-action="Create" class="form-horizontal">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Name" class="control-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <!--<label asp-for="Name" class="control-label"></label>-->
+                <input asp-for="Name" class="form-control" value="@User.Identity.Name" hidden />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartTime" class="control-label"></label>
+                <input asp-for="StartTime" class="form-control" />
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndTime" class="control-label"></label>
+                <input asp-for="EndTime" class="form-control" />
+                <span asp-validation-for="EndTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reason" class="control-label"></label>
+                <input asp-for="Reason" class="form-control" />
+                <span asp-validation-for="Reason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TableId" class="control-label"></label>
+                <select asp-for="TableId" class="form-control" asp-items="ViewBag.TableId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label asp-for="StartTime" class="control-label"></label>
-        <input asp-for="StartTime" class="form-control" />
-        <span asp-validation-for="StartTime" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="EndTime" class="control-label"></label>
-        <input asp-for="EndTime" class="form-control" />
-        <span asp-validation-for="EndTime" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Reason" class="control-label"></label>
-        <input asp-for="Reason" class="form-control" />
-        <span asp-validation-for="Reason" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label class="control-label">TableId</label>
-        <input asp-for="TableId" class="form-control" />
-        <span asp-validation-for="TableId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="CREATE" class="btn subres" />
-    </div>
-</form>
-@{
-    if (@TempData["Msg"] != null)
-    {
-        <script>
-                alert('@TempData["msg"]')
-        </script>
-    }
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
