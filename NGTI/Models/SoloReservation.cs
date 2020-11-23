@@ -20,4 +20,3 @@ namespace NGTI.Models
         public Table Table { get; set; }
     }
 }
-

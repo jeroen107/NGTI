@@ -9,7 +9,7 @@ namespace NGTI.Models
 {
     public class ReservationsViewModel
     {
-        public List<SoloReservation> soloList {get; set;}
+        public List<SoloReservation> soloList { get; set; }
         public List<GroupReservation> groupList { get; set; }
     }
 }

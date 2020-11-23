@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using NGTI.Models;
 
 namespace NGTI.Controllers
 {
+    [Authorize]
     public class SoloReservationsController : Controller
     {
         private readonly ApplicationDbContext _context;
