@@ -333,9 +333,19 @@ namespace NGTI.Controllers
             return _context.GroupReservations.Any(e => e.IdGroupReservation == id);
         }
 
-        public ActionResult covidmeasure()
+        public IActionResult covidmeasure()
         {
+            int limit = SqlMethods.QueryLimit();
+            TempData["limit"] = limit;
             return View();
+        }
+        [HttpPost]
+        public IActionResult covidmeasure(string limit)
+        {
+            int newLimit = Convert.ToInt32(limit);
+            System.Diagnostics.Debug.WriteLine(limit);
+            SqlMethods.QueryVoid("UPDATE Limit SET limit = " + limit);
+            return RedirectToAction("Index");
         }
     }
 }

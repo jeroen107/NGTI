@@ -96,17 +96,23 @@ namespace NGTI.Controllers
         }
         public IActionResult DetailsTeam(string name)
         {
-            Team model = GetTeam(name);
+            TempData["name"] = name;
+            List<Employee> model = GetMembers(name);
             return View(model);
         }
-        [HttpGet]
         public IActionResult DeleteTeam(string name)
         {
-            Team model = GetTeam(name);
-            //List<Employee> model = GetMembers(name);
+            TempData["name"] = name;
+            List<Employee> model = GetMembers(name);
             return View(model);
         }
 
+        public IActionResult DeleteConfirmed(string name)
+        {
+            Deleterow("DELETE Teams WHERE TeamName = '" + name + "'");
+            System.Diagnostics.Debug.WriteLine("DELETED " + name);
+            return RedirectToAction("Index");
+        }
         public Team GetTeam(string name)
         {
             SqlConnection conn = new SqlConnection(connectionString);
@@ -150,6 +156,18 @@ namespace NGTI.Controllers
             }
             conn.Close();
             return model;
+        }
+        public void Deleterow(string query)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+            string sql = query;
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            conn.Open();
+            using (conn)
+            {
+                SqlDataReader rdr = cmd.ExecuteReader();
+            }
+            conn.Close();
         }
     }
 }
