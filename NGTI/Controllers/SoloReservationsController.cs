@@ -2,125 +2,161 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using NGTI.Data;
 using NGTI.Models;
 
 namespace NGTI.Controllers
 {
+    [Authorize]
     public class SoloReservationsController : Controller
     {
-        // GET: SoloReservationController
-        public ActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+        public SoloReservationsController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;
         }
 
-        // GET: SoloReservationController/Details/5
-        public ActionResult Details(int id)
+        // GET: SoloReservations
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var applicationDbContext = _context.SoloReservations.Include(s => s.Table);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: SoloReservationController/Create
-        SoloReservationDBAccesLayer SolResdb = new SoloReservationDBAccesLayer();
+        // GET: SoloReservations/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        [HttpGet]
+            var soloReservation = await _context.SoloReservations
+                .Include(s => s.Table)
+                .FirstOrDefaultAsync(m => m.IdSoloReservation == id);
+            if (soloReservation == null)
+            {
+                return NotFound();
+            }
+
+            return View(soloReservation);
+        }
+
+        // GET: SoloReservations/Create
         public IActionResult Create()
         {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create([Bind] SoloReservation SoloReservationEntities)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    string resp = SolResdb.AddSoloReservationRecord(SoloReservationEntities);
-                    TempData["msg"] = resp;
-                }
-            }
-            catch (Exception ex)
-            {
-                TempData["msg"] = ex.Message;
-            }
+            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId");
             return View();
         }
 
-        // GET: SoloReservationController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: SoloReservationController/Edit/5
+        // POST: SoloReservations/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,StartTime,EndTime,Reason,TableId")] SoloReservation soloReservation)
         {
-            try
+            if (ModelState.IsValid)
             {
+                _context.Add(soloReservation);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
+            return View(soloReservation);
         }
 
-        // GET: SoloReservationController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: SoloReservations/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var soloReservation = await _context.SoloReservations.FindAsync(id);
+            if (soloReservation == null)
+            {
+                return NotFound();
+            }
+            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
+            return View(soloReservation);
         }
 
-        // POST: SoloReservationController/Delete/5
+        // POST: SoloReservations/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, [Bind("IdSoloReservation,Name,StartTime,EndTime,Reason,TableId")] SoloReservation soloReservation)
         {
-            try
+            if (id != soloReservation.IdSoloReservation)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(soloReservation);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!SoloReservationExists(soloReservation.IdSoloReservation))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
+            return View(soloReservation);
         }
 
-        public ActionResult ReservationCheck()
+        // GET: SoloReservations/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            SqlConnection con = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true");
-            string sql = "SELECT StartTime, COUNT(StartTime) AS totaal FROM SoloReservations GROUP BY StartTime HAVING COUNT('totaal') < 10";
-
-            var totals = new List<int>();
-
-            con.Open();
-            using (con) ;
+            if (id == null)
             {
-                SqlCommand cmd = new SqlCommand(sql, con);
-                SqlDataReader rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    int total = (int)rdr["totaal"];
-                    totals.Add(total);
-                }
+                return NotFound();
             }
-            con.Close();
 
-            foreach (int total in totals)
+            var soloReservation = await _context.SoloReservations
+                .Include(s => s.Table)
+                .FirstOrDefaultAsync(m => m.IdSoloReservation == id);
+            if (soloReservation == null)
             {
-                if (total > 5)
-                {
-                    return NotFound();
-                }
+                return NotFound();
             }
-            return Index();
+
+            return View(soloReservation);
+        }
+
+        // POST: SoloReservations/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var soloReservation = await _context.SoloReservations.FindAsync(id);
+            _context.SoloReservations.Remove(soloReservation);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool SoloReservationExists(int id)
+        {
+            return _context.SoloReservations.Any(e => e.IdSoloReservation == id);
         }
     }
 }
-
-
