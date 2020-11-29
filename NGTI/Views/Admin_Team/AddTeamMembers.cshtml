@@ -8,6 +8,56 @@
 <head>
     <link rel="stylesheet" href="~/css/table.css" />
 </head>
+<script>
+    var msg = [];
+    //adduser or delete in array
+    function adduser(user) {
+        mlen = msg.length;
+        check = 0;
+        for (i = 0; i < mlen; i++)
+        {
+            if (msg[i] == user) {
+                check = 1;
+                index = i;
+            }
+        }
+        if (check == 0)
+        {
+            mlen = msg.length;
+            msg[mlen] = user;
+        }
+        else {
+            newarr = [];
+            for (i = 0, j = 0; i < mlen; i++)
+            {
+                if (i != index)
+                {
+                    newarr[j] = msg[i];
+                    j++;
+                }
+            }
+            msg = newarr;
+        }
+        //update div
+            mlen = msg.length;
+        text = "<ul>";
+        for (i = 0; i < mlen; i++) {
+            text += "<li>" + msg[i] + "</li>";
+        }
+        text += "</ul>";
+        document.getElementById("memberlist").innerHTML = text;
+    }
+
+    function test() {
+
+        alert("msg = " + msg)
+    }
+
+    function add(user) {
+        alert(user +" clicked this button");
+    }
+</script>
+<body>
 <table class="content-table">
     <thead>
         <tr>
@@ -42,12 +92,16 @@
                 @Html.DisplayFor(modelItem => item.Admin)
             </td>
             <td>
-                <button>X</button>
+                <button type="button" onclick="adduser('@item.Email')">+</button>
             </td>
         </tr>
         }
     </tbody>
 </table>
+<p>=Members of my team=</p>
+<div id="memberlist" height="500px"></div>
+<button type="button" onclick="test()">checktest</button>
 <form asp-action="AddTeamMembers">
     <button type="submit">Create</button>
 </form>
+</body>
