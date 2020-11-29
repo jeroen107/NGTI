@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NGTI.Models;
 
@@ -11,6 +12,12 @@ namespace NGTI.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly UserManager<ApplicationUser> userManager;
+
+        public AdminController(UserManager<ApplicationUser> userManager)
+        {
+            this.userManager = userManager;
+        }
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -28,8 +35,63 @@ namespace NGTI.Controllers
             return View(reservationList);
         }
 
+        [HttpGet]
+        public IActionResult ListUsers()
+        {
+            var users = userManager.Users;
+            return View(users);
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
 
+            if(user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
+                return View();
+            }
+
+            var model = new Employee
+            {
+                Id = user.Id,
+                Email = user.Email,
+                BHV = user.BHV,
+                Admin = user.Admin,
+
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(Employee model)
+        {
+            var user = await userManager.FindByIdAsync(model.Id);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {model.Id} cannot be found";
+                return View();
+            }
+            else
+            {
+                user.Email = model.Email;
+                user.BHV = model.BHV;
+                user.Admin = model.Admin;
+
+                var result = await userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+
+                }
+                return View(model);
+            }
+            
+            
+        }
 
         public IActionResult Delete()
         {
