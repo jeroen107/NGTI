@@ -225,25 +225,6 @@ namespace NGTI.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("NGTI.Models.Employee", b =>
-                {
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("Admin")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("BHV")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Email");
-
-                    b.ToTable("Employees");
-                });
-
             modelBuilder.Entity("NGTI.Models.GroupReservation", b =>
                 {
                     b.Property<int>("IdGroupReservation")
