@@ -12,6 +12,6 @@ namespace NGTI.Models
         public int TableId { get; set; }
         // verbinding tussen groepreservatie en tafels
         public ICollection<GroupReservation> GroupReservations { get; set; } = new List<GroupReservation>();
-
+        public ICollection<SoloReservation> SoloReservations { get; set; } = new List<SoloReservation>();
     }
 }
