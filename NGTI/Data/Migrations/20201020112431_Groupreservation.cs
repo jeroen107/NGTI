@@ -28,8 +28,8 @@ namespace NGTI.Data.Migrations
                     Name = table.Column<string>(nullable: true),
                     Teamname = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
-                    StartTime = table.Column<DateTime>(nullable: false),
-                    EndTime = table.Column<DateTime>(nullable: false),
+                    //Date = table.Column<DateTime>(nullable: false),
+                    TimeSlot = table.Column<DateTime>(nullable: false),
                     Reason = table.Column<string>(nullable: true),
                     TableId = table.Column<int>(nullable: false)
                 },
