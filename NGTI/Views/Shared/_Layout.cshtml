@@ -3,39 +3,40 @@
 @inject UserManager<ApplicationUser> UserManager
 
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - NGTI</title>
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NGTI</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 
 
-        <meta name="google-signin-scope" content="profile email">
-        <meta name="google-signin-client_id" content="1013616790261-uc1b0io06jusji319pihjnbrcdmld36d.apps.googleusercontent.com">
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <script>
-            gapi.load('auth2', function () {
-                gapi.auth2.init();
-            });
-        </script>
-        <script>
-            function onSignIn(googleUser) {
-                // Useful data for your client-side scripts:
-                var profile = googleUser.getBasicProfile();
-                console.log("ID: " + profile.getId());
-                console.log('Full Name: ' + profile.getName());
-                console.log("Image URL: " + profile.getImageUrl());
-                console.log("Email: " + profile.getEmail());
-                // The ID token you need to pass to your backend:
-                var id_token = googleUser.getAuthResponse().id_token;
-                console.log("ID Token: " + id_token);
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="1013616790261-uc1b0io06jusji319pihjnbrcdmld36d.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        gapi.load('auth2', function () {
+            gapi.auth2.init();
+        });
+    </script>
+    <script>
+        function onSignIn(googleUser) {
+            // Useful data for your client-side scripts:
+            var profile = googleUser.getBasicProfile();
+            console.log("ID: " + profile.getId());
+            console.log('Full Name: ' + profile.getName());
+            console.log("Image URL: " + profile.getImageUrl());
+            console.log("Email: " + profile.getEmail());
+            // The ID token you need to pass to your backend:
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log("ID Token: " + id_token);
 
-                document.getElementById('output').innerHTML = profile.getName;
-            }
-        </script>
+            document.getElementById('output').innerHTML = profile.getName;
+        }
+    </script>
 
     <link rel="stylesheet" href="~/css/layout.css" />
 </head>
@@ -43,51 +44,55 @@
     <nav class="menu" tabindex="0">
         <div class="smartphone-menu-trigger"></div>
         <header class="avatar">
-
-            @*Profile Picture of user*@
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" />
+            <img src="~/img/ngti_logo.svg" />
             @if (SignInManager.IsSignedIn(User))
-            { 
-                <span>@User.Identity.Name.</span>
-                <span class="nav-item">
-                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                        <button type="submit" class="nav-link btn btn-link text-light">Logout</button>
-                    </form>
-                </span>
+            {
+                <li tabindex="0"><span>@User.Identity.Name</span></li>
+                <li tabindex="0">
+                    <span class="nav-item">
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                        </form>
+                    </span>
+                </li>
             }
             else
             {
-                <li class="nav-item">
-                    <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
-                </li>
+                <span class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"><span>Login</span></a>
+                </span>
             }
 
         </header>
+
         <ul>
-            <li tabindex="0" class="icon-dashboard"><span>Dashboard</span></li>
-            <li tabindex="0" class="icon-customers"><a class="nav-link text-light" asp-area="" asp-controller="SoloReservations" asp-action="Create">Planner</a></li>
-            <li tabindex="0" class="icon-users"><span>Agenda</span></li>
-            <li tabindex="0" class="icon-settings"><a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+            <li tabindex="0" class="icon-dashboard"><a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Overview"><span>Dashboard</span></a></li>
+            <li tabindex="0" class="icon-customers"><a class="nav-link text-dark" asp-area="" asp-controller="Reservations" asp-action="Planner"><span>Planner</span></a></li>
+            <li tabindex="0" class="icon-users"><a class="nav-link text-dark" href="https://calendar.google.com/calendar/" target="_blank"> <span>Agenda</span></li></a>
+            <li tabindex="0" class="icon-settings"><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index"><span>Admin</span></a>
         </ul>
+
     </nav>
 
     <main>
 
+    </main>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+
         </main>
+    </div>
 
-        <div class="container">
-            <main role="main" class="pb-3">
-
-            </main>
-        </div>
-
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="/js/app.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        @RenderSection("Scripts", required: false)
-        @RenderBody()
-    </body>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+    @RenderBody()
+</body>
 </html>
+
+
 
 
