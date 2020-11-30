@@ -1,0 +1,95 @@
+﻿
+@model NGTI.Models.ReservationsViewModel;
+@{
+    ViewData["Title"] = "All Reservations";
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/table.css" />
+</head>
+<body>
+    <div class="up">
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Table Nr.</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.soloList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TimeSlot)
+                    </td>
+                    <td class="tableid">
+                        @Html.DisplayFor(modelItem => item.TableId)
+                    </td>
+                    <td>
+                        <a asp-action="EditSolo" asp-route-id="@item.IdSoloReservation">Edit</a> | |
+                        @Html.ActionLink("Details", "Details", new { id = item.IdSoloReservation, type = "Solo" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IdSoloReservation, type = "Solo" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+        </div>
+
+    <div class="down">
+    <table class="content-table">
+        <thead>
+            <tr>
+
+                <th>Name</th>
+                <th>Team Name</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Table Nr</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.groupList)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Teamname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeSlot)
+                </td>
+                <td class="tableid">
+                    @Html.DisplayFor(modelItem => item.TableId)
+                </td>
+                <td>
+                    <a asp-action="EditGroup" asp-route-id="@item.IdGroupReservation">Edit</a> |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdGroupReservation, type = "Group" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdGroupReservation, type = "Group" })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+    
+</body>
+</html>
