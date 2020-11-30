@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +10,6 @@ using NGTI.Models;
 
 namespace NGTI.Controllers
 {
-    [Authorize]
     public class GroupReservationsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -59,7 +57,7 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdGroupReservation,Name,Teamname,Date,StartTime,EndTime,Reason,TableId")] GroupReservation groupReservation)
+        public async Task<IActionResult> Create([Bind("IdGroupReservation,Name,Teamname,StartTime,EndTime,Reason,TableId")] GroupReservation groupReservation)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +91,7 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdGroupReservation,Name,Teamname,Date,StartTime,EndTime,Reason,TableId")] GroupReservation groupReservation)
+        public async Task<IActionResult> Edit(int id, [Bind("IdGroupReservation,Name,Teamname,StartTime,EndTime,Reason,TableId")] GroupReservation groupReservation)
         {
             if (id != groupReservation.IdGroupReservation)
             {

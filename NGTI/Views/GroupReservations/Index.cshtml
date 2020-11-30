@@ -1,8 +1,9 @@
-﻿@model IEnumerable<NGTI.Models.GroupReservation>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model IEnumerable<NGTI.Models.GroupReservation>
 
-@{
-    ViewData["Title"] = "Index";
-}
+@{ ViewData["Title"] = "Index"; }
 
 <h1>Index</h1>
 
@@ -34,32 +35,35 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Teamname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reason)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Table.TableId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdGroupReservation">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdGroupReservation">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdGroupReservation">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            if (item.Name == @User.Identity.Name)
+            {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Teamname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.StartTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EndTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Reason)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Table.TableId)
+    </td>
+    <td>
+        <a asp-action="Edit" asp-route-id="@item.IdGroupReservation">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.IdGroupReservation">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.IdGroupReservation">Delete</a>
+    </td>
+</tr>}
+            }
     </tbody>
 </table>

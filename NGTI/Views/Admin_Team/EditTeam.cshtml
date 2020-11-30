@@ -1,0 +1,20 @@
+﻿@model IEnumerable<NGTI.Models.Employee>
+
+@{
+    ViewData["Title"] = "EditTeam";
+    string teamName = (string)TempData["name"];
+}
+<script>
+</script>
+<h1>EditTeam</h1>
+
+<h4>Team</h4>
+<hr />
+
+<div>
+    <button onclick="test">test</button>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
