@@ -40,8 +40,8 @@ namespace NGTI.Controllers
         {
             // Sql connection
             SqlConnection conn = new SqlConnection(connectionString);
-            string sql = "SELECT * FROM SoloReservations ORDER BY starttime ASC";
-            string sql2 = "SELECT * FROM GroupReservations ORDER BY starttime ASC";
+            string sql = "SELECT * FROM SoloReservations ORDER BY Date ASC";
+            string sql2 = "SELECT * FROM GroupReservations ORDER BY Date ASC";
             string[] sqls = new string[2] { sql, sql2 };
 
             var solo = new List<SoloReservation>();
@@ -62,8 +62,8 @@ namespace NGTI.Controllers
                             var res = new SoloReservation();
                             res.IdSoloReservation = (int)rdr["IdSoloReservation"];
                             res.Name = (string)rdr["Name"];
-                            res.StartTime = (DateTime)rdr["StartTime"];
-                            res.EndTime = (DateTime)rdr["EndTime"];
+                            res.Date = (DateTime)rdr["Date"];
+                            res.TimeSlot = (string)rdr["TimeSlot"];
                             res.Reason = (string)rdr["Reason"];
                             res.TableId = (int)rdr["TableId"];
                             solo.Add(res);
@@ -77,8 +77,8 @@ namespace NGTI.Controllers
                             res.IdGroupReservation = (int)rdr["IdGroupReservation"];
                             res.Teamname = (string)rdr["Teamname"];
                             res.Name = (string)rdr["Name"];
-                            res.StartTime = (DateTime)rdr["StartTime"];
-                            res.EndTime = (DateTime)rdr["EndTime"];
+                            res.Date = (DateTime)rdr["Date"];
+                            res.TimeSlot = (string)rdr["TimeSlot"];
                             res.Reason = (string)rdr["Reason"];
                             res.TableId = (int)rdr["TableId"];
                             group.Add(res);
@@ -178,8 +178,8 @@ namespace NGTI.Controllers
                     var soloRes = new SoloReservation();
                     soloRes.IdSoloReservation = (int)rdr["IdSoloReservation"];
                     soloRes.Name = (string)rdr["Name"];
-                    soloRes.StartTime = (DateTime)rdr["StartTime"];
-                    soloRes.EndTime = (DateTime)rdr["EndTime"];
+                    soloRes.Date = (DateTime)rdr["Date"];
+                    soloRes.TimeSlot = (string)rdr["TimeSlot"];
                     soloRes.Reason = (string)rdr["Reason"];
                     soloRes.TableId = (int)rdr["TableId"];
                     model = soloRes;
@@ -204,8 +204,8 @@ namespace NGTI.Controllers
                     res.IdGroupReservation = (int)rdr["IdGroupReservation"];
                     res.Teamname = (string)rdr["Teamname"];
                     res.Name = (string)rdr["Name"];
-                    res.StartTime = (DateTime)rdr["StartTime"];
-                    res.EndTime = (DateTime)rdr["EndTime"];
+                    res.Date = (DateTime)rdr["Date"];
+                    res.TimeSlot = (string)rdr["TimeSlot"];
                     res.Reason = (string)rdr["Reason"];
                     res.TableId = (int)rdr["TableId"];
                     model = res;
@@ -247,8 +247,8 @@ namespace NGTI.Controllers
                     var soloRes = new SoloReservation();
                     soloRes.IdSoloReservation = (int)rdr["IdSoloReservation"];
                     soloRes.Name = (string)rdr["Name"];
-                    soloRes.StartTime = (DateTime)rdr["StartTime"];
-                    soloRes.EndTime = (DateTime)rdr["EndTime"];
+                    soloRes.Date = (DateTime)rdr["Date"];
+                    soloRes.TimeSlot = (string)rdr["TimeSlot"];
                     soloRes.Reason = (string)rdr["Reason"];
                     soloRes.TableId = (int)rdr["TableId"];
                     model = soloRes;
@@ -275,8 +275,8 @@ namespace NGTI.Controllers
                     soloRes.IdGroupReservation = (int)rdr["IdGroupReservation"];
                     soloRes.Name = (string)rdr["Name"];
                     soloRes.Teamname = (string)rdr["Teamname"];
-                    soloRes.StartTime = (DateTime)rdr["StartTime"];
-                    soloRes.EndTime = (DateTime)rdr["EndTime"];
+                    soloRes.Date = (DateTime)rdr["Date"];
+                    soloRes.TimeSlot = (string)rdr["TimeSlot"];
                     soloRes.Reason = (string)rdr["Reason"];
                     soloRes.TableId = (int)rdr["TableId"];
                     model = soloRes;
@@ -359,7 +359,7 @@ namespace NGTI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditGroup(int id, [Bind("IdGroupReservation,Name,Teamname,StartTime,EndTime,Reason,TableId")] GroupReservation groupReservation)
+        public async Task<IActionResult> EditGroup(int id, [Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,TableId")] GroupReservation groupReservation)
         {
             if (id != groupReservation.IdGroupReservation)
             {

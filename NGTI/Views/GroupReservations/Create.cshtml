@@ -1,19 +1,20 @@
 ﻿@model NGTI.Models.GroupReservation
 
 @{
-    ViewData["Title"] = "Create Group Reservation";
+    ViewData["Title"] = "Create";
 }
-<head>
-    <link rel="stylesheet" href="~/css/create.css" />
-</head>
 
-<h2 class="top">GROUP RESERVATION</h2>
+<h1>Create</h1>
+
+<h4>GroupReservation</h4>
 <hr />
-        <form asp-action="Create" class="form-horizontal">
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <!--<label asp-for="Name" class="control-label"></label>-->
+                <input asp-for="Name" class="form-control" value="@User.Identity.Name" disabled />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -23,14 +24,14 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="StartTime" class="control-label"></label>
-                <input asp-for="StartTime" class="form-control" />
-                <span asp-validation-for="StartTime" class="text-danger"></span>
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EndTime" class="control-label"></label>
-                <input asp-for="EndTime" class="form-control" />
-                <span asp-validation-for="EndTime" class="text-danger"></span>
+                <label asp-for="TimeSlot" class="control-label"></label>
+                <input asp-for="TimeSlot" class="form-control" />
+                <span asp-validation-for="TimeSlot" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Reason" class="control-label"></label>
@@ -38,15 +39,19 @@
                 <span asp-validation-for="Reason" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">TableId</label>
-                <input asp-for="TableId" class="form-control" />
-                <span asp-validation-for="TableId" class="text-danger"></span>
+                <label asp-for="TableId" class="control-label"></label>
+                <select asp-for="TableId" class="form-control" asp-items="ViewBag.TableId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="CREATE" class="btn subres" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+    </div>
+</div>
 
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

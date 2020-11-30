@@ -13,12 +13,12 @@ namespace NGTI.Controllers
     public class DashboardController : Controller
     {
         string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
-        public IActionResult Dashboard()
+        public IActionResult Overview()
         {
             // Sql connection
             SqlConnection conn = new SqlConnection(connectionString);
-            string sql = "SELECT * FROM SoloReservations ORDER BY starttime ASC";
-            string sql2 = "SELECT * FROM GroupReservations ORDER BY starttime ASC";
+            string sql = "SELECT * FROM SoloReservations ORDER BY Date ASC";
+            string sql2 = "SELECT * FROM GroupReservations ORDER BY Date ASC";
             string[] sqls = new string[2] { sql, sql2 };
 
             var solo = new List<SoloReservation>();
@@ -39,8 +39,8 @@ namespace NGTI.Controllers
                             var res = new SoloReservation();
                             res.IdSoloReservation = (int)rdr["IdSoloReservation"];
                             res.Name = (string)rdr["Name"];
-                            res.StartTime = (DateTime)rdr["StartTime"];
-                            res.EndTime = (DateTime)rdr["EndTime"];
+                            res.Date = (DateTime)rdr["Date"];
+                            res.TimeSlot = (string)rdr["TimeSlot"];
                             res.Reason = (string)rdr["Reason"];
                             res.TableId = (int)rdr["TableId"];
                             solo.Add(res);
@@ -54,8 +54,8 @@ namespace NGTI.Controllers
                             res.IdGroupReservation = (int)rdr["IdGroupReservation"];
                             res.Teamname = (string)rdr["Teamname"];
                             res.Name = (string)rdr["Name"];
-                            res.StartTime = (DateTime)rdr["StartTime"];
-                            res.EndTime = (DateTime)rdr["EndTime"];
+                            res.Date = (DateTime)rdr["Date"];
+                            res.TimeSlot = (string)rdr["TimeSlot"];
                             res.Reason = (string)rdr["Reason"];
                             res.TableId = (int)rdr["TableId"];
                             group.Add(res);
@@ -150,7 +150,7 @@ namespace NGTI.Controllers
         public ActionResult ReservationCheck()
         {
             SqlConnection con = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true");
-            string sql = "SELECT StartTime, COUNT(StartTime) AS totaal FROM SoloReservations GROUP BY StartTime HAVING COUNT('totaal') < 10";
+            string sql = "SELECT Date, COUNT(Date) AS totaal FROM SoloReservations GROUP BY Date HAVING COUNT('totaal') < 10";
 
             var totals = new List<int>();
 

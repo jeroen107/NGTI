@@ -3,39 +3,39 @@
 @inject UserManager<ApplicationUser> UserManager
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - NGTI</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - NGTI</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
 
 
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="1013616790261-uc1b0io06jusji319pihjnbrcdmld36d.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script>
-        gapi.load('auth2', function () {
-            gapi.auth2.init();
-        });
-    </script>
-    <script>
-        function onSignIn(googleUser) {
-            // Useful data for your client-side scripts:
-            var profile = googleUser.getBasicProfile();
-            console.log("ID: " + profile.getId());
-            console.log('Full Name: ' + profile.getName());
-            console.log("Image URL: " + profile.getImageUrl());
-            console.log("Email: " + profile.getEmail());
-            // The ID token you need to pass to your backend:
-            var id_token = googleUser.getAuthResponse().id_token;
-            console.log("ID Token: " + id_token);
+        <meta name="google-signin-scope" content="profile email">
+        <meta name="google-signin-client_id" content="1013616790261-uc1b0io06jusji319pihjnbrcdmld36d.apps.googleusercontent.com">
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script>
+            gapi.load('auth2', function () {
+                gapi.auth2.init();
+            });
+        </script>
+        <script>
+            function onSignIn(googleUser) {
+                // Useful data for your client-side scripts:
+                var profile = googleUser.getBasicProfile();
+                console.log("ID: " + profile.getId());
+                console.log('Full Name: ' + profile.getName());
+                console.log("Image URL: " + profile.getImageUrl());
+                console.log("Email: " + profile.getEmail());
+                // The ID token you need to pass to your backend:
+                var id_token = googleUser.getAuthResponse().id_token;
+                console.log("ID Token: " + id_token);
 
-            document.getElementById('output').innerHTML = profile.getName;
-        }
-    </script>
+                document.getElementById('output').innerHTML = profile.getName;
+            }
+        </script>
 
     <link rel="stylesheet" href="~/css/layout.css" />
 </head>
@@ -73,19 +73,21 @@
 
     <main>
 
-    </main>
-
-    <div class="container">
-        <main role="main" class="pb-3">
-
         </main>
-    </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="/js/app.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
-    @RenderBody()
-</body>
+        <div class="container">
+            <main role="main" class="pb-3">
+
+            </main>
+        </div>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="/js/app.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+        @RenderBody()
+    </body>
 </html>
+
+
