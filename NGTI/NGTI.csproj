@@ -6,6 +6,11 @@
  </PropertyGroup>
 
  <ItemGroup>
+   <Compile Remove="Migrations\20201130124426_test.cs" />
+   <Compile Remove="Migrations\20201130124426_test.Designer.cs" />
+ </ItemGroup>
+
+ <ItemGroup>
    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.9" />
    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.9" />
    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />

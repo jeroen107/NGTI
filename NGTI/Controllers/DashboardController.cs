@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver.Core.Configuration;
+//using MongoDB.Driver.Core.Configuration;
 using NGTI.Models;
 
 namespace NGTI.Controllers

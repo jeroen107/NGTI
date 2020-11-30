@@ -88,7 +88,7 @@ namespace NGTI.Controllers
                 {
                     var obj = new Employee();
                     obj.Email = (string)rdr["Email"];
-                    obj.Name = (string)rdr["Id"];
+                    //obj.Name = (string)rdr["Id"];
                     //Hardcoded bhv en admin
                     obj.BHV = false;
                     obj.Admin = true;
@@ -178,7 +178,7 @@ namespace NGTI.Controllers
                 while (rdr.Read())
                 {
                     var obj = new Employee();
-                    obj.Name = (string)rdr["Name"];
+                    //obj.Name = (string)rdr["Name"];
                     obj.Email = (string)rdr["Email"];
                     obj.BHV = (bool)rdr["BHV"];
                     obj.Admin = (bool)rdr["Admin"];

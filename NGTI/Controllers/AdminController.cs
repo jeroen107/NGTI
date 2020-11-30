@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using NGTI.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,12 +19,18 @@ namespace NGTI.Controllers
 {
     public class AdminController : Controller
     {
+        //sql connection var
+        public string connectionString; 
+
         private readonly UserManager<ApplicationUser> userManager;
 
-        public AdminController(UserManager<ApplicationUser> userManager)
+        public AdminController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             this.userManager = userManager;
+            _context = context;
+            this.connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
         }
+
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -83,15 +90,6 @@ namespace NGTI.Controllers
             var model = new ReservationsViewModel() { soloList = solo, groupList = group };
             return View(model);
         }
-        public IActionResult Details(int id, string type) //check if obj is solo or group and redirect
-                new SoloReservation() { IdSoloReservation = 1, Name = "john", StartTime = new DateTime(2020,10,27,9,30,0), EndTime = new DateTime(2020,10,27,15,0,0), Reason = "", TableId = 1, Table = null},
-                new SoloReservation() { IdSoloReservation = 2, Name = "sponge", StartTime = new DateTime(2020,10,27,9,30,0), EndTime = new DateTime(2020,10,27,20,0,0), Reason = "", TableId = 2, Table = null},
-                new SoloReservation() { IdSoloReservation = 3, Name = "bob", StartTime = new DateTime(2020,10,27,9,30,0), EndTime = new DateTime(2020,10,27,18,0,0), Reason = "", TableId = 5, Table = null},
-                new SoloReservation() { IdSoloReservation = 4, Name = "patrick", StartTime = new DateTime(2020,10,28,9,30,0), EndTime = new DateTime(2020,10,28,15,0,0), Reason = "", TableId = 3, Table = null}
-            };
-            return View(reservationList);
-        }
-
         [HttpGet]
         public IActionResult ListUsers()
         {
@@ -104,13 +102,58 @@ namespace NGTI.Controllers
         {
             var user = await userManager.FindByIdAsync(id);
 
-            if(user == null)
+            if (user == null)
             {
                 ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
                 return View();
             }
 
             var model = new Employee
+            {
+                Id = user.Id,
+                Email = user.Email,
+                BHV = user.BHV,
+                Admin = user.Admin,
+
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(Employee model)
+        {
+            var user = await userManager.FindByIdAsync(model.Id);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {model.Id} cannot be found";
+                return View();
+            }
+            else
+            {
+                user.Email = model.Email;
+                user.BHV = model.BHV;
+                user.Admin = model.Admin;
+
+                var result = await userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+
+                }
+                return View(model);
+            }
+
+
+        }
+        public IActionResult Details(int id, string type) //check if obj is solo or group and redirect
+        {
+            if (type == "Solo")
+            {
+                return RedirectToAction("DetailsSolo", new { id = id });
+            }
+            else if (type == "Group")
             {
                 return RedirectToAction("DetailsGroup", new { id = id });
             }
@@ -143,17 +186,9 @@ namespace NGTI.Controllers
                 }
             }
             conn.Close();
-                Id = user.Id,
-                Email = user.Email,
-                BHV = user.BHV,
-                Admin = user.Admin,
-
-            };
             return View(model);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> EditUser(Employee model)
+        public IActionResult DetailsGroup(int id)
         {
             SqlConnection conn = new SqlConnection(connectionString);
             string sql = "SELECT * FROM GroupReservations WHERE IdGroupReservation = " + id;
@@ -180,18 +215,19 @@ namespace NGTI.Controllers
             return View(model);
         }
 
-            if (user == null)
+        // GET: /<controller>/
+        public IActionResult Delete(int id, string type)
+        {
+            if (type == "Solo")
             {
-                ViewBag.ErrorMessage = $"User with Id = {model.Id} cannot be found";
-                return View();
+                return RedirectToAction("DeleteSolo", new { id = id, type = type });
+            }
+            else if (type == "Group")
+            {
+                return RedirectToAction("DeleteGroup", new { id = id, type = type });
             }
             else
             {
-                user.Email = model.Email;
-                user.BHV = model.BHV;
-                user.Admin = model.Admin;
-
-                var result = await userManager.UpdateAsync(user);
                 return NotFound();
             }
         }
@@ -225,15 +261,16 @@ namespace NGTI.Controllers
         {
             System.Diagnostics.Debug.WriteLine("deleteGroup : [" + id + "] [" + type + "]");
 
-                if (result.Succeeded)
+            SqlConnection conn = new SqlConnection(connectionString);
+            string sql = "SELECT * FROM GroupReservations WHERE IdGroupReservation = " + id;
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            var model = new GroupReservation();
+            conn.Open();
+            using (conn)
+            {
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
                 {
-                    return RedirectToAction("ListUsers");
-
-                }
-                return View(model);
-            }
-            
-            
                     var soloRes = new GroupReservation();
                     soloRes.IdGroupReservation = (int)rdr["IdGroupReservation"];
                     soloRes.Name = (string)rdr["Name"];
@@ -302,10 +339,6 @@ namespace NGTI.Controllers
 
         private readonly ApplicationDbContext _context;
 
-        public AdminController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
         public async Task<IActionResult> EditGroup(int? id)
         {
             if (id == null)
