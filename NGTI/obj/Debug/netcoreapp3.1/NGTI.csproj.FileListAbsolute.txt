@@ -411,3 +411,4 @@ C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Vi
 C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\DetailsTeam.cshtml.g.cs
 C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\AddTeamMembers.cshtml.g.cs
 C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\CreateTeam.cshtml.g.cs
+C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\EditTeam.cshtml.g.cs

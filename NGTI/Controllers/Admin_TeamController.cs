@@ -44,7 +44,8 @@ namespace NGTI.Controllers
         {
             try
             {
-                SqlConnection conn = new SqlConnection(connectionString);
+                SqlMethods.QueryVoid("INSERT INTO Teams(TeamName) VALUES('" + teamName + "')");
+                /*SqlConnection conn = new SqlConnection(connectionString);
                 string sql = "INSERT INTO Teams(TeamName) VALUES('"+teamName+"')";
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 conn.Open();
@@ -52,7 +53,8 @@ namespace NGTI.Controllers
                 {
                     SqlDataReader rdr = cmd.ExecuteReader();
                 }
-                conn.Close();
+                conn.Close();*/
+                TempData["name"] = teamName;
                 return RedirectToAction("AddTeamMembers");
             }
             catch(Exception ex)
@@ -72,6 +74,8 @@ namespace NGTI.Controllers
         }
         public IActionResult AddTeamMembers()
         {
+            string teamName = (string)TempData["name"];
+            ViewData["name"] = teamName;
             SqlConnection conn = new SqlConnection(connectionString);
             string sql = "SELECT * FROM AspNetUsers";
             SqlCommand cmd = new SqlCommand(sql, conn);
@@ -94,6 +98,32 @@ namespace NGTI.Controllers
             conn.Close();
             return View(model);
         }
+
+        [HttpPost]
+        public IActionResult AddTeamMembers(string teamName)
+        {
+            System.Diagnostics.Debug.WriteLine("teamname = "+ teamName);
+            /*foreach (string a in members)
+            //{
+                System.Diagnostics.Debug.WriteLine(a);
+                //SqlMethods.QueryVoid("INSERT INTO teamMembers VALUES(teamName,a);");
+            }*/
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult EditTeam(string name)
+        {
+            TempData["name"] = name;
+            List<Employee> model = GetMembers(name);
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult EditTeam(string[] arr)
+        {
+            System.Diagnostics.Debug.WriteLine("arrived at editTeam Post => "+arr);
+            System.Diagnostics.Debug.WriteLine("=> "+arr);
+            return View();
+        }
         public IActionResult DetailsTeam(string name)
         {
             TempData["name"] = name;
@@ -109,6 +139,7 @@ namespace NGTI.Controllers
 
         public IActionResult DeleteConfirmed(string name)
         {
+            System.Diagnostics.Debug.WriteLine(name);
             Deleterow("DELETE Teams WHERE TeamName = '" + name + "'");
             System.Diagnostics.Debug.WriteLine("DELETED " + name);
             return RedirectToAction("Index");
