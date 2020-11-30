@@ -219,6 +219,25 @@ namespace NGTI.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("NGTI.Models.Employee", b =>
+                {
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Admin")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("BHV")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Email");
+
+                    b.ToTable("Employees");
+                });
+
             modelBuilder.Entity("NGTI.Models.GroupReservation", b =>
                 {
                     b.Property<int>("IdGroupReservation")
@@ -229,7 +248,7 @@ namespace NGTI.Data.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime>("TimeSlot")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -238,7 +257,7 @@ namespace NGTI.Data.Migrations
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartTime")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("TableId")
@@ -264,7 +283,7 @@ namespace NGTI.Data.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime>("TimeSlot")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -273,7 +292,7 @@ namespace NGTI.Data.Migrations
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartTime")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("TableId")
@@ -361,7 +380,7 @@ namespace NGTI.Data.Migrations
             modelBuilder.Entity("NGTI.Models.SoloReservation", b =>
                 {
                     b.HasOne("NGTI.Models.Table", "Table")
-                        .WithMany()
+                        .WithMany("SoloReservations")
                         .HasForeignKey("TableId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
