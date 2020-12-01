@@ -439,7 +439,6 @@ C:\Users\m_cel\source\repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Vi
 C:\Users\m_cel\source\repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\DetailsTeam.cshtml.g.cs
 C:\Users\m_cel\source\repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\EditTeam.cshtml.g.cs
 C:\Users\m_cel\source\repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\Index.cshtml.g.cs
-C:\Users\m_cel\source\repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Dashboard.cshtml.g.cs
 C:\Users\m_cel\source\repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Delete.cshtml.g.cs
 C:\Users\m_cel\source\repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Details.cshtml.g.cs
 C:\Users\m_cel\source\repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Edit.cshtml.g.cs
@@ -632,3 +631,4 @@ C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashbo
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Reservations\Planner.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Overview.cshtml.g.cs
+C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Overview.cshtml.g.cs

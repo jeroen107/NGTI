@@ -23,6 +23,7 @@ namespace NGTI.Controllers
         public string connectionString; 
 
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ApplicationDbContext _context;
 
         public AdminController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
@@ -336,8 +337,6 @@ namespace NGTI.Controllers
                 return View();
             }
         }
-
-        private readonly ApplicationDbContext _context;
 
         public async Task<IActionResult> EditGroup(int? id)
         {
