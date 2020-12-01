@@ -45,15 +45,6 @@ namespace NGTI.Controllers
             try
             {
                 SqlMethods.QueryVoid("INSERT INTO Teams(TeamName) VALUES('" + teamName + "')");
-                /*SqlConnection conn = new SqlConnection(connectionString);
-                string sql = "INSERT INTO Teams(TeamName) VALUES('"+teamName+"')";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                conn.Open();
-                using (conn)
-                {
-                    SqlDataReader rdr = cmd.ExecuteReader();
-                }
-                conn.Close();*/
                 TempData["name"] = teamName;
                 return RedirectToAction("AddTeamMembers");
             }
@@ -90,8 +81,8 @@ namespace NGTI.Controllers
                     obj.Email = (string)rdr["Email"];
                     //obj.Name = (string)rdr["Id"];
                     //Hardcoded bhv en admin
-                    obj.BHV = false;
-                    obj.Admin = true;
+                    obj.BHV = (bool)rdr["BHV"];
+                    obj.Admin = (bool)rdr["Admin"];
                     model.Add(obj);
                 }
             }
@@ -100,14 +91,17 @@ namespace NGTI.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTeamMembers(string teamName)
+        public IActionResult AddTeamMembers(IEnumerable<string> members,string teamName)
         {
-            System.Diagnostics.Debug.WriteLine("teamname = "+ teamName);
-            /*foreach (string a in members)
-            //{
-                System.Diagnostics.Debug.WriteLine(a);
-                //SqlMethods.QueryVoid("INSERT INTO teamMembers VALUES(teamName,a);");
-            }*/
+            System.Diagnostics.Debug.WriteLine("members = " + members + " teamName = " + teamName);
+            foreach (string a in members)
+            {
+                System.Diagnostics.Debug.WriteLine("email = "+a);
+                if (a != "false" || a != "False")
+                {
+                    SqlMethods.QueryVoid("INSERT INTO teamMembers VALUES('"+teamName+"','"+a+"');");
+                }
+            }
             return RedirectToAction("Index");
         }
 
