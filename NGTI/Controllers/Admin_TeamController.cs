@@ -96,7 +96,7 @@ namespace NGTI.Controllers
             foreach (string a in members)
             {
                 System.Diagnostics.Debug.WriteLine("email = "+a);
-                if (a != "false" || a != "False")
+                if (a != "false" && a != "False")
                 {
                     SqlMethods.QueryVoid("INSERT INTO teamMembers VALUES('"+teamName+"','"+a+"');");
                 }

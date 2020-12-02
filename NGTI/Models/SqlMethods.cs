@@ -15,6 +15,7 @@ namespace NGTI.Models
 
             SqlConnection conn = new SqlConnection(connectionString);
             string sql = query;
+            System.Diagnostics.Debug.WriteLine("SQL = "+sql);
             SqlCommand cmd = new SqlCommand(sql, conn);
             conn.Open();
             using (conn)
