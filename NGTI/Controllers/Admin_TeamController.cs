@@ -15,7 +15,7 @@ namespace NGTI.Controllers
         public IActionResult Index()
         {
             SqlConnection conn = new SqlConnection(connectionString);
-            string sql = "SELECT t.TeamName, COUNT(tm.EmpEmail) AS count FROM Teams t LEFT JOIN TeamMembers tm ON t.TeamName = tm.TeamName GROUP BY t.TeamName;";
+            string sql = "SELECT t.TeamName, COUNT(tm.UserId) AS count FROM Teams t LEFT JOIN TeamMembers tm ON t.TeamName = tm.TeamName GROUP BY t.TeamName;";
             SqlCommand cmd = new SqlCommand(sql, conn);
             var model = new List<Team>();
             conn.Open();
@@ -78,9 +78,8 @@ namespace NGTI.Controllers
                 while (rdr.Read())
                 {
                     var obj = new Employee();
+                    obj.Id = (string)rdr["Id"];
                     obj.Email = (string)rdr["Email"];
-                    //obj.Name = (string)rdr["Id"];
-                    //Hardcoded bhv en admin
                     obj.BHV = (bool)rdr["BHV"];
                     obj.Admin = (bool)rdr["Admin"];
                     model.Add(obj);
@@ -141,7 +140,7 @@ namespace NGTI.Controllers
         public Team GetTeam(string name)
         {
             SqlConnection conn = new SqlConnection(connectionString);
-            string sql = "SELECT t.TeamName, COUNT(tm.EmpEmail) AS count FROM Teams t LEFT JOIN TeamMembers tm ON t.TeamName = tm.TeamName WHERE t.TeamName = '" + name + "' GROUP BY t.TeamName;";
+            string sql = "SELECT t.TeamName, COUNT(tm.UserId) AS count FROM Teams t LEFT JOIN TeamMembers tm ON t.TeamName = tm.TeamName WHERE t.TeamName = '" + name + "' GROUP BY t.TeamName;";
             SqlCommand cmd = new SqlCommand(sql, conn);
             var model = new Team();
             conn.Open();
@@ -162,7 +161,7 @@ namespace NGTI.Controllers
         public List<Employee> GetMembers(string name)
         {
             SqlConnection conn = new SqlConnection(connectionString);
-            string sql = "SELECT * FROM Employees JOIN TeamMembers tm ON Email = tm.EmpEmail WHERE tm.TeamName = '" + name + "'";
+            string sql = "SELECT a.Id, a.Email, a.BHV, a.Admin FROM AspNetUsers a JOIN TeamMembers tm ON a.Id = tm.UserId WHERE tm.TeamName = '" + name + "'";
             SqlCommand cmd = new SqlCommand(sql, conn);
             var model = new List<Employee>();
             conn.Open();
@@ -172,7 +171,7 @@ namespace NGTI.Controllers
                 while (rdr.Read())
                 {
                     var obj = new Employee();
-                    //obj.Name = (string)rdr["Name"];
+                    obj.Id = (string)rdr["Id"];
                     obj.Email = (string)rdr["Email"];
                     obj.BHV = (bool)rdr["BHV"];
                     obj.Admin = (bool)rdr["Admin"];
