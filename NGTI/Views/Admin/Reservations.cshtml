@@ -14,11 +14,10 @@
     <table class="content-table">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Name</th>
                 <th>Start</th>
                 <th>End</th>
-                <th>Table ID</th>
+                <th>Table Nr.</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,16 +26,13 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IdSoloReservation)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.StartTime)
+                        @Html.DisplayFor(modelItem => item.Date)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.EndTime)
+                        @Html.DisplayFor(modelItem => item.TimeSlot)
                     </td>
                     <td class="tableid">
                         @Html.DisplayFor(modelItem => item.TableId)
@@ -56,12 +52,12 @@
     <table class="content-table">
         <thead>
             <tr>
-                <th>ID</th>
+
                 <th>Name</th>
                 <th>Team Name</th>
                 <th>Start</th>
                 <th>End</th>
-                <th>Table ID</th>
+                <th>Table Nr</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -70,19 +66,16 @@
             {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdGroupReservation)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Teamname)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
+                    @Html.DisplayFor(modelItem => item.Date)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.EndTime)
+                    @Html.DisplayFor(modelItem => item.TimeSlot)
                 </td>
                 <td class="tableid">
                     @Html.DisplayFor(modelItem => item.TableId)
