@@ -1,0 +1,50 @@
+﻿@model IEnumerable<NGTI.Models.Team>
+
+@{
+    ViewData["Title"] = "Teams";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/table.css" />
+</head>
+<body>
+    <h1>Teams</h1>
+
+    <p>
+        <a asp-action="CreateTeam">Create New</a>
+    </p>
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TeamName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Members)
+                </th>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamName)
+                        
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Members)
+                    </td>
+                    <td>
+                        <a asp-action="EditTeam" asp-route-name="@item.TeamName">Edit</a> |
+                        <a asp-action="DetailsTeam" asp-route-name="@item.TeamName">Details</a> |
+                        <a asp-action="DeleteTeam" asp-route-name="@item.TeamName">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
