@@ -225,25 +225,6 @@ namespace NGTI.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("NGTI.Models.Employee", b =>
-                {
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("Admin")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("BHV")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Email");
-
-                    b.ToTable("Employees");
-                });
-
             modelBuilder.Entity("NGTI.Models.GroupReservation", b =>
                 {
                     b.Property<int>("IdGroupReservation")
@@ -254,22 +235,19 @@ namespace NGTI.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("TimeSlot")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("TableId")
                         .HasColumnType("int");
 
                     b.Property<string>("Teamname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TimeSlot")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdGroupReservation");
@@ -289,20 +267,17 @@ namespace NGTI.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("TimeSlot")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("TableId")
                         .HasColumnType("int");
+
+                    b.Property<string>("TimeSlot")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdSoloReservation");
 
@@ -321,6 +296,19 @@ namespace NGTI.Migrations
                     b.HasKey("TableId");
 
                     b.ToTable("Tables");
+                });
+
+            modelBuilder.Entity("NGTI.Models.Team", b =>
+                {
+                    b.Property<string>("TeamName")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Members")
+                        .HasColumnType("int");
+
+                    b.HasKey("TeamName");
+
+                    b.ToTable("Team");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
