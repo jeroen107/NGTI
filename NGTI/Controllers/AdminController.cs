@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Threading.Tasks.Dataflow;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NGTI.Models;
 using System.Security.Cryptography.X509Certificates;
@@ -12,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using NGTI.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,7 +20,17 @@ namespace NGTI.Controllers
     public class AdminController : Controller
     {
         //sql connection var
-        string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
+        public string connectionString; 
+
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly ApplicationDbContext _context;
+
+        public AdminController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        {
+            this.userManager = userManager;
+            _context = context;
+            this.connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
+        }
 
         // GET: /<controller>/
         public IActionResult Index()
@@ -80,6 +90,63 @@ namespace NGTI.Controllers
             conn.Close();
             var model = new ReservationsViewModel() { soloList = solo, groupList = group };
             return View(model);
+        }
+        [HttpGet]
+        public IActionResult ListUsers()
+        {
+            var users = userManager.Users;
+            return View(users);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
+                return View();
+            }
+
+            var model = new Employee
+            {
+                Id = user.Id,
+                Email = user.Email,
+                BHV = user.BHV,
+                Admin = user.Admin,
+
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(Employee model)
+        {
+            var user = await userManager.FindByIdAsync(model.Id);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {model.Id} cannot be found";
+                return View();
+            }
+            else
+            {
+                user.Email = model.Email;
+                user.BHV = model.BHV;
+                user.Admin = model.Admin;
+
+                var result = await userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+
+                }
+                return View(model);
+            }
+
+
         }
         public IActionResult Details(int id, string type) //check if obj is solo or group and redirect
         {
@@ -271,12 +338,6 @@ namespace NGTI.Controllers
             }
         }
 
-        private readonly ApplicationDbContext _context;
-
-        public AdminController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
         public async Task<IActionResult> EditGroup(int? id)
         {
             if (id == null)
@@ -331,6 +392,21 @@ namespace NGTI.Controllers
         private bool GroupReservationExists(int id)
         {
             return _context.GroupReservations.Any(e => e.IdGroupReservation == id);
+        }
+
+        public IActionResult covidmeasure()
+        {
+            int limit = SqlMethods.QueryLimit();
+            TempData["limit"] = limit;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult covidmeasure(string limit)
+        {
+            int newLimit = Convert.ToInt32(limit);
+            System.Diagnostics.Debug.WriteLine(limit);
+            SqlMethods.QueryVoid("UPDATE Limit SET limit = " + limit);
+            return RedirectToAction("Index");
         }
     }
 }

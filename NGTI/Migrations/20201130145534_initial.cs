@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NGTI.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,25 +39,13 @@ namespace NGTI.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Employees",
-                columns: table => new
-                {
-                    Email = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    AccessFailedCount = table.Column<int>(nullable: false),
                     BHV = table.Column<bool>(nullable: false),
                     Admin = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employees", x => x.Email);
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,6 +58,18 @@ namespace NGTI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tables", x => x.TableId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Team",
+                columns: table => new
+                {
+                    TeamName = table.Column<string>(nullable: false),
+                    Members = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Team", x => x.TeamName);
                 });
 
             migrationBuilder.CreateTable(
@@ -187,8 +187,7 @@ namespace NGTI.Migrations
                     Name = table.Column<string>(nullable: true),
                     Teamname = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
-                    StartTime = table.Column<DateTime>(nullable: false),
-                    EndTime = table.Column<DateTime>(nullable: false),
+                    TimeSlot = table.Column<string>(nullable: true),
                     Reason = table.Column<string>(nullable: true),
                     TableId = table.Column<int>(nullable: false)
                 },
@@ -210,8 +209,8 @@ namespace NGTI.Migrations
                     IdSoloReservation = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
-                    StartTime = table.Column<DateTime>(nullable: false),
-                    EndTime = table.Column<DateTime>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
+                    TimeSlot = table.Column<string>(nullable: true),
                     Reason = table.Column<string>(nullable: true),
                     TableId = table.Column<int>(nullable: false)
                 },
@@ -294,13 +293,13 @@ namespace NGTI.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Employees");
-
-            migrationBuilder.DropTable(
                 name: "GroupReservations");
 
             migrationBuilder.DropTable(
                 name: "SoloReservations");
+
+            migrationBuilder.DropTable(
+                name: "Team");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

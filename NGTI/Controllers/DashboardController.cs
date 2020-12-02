@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver.Core.Configuration;
+//using MongoDB.Driver.Core.Configuration;
 using NGTI.Models;
 
 namespace NGTI.Controllers
@@ -155,7 +155,7 @@ namespace NGTI.Controllers
             var totals = new List<int>();
 
             con.Open();
-            using (con) ;
+            using (con)
             {
                 SqlCommand cmd = new SqlCommand(sql, con);
                 SqlDataReader rdr = cmd.ExecuteReader();
