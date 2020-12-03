@@ -37,8 +37,8 @@
                                         <span>Edit Reservations <br /> Delete Reservations <br> See Reservations </span>
 </li>
                                 <li class="fa fa-edit">
-                                    <h3>Edit Users</h3>
-                                    <span>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Edit Roles and permissions.</span>
+                                    <a asp-controller="Admin_Team" asp-action="Index" style="text-decoration:none"> <h3>Edit Users</h3></a>
+                                    <span>Edit Roles and permissions.</span>
                                 </li>
                             </ul>
                         </section>
@@ -47,11 +47,11 @@
                         <section>
                             <ul class="style">
                                 <li class="fa fa-plus">
-                                    <h3>Make Group</h3>
+                                    <a asp-controller="Admin_Team" asp-action="Index" style="text-decoration:none"> <h3>Make Group</h3></a>
                                     <span>Add A Team <br /> Delete A Team <br> See All Teams</span>
                                 </li>
                                 <li class="fa fa-heart">
-                                    <h3>Covid Measures</h3>
+                                    <a asp-action="covidmeasure" style="text-decoration:none"> <h3>Covid measures</h3></a>
                                     <span>Adjust Limit <br /> Cancell All Reservations <br> Announce Positive test</span>
                                 </li>
                             </ul>

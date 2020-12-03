@@ -22,7 +22,7 @@ namespace NGTI.Models
                 cmd.Parameters.AddWithValue("@Date", SoloReservationEntities.Date);
                 cmd.Parameters.AddWithValue("@TimeSlot", SoloReservationEntities.TimeSlot);
                 cmd.Parameters.AddWithValue("@Reason", SoloReservationEntities.Reason);
-                cmd.Parameters.AddWithValue("@TableId", SoloReservationEntities.TableId);
+                cmd.Parameters.AddWithValue("@TableId", SoloReservationEntities.TableId); 
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
