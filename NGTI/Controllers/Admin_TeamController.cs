@@ -93,8 +93,29 @@ namespace NGTI.Controllers
             return View(model);
         }
         [HttpPost]
-        public IActionResult EditTeam(IEnumerable<string> AddMembers, IEnumerable<string> DelMembers, string TeamName)
+        public IActionResult EditTeam(IEnumerable<string> AddMembers, IEnumerable<string> DelMembers, string TeamName,string newTeamName)
         {
+            System.Diagnostics.Debug.WriteLine(TeamName+" "+newTeamName);
+            if(newTeamName != TeamName)
+            {
+                try
+                {
+                    SqlMethods.QueryVoid("UPDATE Teams SET TeamName = '"+ newTeamName +"' WHERE TeamName = '"+ TeamName +"'");
+                    TeamName = newTeamName;
+                }
+                catch (Exception ex)
+                {
+                    Team check = GetTeam(newTeamName);
+                    if (check.TeamName == newTeamName)
+                    {
+                        TempData["msg"] = "Name already taken";
+                    }
+                    else
+                    {
+                        TempData["msg"] = ex;
+                    }
+                }
+            }
             foreach (string a in AddMembers)
             {
                 if (a != "false" && a != "False")
@@ -126,7 +147,6 @@ namespace NGTI.Controllers
 
         public IActionResult DeleteConfirmed(string name)
         {
-            System.Diagnostics.Debug.WriteLine(name);
             Deleterow("DELETE Teams WHERE TeamName = '" + name + "'");
             System.Diagnostics.Debug.WriteLine("DELETED " + name);
             return RedirectToAction("Index");
