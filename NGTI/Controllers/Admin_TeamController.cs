@@ -67,35 +67,15 @@ namespace NGTI.Controllers
         {
             string teamName = (string)TempData["name"];
             ViewData["name"] = teamName;
-            SqlConnection conn = new SqlConnection(connectionString);
-            string sql = "SELECT * FROM AspNetUsers";
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            var model = new List<Employee>();
-            conn.Open();
-            using (conn)
-            {
-                SqlDataReader rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    var obj = new Employee();
-                    obj.Id = (string)rdr["Id"];
-                    obj.Email = (string)rdr["Email"];
-                    obj.BHV = (bool)rdr["BHV"];
-                    obj.Admin = (bool)rdr["Admin"];
-                    model.Add(obj);
-                }
-            }
-            conn.Close();
+            List<Employee> model = SqlMethods.GetUsers();
             return View(model);
         }
 
         [HttpPost]
         public IActionResult AddTeamMembers(IEnumerable<string> members,string teamName)
         {
-            System.Diagnostics.Debug.WriteLine("members = " + members + " teamName = " + teamName);
             foreach (string a in members)
             {
-                System.Diagnostics.Debug.WriteLine("email = "+a);
                 if (a != "false" && a != "False")
                 {
                     SqlMethods.QueryVoid("INSERT INTO teamMembers VALUES('"+teamName+"','"+a+"');");
@@ -107,15 +87,29 @@ namespace NGTI.Controllers
         public IActionResult EditTeam(string name)
         {
             TempData["name"] = name;
-            List<Employee> model = GetMembers(name);
+            List<Employee> users = SqlMethods.GetUsersForEdit(name);
+            List<Employee> members = GetMembers(name);
+            EditTeam model = new EditTeam { TeamMembers = members, Users = users };
             return View(model);
         }
         [HttpPost]
-        public IActionResult EditTeam(string[] arr)
+        public IActionResult EditTeam(IEnumerable<string> AddMembers, IEnumerable<string> DelMembers, string TeamName)
         {
-            System.Diagnostics.Debug.WriteLine("arrived at editTeam Post => "+arr);
-            System.Diagnostics.Debug.WriteLine("=> "+arr);
-            return View();
+            foreach (string a in AddMembers)
+            {
+                if (a != "false" && a != "False")
+                {
+                    SqlMethods.QueryVoid("INSERT INTO teamMembers VALUES('" + TeamName + "','" + a + "');");
+                }
+            }
+            foreach (string a in DelMembers)
+            {
+                if (a != "false" && a != "False")
+                {
+                    SqlMethods.QueryVoid("DELETE FROM teamMembers WHERE TeamName = '" + TeamName +"' AND UserId = '" + a +"'");
+                }
+            }
+            return RedirectToAction("Index");
         }
         public IActionResult DetailsTeam(string name)
         {
