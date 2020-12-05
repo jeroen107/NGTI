@@ -1,17 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
+//using MongoDB.Driver.Core.Configuration;
 using NGTI.Models;
 
 namespace NGTI.Controllers
 {
-    public class SoloReservationController : Controller
+    public class DashboardController : Controller
     {
-        // GET: SoloReservationController
+        string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
+        public IActionResult Overview()
+        {
+            // Sql connection
+            SqlConnection conn = new SqlConnection(connectionString);
+            string sql = "SELECT * FROM SoloReservations ORDER BY Date ASC";
+            string sql2 = "SELECT * FROM GroupReservations ORDER BY Date ASC";
+            string[] sqls = new string[2] { sql, sql2 };
+
+            var solo = new List<SoloReservation>();
+            var group = new List<GroupReservation>();
+
+            conn.Open();
+            using (conn)
+            {
+                //read all reservations and add them to tuple<solo,group>
+                for (int x = 0; x < 2; x++)
+                {
+                    SqlCommand cmd = new SqlCommand(sqls[x], conn);
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                    if (x == 0)
+                    {
+                        while (rdr.Read())
+                        {
+                            var res = new SoloReservation();
+                            res.IdSoloReservation = (int)rdr["IdSoloReservation"];
+                            res.Name = (string)rdr["Name"];
+                            res.Date = (DateTime)rdr["Date"];
+                            res.TimeSlot = (string)rdr["TimeSlot"];
+                            res.Reason = (string)rdr["Reason"];
+                            res.TableId = (int)rdr["TableId"];
+                            solo.Add(res);
+                        }
+                    }
+                    else if (x == 1)
+                    {
+                        while (rdr.Read())
+                        {
+                            var res = new GroupReservation();
+                            res.IdGroupReservation = (int)rdr["IdGroupReservation"];
+                            res.Teamname = (string)rdr["Teamname"];
+                            res.Name = (string)rdr["Name"];
+                            res.Date = (DateTime)rdr["Date"];
+                            res.TimeSlot = (string)rdr["TimeSlot"];
+                            res.Reason = (string)rdr["Reason"];
+                            res.TableId = (int)rdr["TableId"];
+                            group.Add(res);
+                        }
+                    }
+                }
+            }
+            conn.Close();
+            var model = new ReservationsViewModel() { soloList = solo, groupList = group };
+            return View(model);
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -94,12 +150,12 @@ namespace NGTI.Controllers
         public ActionResult ReservationCheck()
         {
             SqlConnection con = new SqlConnection("Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true");
-            string sql = "SELECT StartTime, COUNT(StartTime) AS totaal FROM SoloReservations GROUP BY StartTime HAVING COUNT('totaal') < 10";
+            string sql = "SELECT Date, COUNT(Date) AS totaal FROM SoloReservations GROUP BY Date HAVING COUNT('totaal') < 10";
 
             var totals = new List<int>();
 
             con.Open();
-            using (con);
+            using (con)
             {
                 SqlCommand cmd = new SqlCommand(sql, con);
                 SqlDataReader rdr = cmd.ExecuteReader();
@@ -111,9 +167,9 @@ namespace NGTI.Controllers
             }
             con.Close();
 
-            foreach(int total in totals)
+            foreach (int total in totals)
             {
-                if(total > 5)
+                if (total > 5)
                 {
                     return NotFound();
                 }

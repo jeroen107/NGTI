@@ -232,7 +232,7 @@ namespace NGTI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -241,13 +241,13 @@ namespace NGTI.Migrations
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("TableId")
                         .HasColumnType("int");
 
                     b.Property<string>("Teamname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TimeSlot")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdGroupReservation");
@@ -264,7 +264,7 @@ namespace NGTI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -273,11 +273,11 @@ namespace NGTI.Migrations
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("TableId")
                         .HasColumnType("int");
+
+                    b.Property<string>("TimeSlot")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdSoloReservation");
 
@@ -296,6 +296,19 @@ namespace NGTI.Migrations
                     b.HasKey("TableId");
 
                     b.ToTable("Tables");
+                });
+
+            modelBuilder.Entity("NGTI.Models.Team", b =>
+                {
+                    b.Property<string>("TeamName")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Members")
+                        .HasColumnType("int");
+
+                    b.HasKey("TeamName");
+
+                    b.ToTable("Team");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

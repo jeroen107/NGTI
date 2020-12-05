@@ -28,6 +28,7 @@
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "3.1.9",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.9",
           "Microsoft.AspNetCore.Identity.UI": "3.1.9",
+          "Microsoft.EntityFrameworkCore.Analyzers": "5.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.9",
           "Microsoft.EntityFrameworkCore.Tools": "3.1.9",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.4",
@@ -731,7 +732,7 @@
           "Microsoft.Bcl.AsyncInterfaces": "1.1.1",
           "Microsoft.Bcl.HashCode": "1.1.0",
           "Microsoft.EntityFrameworkCore.Abstractions": "3.1.9",
-          "Microsoft.EntityFrameworkCore.Analyzers": "3.1.9",
+          "Microsoft.EntityFrameworkCore.Analyzers": "5.0.0",
           "Microsoft.Extensions.Caching.Memory": "3.1.9",
           "Microsoft.Extensions.DependencyInjection": "3.1.9",
           "Microsoft.Extensions.Logging": "3.1.9",
@@ -760,7 +761,7 @@
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/3.1.9": {},
+      "Microsoft.EntityFrameworkCore.Analyzers/5.0.0": {},
       "Microsoft.EntityFrameworkCore.Design/3.1.9": {
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
@@ -4114,12 +4115,12 @@
       "path": "microsoft.entityframeworkcore.abstractions/3.1.9",
       "hashPath": "microsoft.entityframeworkcore.abstractions.3.1.9.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/3.1.9": {
+    "Microsoft.EntityFrameworkCore.Analyzers/5.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-eXGyx/Lb1fiiKtnIStdxGrfBSSQg8oZytE10f1T/2xAx12W9dKB9U9fg05cwNCDC0S2CXILsmZHYaGqCSXVAqQ==",
-      "path": "microsoft.entityframeworkcore.analyzers/3.1.9",
-      "hashPath": "microsoft.entityframeworkcore.analyzers.3.1.9.nupkg.sha512"
+      "sha512": "sha512-l1c/1ge8ymXgLqtstTyX3PZOLRuFo1jn0FQ9H4ag3Bwz70KTMyEOXwkKBZZ1gDlCibETrooflMis8wvvXFh5YQ==",
+      "path": "microsoft.entityframeworkcore.analyzers/5.0.0",
+      "hashPath": "microsoft.entityframeworkcore.analyzers.5.0.0.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Design/3.1.9": {
       "type": "package",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MwBP7XL+TfFPtBtJcxGSsT70MoA3j/2DRCfZbCVTO498J1dS38NOaIyiO5cJESlvpWgSjgLpB1G7W3qT86gomA==",
+  "dgSpecHash": "HxBYoTdCzuX5r1cZdmNf7O/+SDBe56ahfdXjd/u/egUfWNYQxxCmORCNDhx6cP216gh0ng3ST+UNEH5PGl2CyA==",
   "success": true,
   "projectFilePath": "C:\\Users\\jeroe\\source\\repos\\NGTI\\NGTI\\NGTI.csproj",
   "expectedPackageFiles": [
@@ -26,7 +26,7 @@
     "C:\\Users\\jeroe\\.nuget\\packages\\microsoft.data.sqlclient\\1.1.3\\microsoft.data.sqlclient.1.1.3.nupkg.sha512",
     "C:\\Users\\jeroe\\.nuget\\packages\\microsoft.entityframeworkcore\\3.1.9\\microsoft.entityframeworkcore.3.1.9.nupkg.sha512",
     "C:\\Users\\jeroe\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\3.1.9\\microsoft.entityframeworkcore.abstractions.3.1.9.nupkg.sha512",
-    "C:\\Users\\jeroe\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\3.1.9\\microsoft.entityframeworkcore.analyzers.3.1.9.nupkg.sha512",
+    "C:\\Users\\jeroe\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.0\\microsoft.entityframeworkcore.analyzers.5.0.0.nupkg.sha512",
     "C:\\Users\\jeroe\\.nuget\\packages\\microsoft.entityframeworkcore.design\\3.1.9\\microsoft.entityframeworkcore.design.3.1.9.nupkg.sha512",
     "C:\\Users\\jeroe\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\3.1.9\\microsoft.entityframeworkcore.relational.3.1.9.nupkg.sha512",
     "C:\\Users\\jeroe\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\3.1.9\\microsoft.entityframeworkcore.sqlserver.3.1.9.nupkg.sha512",

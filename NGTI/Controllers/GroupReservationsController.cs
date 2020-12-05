@@ -59,7 +59,7 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdGroupReservation,Name,Teamname,Date,StartTime,EndTime,Reason,TableId")] GroupReservation groupReservation)
+        public async Task<IActionResult> Create([Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,TableId")] GroupReservation groupReservation)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdGroupReservation,Name,Teamname,Date,StartTime,EndTime,Reason,TableId")] GroupReservation groupReservation)
+        public async Task<IActionResult> Edit(int id, [Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,TableId")] GroupReservation groupReservation)
         {
             if (id != groupReservation.IdGroupReservation)
             {

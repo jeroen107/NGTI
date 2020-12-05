@@ -3,6 +3,7 @@
 @inject UserManager<ApplicationUser> UserManager
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,32 +44,34 @@
     <nav class="menu" tabindex="0">
         <div class="smartphone-menu-trigger"></div>
         <header class="avatar">
-
-            @*Profile Picture of user*@
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" />
+            <img src="~/img/ngti_logo.svg" />
             @if (SignInManager.IsSignedIn(User))
-            { 
-                <span>@User.Identity.Name.</span>
-                <span class="nav-item">
-                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                        <button type="submit" class="nav-link btn btn-link text-light">Logout</button>
-                    </form>
-                </span>
+            {
+                <li tabindex="0"><span>@User.Identity.Name</span></li>
+                <li tabindex="0">
+                    <span class="nav-item">
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                        </form>
+                    </span>
+                </li>
             }
             else
             {
-                <li class="nav-item">
-                    <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
-                </li>
+                <span class="nav-item">
+                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"><span>Login</span></a>
+                </span>
             }
 
         </header>
+
         <ul>
-            <li tabindex="0" class="icon-dashboard"><span>Dashboard</span></li>
-            <li tabindex="0" class="icon-customers"><a class="nav-link text-light" asp-area="" asp-controller="SoloReservations" asp-action="Create">Planner</a></li>
-            <li tabindex="0" class="icon-users"><span>Agenda</span></li>
-            <li tabindex="0" class="icon-settings"><a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+            <li tabindex="0" class="icon-dashboard"><a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Overview"><span>Dashboard</span></a></li>
+            <li tabindex="0" class="icon-customers"><a class="nav-link text-dark" asp-area="" asp-controller="Reservations" asp-action="Planner"><span>Planner</span></a></li>
+            <li tabindex="0" class="icon-users"><a class="nav-link text-dark" href="https://calendar.google.com/calendar/" target="_blank"> <span>Agenda</span></li></a>
+            <li tabindex="0" class="icon-settings"><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index"><span>Admin</span></a>
         </ul>
+
     </nav>
 
     <main>
@@ -89,3 +92,7 @@
     @RenderBody()
 </body>
 </html>
+
+
+
+

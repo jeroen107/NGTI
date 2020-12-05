@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Employee>
+@*
+  
+*@
+@{
+    string[] members = new string[2];
+    string teamName = (string)ViewData["name"];
+}
+<h4>@teamName members</h4>
+<head>
+    <link rel="stylesheet" href="~/css/table.css" />
+</head>
+<script>
+</script>
+<body>
+<form asp-action="AddTeamMembers" asp-route-teamName="@teamName" method="post">
+<table class="content-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BHV)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Admin)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Employee item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BHV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Admin)
+            </td>
+            <td>
+                @Html.CheckBox("members", new { value = item.Id })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+    <div class="form-group">
+        <input type="submit" value="Done" class="btn btn-primary" />
+    </div>
+</form>
+</body>
