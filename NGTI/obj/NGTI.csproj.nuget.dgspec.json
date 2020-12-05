@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj": {}
+    "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\NGTI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj": {
+    "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\NGTI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj",
+        "projectUniqueName": "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\NGTI.csproj",
         "projectName": "NGTI",
-        "projectPath": "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj",
-        "packagesPath": "C:\\Users\\m_cel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\obj\\",
+        "projectPath": "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\NGTI.csproj",
+        "packagesPath": "C:\\Users\\zoon_\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\m_cel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\zoon_\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -53,6 +53,12 @@
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[3.1.9, )"
+            },
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.9.4, )"
             },
             "Microsoft.EntityFrameworkCore.Analyzers": {
               "target": "Package",

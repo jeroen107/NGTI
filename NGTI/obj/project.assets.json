@@ -159,7 +159,7 @@
       "Microsoft.CodeAnalysis.Analyzers/2.9.4": {
         "type": "package",
         "build": {
-          "build/_._": {}
+          "build/Microsoft.CodeAnalysis.Analyzers.props": {}
         }
       },
       "Microsoft.CodeAnalysis.Common/3.3.1": {
@@ -8992,6 +8992,7 @@
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 3.1.9",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 3.1.9",
       "Microsoft.AspNetCore.Identity.UI >= 3.1.9",
+      "Microsoft.CodeAnalysis.Analyzers >= 2.9.4",
       "Microsoft.EntityFrameworkCore.Analyzers >= 5.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.9",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.9",
@@ -9000,19 +9001,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\m_cel\\.nuget\\packages\\": {}
+    "C:\\Users\\zoon_\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj",
+      "projectUniqueName": "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\NGTI.csproj",
       "projectName": "NGTI",
-      "projectPath": "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\NGTI.csproj",
-      "packagesPath": "C:\\Users\\m_cel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\m_cel\\Source\\Repos\\jeroen107\\NGTI\\NGTI\\obj\\",
+      "projectPath": "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\NGTI.csproj",
+      "packagesPath": "C:\\Users\\zoon_\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\m_cel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\zoon_\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9051,6 +9052,12 @@
           "Microsoft.AspNetCore.Identity.UI": {
             "target": "Package",
             "version": "[3.1.9, )"
+          },
+          "Microsoft.CodeAnalysis.Analyzers": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[2.9.4, )"
           },
           "Microsoft.EntityFrameworkCore.Analyzers": {
             "target": "Package",
