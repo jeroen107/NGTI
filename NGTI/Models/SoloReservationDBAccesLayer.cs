@@ -19,8 +19,8 @@ namespace NGTI.Models
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@IdSoloReservation", SoloReservationEntities.IdSoloReservation);
                 cmd.Parameters.AddWithValue("@Name", SoloReservationEntities.Name);
-                cmd.Parameters.AddWithValue("@StartTime", SoloReservationEntities.StartTime);
-                cmd.Parameters.AddWithValue("@EndTime", SoloReservationEntities.EndTime);
+                cmd.Parameters.AddWithValue("@Date", SoloReservationEntities.Date);
+                cmd.Parameters.AddWithValue("@TimeSlot", SoloReservationEntities.TimeSlot);
                 cmd.Parameters.AddWithValue("@Reason", SoloReservationEntities.Reason);
                 cmd.Parameters.AddWithValue("@TableId", SoloReservationEntities.TableId); 
                 con.Open();
