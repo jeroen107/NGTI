@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 
 namespace NGTI.Models
@@ -19,7 +19,7 @@ namespace NGTI.Models
                 SqlCommand cmd = new SqlCommand("AddNewEmpdetails", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Email", employeeEntities.Email);
-                cmd.Parameters.AddWithValue("@Name", employeeEntities.Name);
+                //cmd.Parameters.AddWithValue("@Name", employeeEntities.Name);
                 cmd.Parameters.AddWithValue("@BHV", employeeEntities.BHV);
                 cmd.Parameters.AddWithValue("@Admin", employeeEntities.Admin);
                 con.Open();

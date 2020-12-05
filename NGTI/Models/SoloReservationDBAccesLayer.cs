@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace NGTI.Models
 {
     public class SoloReservationDBAccesLayer
@@ -19,10 +20,9 @@ namespace NGTI.Models
                 cmd.Parameters.AddWithValue("@IdSoloReservation", SoloReservationEntities.IdSoloReservation);
                 cmd.Parameters.AddWithValue("@Name", SoloReservationEntities.Name);
                 cmd.Parameters.AddWithValue("@Date", SoloReservationEntities.Date);
-                cmd.Parameters.AddWithValue("@StartTime", SoloReservationEntities.StartTime);
-                cmd.Parameters.AddWithValue("@EndTime", SoloReservationEntities.EndTime);
+                cmd.Parameters.AddWithValue("@TimeSlot", SoloReservationEntities.TimeSlot);
                 cmd.Parameters.AddWithValue("@Reason", SoloReservationEntities.Reason);
-                cmd.Parameters.AddWithValue("@TableId", SoloReservationEntities.TableId);
+                cmd.Parameters.AddWithValue("@TableId", SoloReservationEntities.TableId); 
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();

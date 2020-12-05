@@ -1,0 +1,98 @@
+﻿@model NGTI.Models.EditTeam
+
+@{
+    ViewData["Title"] = "EditTeam";
+    string teamName = (string)TempData["name"];
+}
+<head>
+    <link rel="stylesheet" href="~/css/table.css" />
+</head>
+<script>
+</script>
+<body>
+    <form asp-action="EditTeam" asp-route-TeamName ="@teamName"  method="post">
+        <div class="form-group">
+            <h4>Teamname</h4>
+            <label for="newTeamName" class="control-label"></label>
+            <input type="text" id="newTeamName" name="newTeamName" class="form-control" value="@teamName"/>
+        </div>
+        <h4>Remove members</h4>
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        BHV
+                    </th>
+                    <th>
+                        Admin
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Employee item in Model.TeamMembers)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BHV)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Admin)
+                        </td>
+                        <td>
+                            @Html.CheckBox("DelMembers", new { value = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <h4>Add members?</h4>
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        BHV
+                    </th>
+                    <th>
+                        Admin
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Employee item in Model.Users)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BHV)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Admin)
+                        </td>
+                        <td>
+                            @Html.CheckBox("AddMembers", new { value = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="form-group">
+            <input type="submit" value="Done" class="btn btn-primary" />
+        </div>
+    </form>
+</body>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
