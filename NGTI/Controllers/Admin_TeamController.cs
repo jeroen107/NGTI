@@ -90,15 +90,15 @@ namespace NGTI.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTeamMembers(IEnumerable<string> members, string teamName)
+        public IActionResult AddTeamMembers(IEnumerable<string> members,string teamName)
         {
             System.Diagnostics.Debug.WriteLine("members = " + members + " teamName = " + teamName);
             foreach (string a in members)
             {
-                System.Diagnostics.Debug.WriteLine("email = " + a);
+                System.Diagnostics.Debug.WriteLine("email = "+a);
                 if (a != "false" && a != "False")
                 {
-                    SqlMethods.QueryVoid("INSERT INTO teamMembers VALUES('" + teamName + "','" + a + "');");
+                    SqlMethods.QueryVoid("INSERT INTO teamMembers VALUES('"+teamName+"','"+a+"');");
                 }
             }
             return RedirectToAction("Index");

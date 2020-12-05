@@ -13,7 +13,7 @@
 <script>
 </script>
 <body>
-<form asp-action="AddTeamMembers" asp-route-teamName="@teamName">
+<form asp-action="AddTeamMembers" asp-route-teamName="@teamName" method="post">
 <table class="content-table">
     <thead>
         <tr>
@@ -42,13 +42,13 @@
                 @Html.DisplayFor(modelItem => item.Admin)
             </td>
             <td>
-                <input type="checkbox" id="members" value="@item.Email" />
+                @Html.CheckBox("members", new { value = item.Id })
             </td>
         </tr>
         }
     </tbody>
 </table>
-    <<div class="form-group">
+    <div class="form-group">
         <input type="submit" value="Done" class="btn btn-primary" />
     </div>
 </form>
