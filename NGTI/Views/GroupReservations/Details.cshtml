@@ -25,8 +25,8 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Date)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date)
+        <dd class="col-sm-10">
+            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Date))
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.TimeSlot)
