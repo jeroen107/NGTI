@@ -1,26 +1,24 @@
-﻿.top {
-    font-family: Arial;
-    font: Arial;
-    font-weight: 700;
-    color: #000;
-    position: absolute;
-    left: 50%;
-    top: 10%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    background-color: black;
+﻿.card-header {
+    margin-left: 300px;
+    text-align: center;
 }
 
-.form-horizontal {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+.label {
+    font-weight: bold;
+    color: #151517;
 }
 
-.subres {
-    color: white;
-    background-color: #5F5F62;
-    left: 0%;
+
+.row {
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    width: 57%;
 }
+
+.submit {
+    font-weight: bold;
+    color: #151517;
+    background: #9F8974;
+}
+

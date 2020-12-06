@@ -15,8 +15,8 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Start</th>
-                <th>End</th>
+                <th>Date</th>
+                <th>Timeslot</th>
                 <th>Table Nr.</th>
                 <th>Actions</th>
             </tr>
@@ -29,7 +29,7 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Date)
+                        @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Date))
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.TimeSlot)
@@ -55,8 +55,8 @@
 
                 <th>Name</th>
                 <th>Team Name</th>
-                <th>Start</th>
-                <th>End</th>
+                <th>Date</th>
+                <th>TimeSlot</th>
                 <th>Table Nr</th>
                 <th>Actions</th>
             </tr>
@@ -72,7 +72,7 @@
                     @Html.DisplayFor(modelItem => item.Teamname)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Date)
+                    @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Date))
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TimeSlot)
