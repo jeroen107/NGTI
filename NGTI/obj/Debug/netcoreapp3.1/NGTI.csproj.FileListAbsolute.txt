@@ -632,3 +632,15 @@ C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashbo
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Reservations\Planner.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Overview.cshtml.g.cs
 C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Overview.cshtml.g.cs
+C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.csprojAssemblyReference.cache
+C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.AssemblyInfoInputs.cache
+C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.AssemblyInfo.cs
+C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.csproj.CoreCompileInputs.cache
+C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.RazorAssemblyInfo.cache
+C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.RazorAssemblyInfo.cs
+C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.TagHelpers.input.cache
+C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.TagHelpers.output.cache
+C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.dll
+C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.pdb

@@ -38,10 +38,6 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "Google.Apis.Calendar.v3": {
-              "target": "Package",
-              "version": "[1.40.3.1692, )"
-            },
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
               "version": "[3.1.9, )"
@@ -68,9 +64,9 @@
               "target": "Package",
               "version": "[3.1.9, )"
             },
-            "MongoDB.Driver.Core": {
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[2.11.4, )"
+              "version": "[3.1.4, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
