@@ -12,17 +12,20 @@ using NGTI.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace NGTI.Controllers
 {
+   
     public class AdminController : Controller
     {
         //sql connection var
         public string connectionString; 
 
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ApplicationDbContext _context;
 
         public AdminController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
@@ -336,8 +339,6 @@ namespace NGTI.Controllers
                 return View();
             }
         }
-
-        private readonly ApplicationDbContext _context;
 
         public async Task<IActionResult> EditGroup(int? id)
         {
