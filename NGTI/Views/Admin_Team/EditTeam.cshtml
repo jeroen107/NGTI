@@ -5,14 +5,14 @@
     string teamName = (string)TempData["name"];
 }
 <head>
-    <link rel="stylesheet" href="~/css/table.css" />
+    <link rel="stylesheet" href="~/css/EditTeam.css" />
 </head>
 <script>
 </script>
 <body>
     <form asp-action="EditTeam" asp-route-TeamName ="@teamName"  method="post">
         <div class="form-group">
-            <h4>Teamname</h4>
+            <h4>Team name</h4>
             <label for="newTeamName" class="control-label"></label>
             <input type="text" id="newTeamName" name="newTeamName" class="form-control" value="@teamName"/>
         </div>
@@ -28,6 +28,9 @@
                     </th>
                     <th>
                         Admin
+                    </th>
+                    <th>
+                        Remove
                     </th>
                 </tr>
             </thead>
@@ -52,7 +55,7 @@
             </tbody>
         </table>
         <h4>Add members?</h4>
-        <table class="content-table">
+        <table class="content-table2">
             <thead>
                 <tr>
                     <th>
@@ -63,6 +66,9 @@
                     </th>
                     <th>
                         Admin
+                    </th>
+                    <th>
+                        Add
                     </th>
                 </tr>
             </thead>
@@ -86,7 +92,7 @@
                 }
             </tbody>
         </table>
-        <div class="form-group">
+        <div class="button">
             <input type="submit" value="Done" class="btn btn-primary" />
         </div>
     </form>

@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="~/css/table.css" />
+    <link rel="stylesheet" href="~/css/IndexTeams.css" />
 </head>
 <body>
     <h1>Teams</h1>
@@ -29,7 +29,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Members)
                 </th>
-                <td></td>
+                <td>
+                    
+                </td>
             </tr>
         </thead>
         <tbody>
@@ -38,7 +40,6 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.TeamName)
-
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Members)

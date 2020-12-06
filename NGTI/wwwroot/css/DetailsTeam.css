@@ -1,0 +1,88 @@
+﻿body {
+    background-color: #1C1C20;
+    color: white;
+    font: Arial;
+}
+
+h4 {
+    background-color: #1C1C20;
+    color: #5F5F62;
+    border: 10px;
+    border-color: #9F8974;
+}
+
+.content-table {
+    width: 65%;
+    margin-left: 50px;
+    font: Arial;
+    margin-bottom: 50px;
+    background-color: #151517;
+}
+
+    .content-table thead tr {
+        text-align: center;
+        vertical-align: middle;
+        text-align: right;
+        vertical-align: middle;
+        background-color: #151517;
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+        font: Arial;
+        border-bottom: 2px;
+        border-bottom-color: black;
+    }
+
+    .content-table th,
+    .content-table td {
+        padding: 12px 15px;
+        background-color: #151517;
+        color: #9F8974;
+    }
+
+    .content-table tbody tr {
+        border-bottom: 1px solid #151517;
+        margin-left: 5px;
+        background-color: #151517;
+    }
+
+.content-table tbody tr {
+    background-color: #5F5F62;
+}
+
+    .content-table tbody tr:last-of-type {
+        border-top: 2px;
+        border-top-color: black;
+    }
+
+    .content-table tbody tr.active-row {
+        font-weight: bold;
+        color: black;
+    }
+
+.row {
+    margin-left: 35px;
+    color: #5F5F62;
+}
+
+.table-class thead th{
+    margin-left: 50px;
+}
+
+.table-class thead tr {
+    margin-left: 50px;
+}
+
+a {
+    color: white;
+    margin: 50px;
+    margin-top: auto;
+    -webkit-transition: color 0.2s linear;
+    -moz-transition: color 0.2s linear;
+    -ms-transition: color 0.2s linear;
+    -o-transition: color 0.2s linear;
+    transition: color 0.2s linear;
+}
+    a:hover {
+        color: #9F8974;
+    }

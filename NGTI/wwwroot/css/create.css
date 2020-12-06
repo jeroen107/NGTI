@@ -1,5 +1,6 @@
 ﻿.top {
-    font: "sans-serif";
+    font-family: Arial;
+    font: Arial;
     font-weight: 700;
     color: #000;
     position: absolute;
@@ -7,6 +8,7 @@
     top: 10%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    background-color: black;
 }
 
 .form-horizontal {
@@ -19,6 +21,6 @@
 
 .subres {
     color: white;
-    background-color: #0B7A75;
+    background-color: #5F5F62;
     left: 0%;
 }
