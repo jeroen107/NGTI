@@ -9005,11 +9005,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zoon_\\Source\\Repos\\NGTI\\NGTI\\NGTI.csproj",
+      "projectUniqueName": "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\NGTI.csproj",
       "projectName": "NGTI",
-      "projectPath": "C:\\Users\\zoon_\\Source\\Repos\\NGTI\\NGTI\\NGTI.csproj",
+      "projectPath": "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\NGTI.csproj",
       "packagesPath": "C:\\Users\\zoon_\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\zoon_\\Source\\Repos\\NGTI\\NGTI\\obj\\",
+      "outputPath": "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\zoon_\\AppData\\Roaming\\NuGet\\NuGet.Config",
