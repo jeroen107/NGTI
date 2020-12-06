@@ -1,40 +1,51 @@
 ﻿body {
-    background-color: black;
+    background-color: #1C1C20;
     color: white;
     font: Arial;
 }
 
 h1 {
-    background-color: #5F5F62;
-    color: white;
+    background-color: #1C1C20;
+    color: #5F5F62;
     border: 10px;
-    border-color: #9F8974;
+    border-color: #1C1C20;
     font: Arial;
     font-size: 24px;
 }
 
-.form-group{
+.form-group {
     margin-left: 50px;
     margin-right: -50px;
+    color: #9F8974;
 }
 
-a {
+.link a {
     color: white;
-    
+    -webkit-transition: color 0.2s linear;
+    -moz-transition: color 0.2s linear;
+    -ms-transition: color 0.2s linear;
+    -o-transition: color 0.2s linear;
+    transition: color 0.2s linear;
+    margin-left: 50px;
 }
 
-    a:hover {
-        color: black;
+    .link a:hover {
+        color: #9F8974;
+
     }
+
+.col-md-4 {
+    background: #151517;
+}
+
 
 .form-control {
     padding: 12px;
     width: 62%;
     border: none;
     background-color: #5F5F62 !important;
-    color: white !important;
+    color: #9F8974 !important;
     margin-bottom: 50px;
-    
 }
 
 input[type=submit] {

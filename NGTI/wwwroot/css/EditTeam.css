@@ -1,20 +1,21 @@
 ﻿body {
-    background-color: black;
+    background-color: #1C1C20;
     color: white;
     font: Arial;
 }
 
 h4 {
-    background-color: #5F5F62;
-    color: white;
+    background-color: #1C1C20;
+    color: #5F5F62;
     border: 10px;
-    border-color: #9F8974;
-
+    border-color: #1C1C20;
 }
 
-.content-table{
+.content-table {
     margin: 50px;
     width: 30%;
+    background-color: #151517;
+    color: #9F8974;
 }
 
 .content-table td{
@@ -29,10 +30,12 @@ h4 {
 
 
 
-.content-table2{
+.content-table2 {
     margin: 50px;
     width: 30%;
     margin-bottom: 100px;
+    background-color: #151517;
+    color: #9F8974;
 }
 
 .content-table2 td {
@@ -51,17 +54,22 @@ h4 {
     width: 20%;
     border: none;
     background-color: #5F5F62 !important;
-    color: white !important;
+    color: #151517 !important;
     margin-left: 50px;
     margin-bottom: 50px;
 }
 
 a {
     color: white;
+    -webkit-transition: color 0.2s linear;
+    -moz-transition: color 0.2s linear;
+    -ms-transition: color 0.2s linear;
+    -o-transition: color 0.2s linear;
+    transition: color 0.2s linear;
 }
 
     a:hover {
-        color: black;
+        color: #9F8974;
     }
 
 .button {
@@ -82,7 +90,13 @@ input[type=submit]:hover {
     border-color: white;
 }
 
-input[type=checkbox]:checked + span {
+input[type=checkbox]:before {
+    background-color: #9F8974;
+    border-color: #9F8974;
+}
+
+
+input[type=checkbox]:after {
 
     color: black;
     background-color: white;
