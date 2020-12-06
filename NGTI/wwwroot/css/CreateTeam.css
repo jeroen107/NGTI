@@ -1,0 +1,56 @@
+﻿body {
+    background-color: black;
+    color: white;
+    font: Arial;
+}
+
+h1 {
+    background-color: #5F5F62;
+    color: white;
+    border: 10px;
+    border-color: #9F8974;
+    font: Arial;
+    font-size: 24px;
+}
+
+.form-group{
+    margin-left: 50px;
+    margin-right: -50px;
+}
+
+a {
+    color: white;
+    
+}
+
+    a:hover {
+        color: black;
+    }
+
+.form-control {
+    padding: 12px;
+    width: 62%;
+    border: none;
+    background-color: #5F5F62 !important;
+    color: white !important;
+    margin-bottom: 50px;
+    
+}
+
+input[type=submit] {
+    color: black;
+    background-color: #9F8974;
+    border-color: #9F8974;
+}
+
+    input[type=submit]:hover {
+        color: black;
+        background-color: white;
+        border-color: white;
+    }
+
+input[type=checkbox]:checked + span {
+    color: black;
+    background-color: white;
+    border-color: white;
+}

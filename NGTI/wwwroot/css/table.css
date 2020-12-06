@@ -1,5 +1,6 @@
 ﻿.all {
-    font: "sans-serif";
+    font-family: Arial;
+    font: Arial;
     font-weight: 700;
     color: #000;
     position: absolute;
@@ -7,6 +8,7 @@
     top: 10%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    
 }
 
 .up {
@@ -21,8 +23,9 @@
 
     border-collapse: collapse;
     margin: 25px 0;
+    margin-left: 80px;
     font-size: 0.9em;
-    min-width: 400px;
+    min-width: 1000px;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -31,9 +34,9 @@
     .content-table thead tr {
         text-align: center;
         vertical-align: middle;
-        text-align: center;
+        text-align: right;
         vertical-align: middle;
-        background-color: #009879;
+        background-color: #5F5F62;
         color: #ffffff;
         text-align: left;
         font-weight: bold;
@@ -45,20 +48,26 @@
     }
 
     .content-table tbody tr {
-        border-bottom: 1px solid #dddddd;
+        border-bottom: 1px solid #5F5F62;
+        margin-left: 5px;
     }
 
-        .content-table tbody tr:nth-of-type(even) {
-            background-color: #f3f3f3;
-        }
+    .content-table tbody tr {
+        background-color: #9F8974;
+        border-bottom: 2px solid #5F5F62;
+        border-right: 2px solid #5F5F62;
+        border-left: 2px solid #5F5F62;
+    }
 
-        .content-table tbody tr:last-of-type {
-            border-bottom: 2px solid #009879;
-        }
+            .content-table tbody tr:last-of-type {
+                border-bottom: 2px solid #5F5F62;
+                border-right: 2px solid #5F5F62;
+                border-left: 2px solid #5F5F62;
+            }
 
         .content-table tbody tr.active-row {
             font-weight: bold;
-            color: #009879;
+            color: #FFFFFF;
         }
 
 
@@ -66,4 +75,8 @@
 .tableid {
     text-align: center;
     vertical-align: middle;
+}
+
+.form-group {
+    background-color: #9F8974;
 }
