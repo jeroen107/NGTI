@@ -1,0 +1,20 @@
+.admin{
+    padding: 4rem;
+}
+
+.content{
+    font-family: sans-serif;
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: top;
+    padding: 4rem;
+}
+
+h4 {
+    font-family: 'Graphik';
+}
+
+h1{
+    font-family:  'Graphik';
+    color: black;
+}
