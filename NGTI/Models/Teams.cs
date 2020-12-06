@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace NGTI.Models
 {
-    public class Team
+    public class Teams
     {
-        [Key][Required]
+        [Key]
         public string TeamName { get; set; }
-        public int Members { get; set; }
+        public ICollection<GroupReservation> GroupReservations { get; set; } = new List<GroupReservation>();
+        
+       
     }
-    
+
+
 }

@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace NGTI.Models
 {
-    public class Team
+    public class TeamMembers
     {
-        [Key][Required]
+        [Key, Column(Order =0)]
         public string TeamName { get; set; }
-        public int Members { get; set; }
+        [Key, Column(Order = 1)]
+        public string UserId { get; set; }
+        
     }
-    
 }
