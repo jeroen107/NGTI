@@ -644,3 +644,4 @@ C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.TagHelpers.in
 C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.TagHelpers.output.cache
 C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.dll
 C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.pdb
+C:\Users\ertug\Source\Repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.RazorCoreGenerate.cache
