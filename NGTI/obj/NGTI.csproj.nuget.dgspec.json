@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ertug\\Source\\Repos\\NGTI\\NGTI\\NGTI.csproj": {}
+    "C:\\Users\\ertug\\source\\repos\\NGTI\\NGTI\\NGTI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ertug\\Source\\Repos\\NGTI\\NGTI\\NGTI.csproj": {
+    "C:\\Users\\ertug\\source\\repos\\NGTI\\NGTI\\NGTI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ertug\\Source\\Repos\\NGTI\\NGTI\\NGTI.csproj",
+        "projectUniqueName": "C:\\Users\\ertug\\source\\repos\\NGTI\\NGTI\\NGTI.csproj",
         "projectName": "NGTI",
-        "projectPath": "C:\\Users\\ertug\\Source\\Repos\\NGTI\\NGTI\\NGTI.csproj",
+        "projectPath": "C:\\Users\\ertug\\source\\repos\\NGTI\\NGTI\\NGTI.csproj",
         "packagesPath": "C:\\Users\\ertug\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ertug\\Source\\Repos\\NGTI\\NGTI\\obj\\",
+        "outputPath": "C:\\Users\\ertug\\source\\repos\\NGTI\\NGTI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ertug\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,6 +53,16 @@
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[3.1.9, )"
+            },
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.9.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Analyzers": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
