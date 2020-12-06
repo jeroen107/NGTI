@@ -5,7 +5,7 @@
     string name = (string)TempData["name"];
 }
 <head>
-    <link rel="stylesheet" href="~/css/table.css" />
+    <link rel="stylesheet" href="~/css/DetailsTeam.css" />
 </head>
 <div>
     <h4>Team details</h4>
@@ -45,15 +45,12 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Admin)
                     </td>
-                    <td>
-                        <button>X</button>
-                    </td>
                 </tr>
             }
         </tbody>
     </table>
     <div>
-        <a asp-action="Edit" asp-route-name="@name">Edit</a> |
+        <a asp-action="EditTeam" asp-route-name="@name">Edit</a> |
         <a asp-action="Index">Back to List</a>
     </div>
 </div>
