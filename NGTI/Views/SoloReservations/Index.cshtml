@@ -5,59 +5,72 @@
 
 @{ ViewData["Title"] = "Index"; }
 
-<h1>Index</h1>
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="~/css/res_index.css" />
+</head>
+<html>
+<body>
+    <div class="card-header">
+        <h1>Index Solo Reservations</h1>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TimeSlot)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reason)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Table)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            if (item.Name == @User.Identity.Name)
-            {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Date))
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.TimeSlot)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Reason)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Table.TableId)
-    </td>
-    <td>
-        <a asp-action="Edit" asp-route-id="@item.IdSoloReservation">Edit</a> |
-        <a asp-action="Details" asp-route-id="@item.IdSoloReservation">Details</a> |
-        <a asp-action="Delete" asp-route-id="@item.IdSoloReservation">Delete</a>
-    </td>
-</tr>}
-            }
-    </tbody>
-</table>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <div class="content">
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TimeSlot)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Reason)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Table)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (item.Name == @User.Identity.Name)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Date))
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TimeSlot)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Reason)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Table.TableId)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.IdSoloReservation">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.IdSoloReservation">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.IdSoloReservation">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
