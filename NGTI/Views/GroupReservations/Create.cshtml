@@ -14,10 +14,9 @@
 
 
 <body>
-    <h1>Create</h1>
-
-    <h4>GroupReservation</h4>
-    <hr />
+    <div class="card-header">
+        <h1>New Team Reservation</h1>
+    </div>
     <div class="row">
         <div class="col-md-4">
             <form asp-action="Create">
@@ -58,15 +57,13 @@
                     <select asp-for="TableId" class="form-control" asp-items="ViewBag.TableId"></select>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Create" class="submit" />
                 </div>
             </form>
+            <a asp-action="Index">Go to Overview</a>
         </div>
     </div>
 
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
 
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
