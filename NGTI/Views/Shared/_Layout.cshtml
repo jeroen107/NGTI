@@ -50,9 +50,9 @@
                 <li tabindex="0"><span>@User.Identity.Name</span></li>
                 <li tabindex="0">
                     <span class="nav-item">
-                        <a class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                            <span type="submit" class="nav-link btn btn-link text-dark">Logout</span>
-                        </a>
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button class="nav-link btn btn-link text-dark">Logout</button>
+                        </form>
                     </span>
                 </li>
             }
