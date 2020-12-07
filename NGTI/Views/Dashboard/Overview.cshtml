@@ -22,6 +22,7 @@
                     <th>Name</th>
                     <th>Date</th>
                     <th>TimeSlot</th>
+                    <th>Reason</th>
                     <th>Table Nr.</th>
                 </tr>
             </thead>
@@ -40,6 +41,9 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.TimeSlot)
                             </td>
+                            <td>
+                                @Html.DisplayFor(modelitem => item.Reason)
+                            </td>
                             <td class="tableid">
                                 @Html.DisplayFor(modelItem => item.TableId)
                             </td>
@@ -48,75 +52,79 @@
                 }
             </tbody>
         </table>
+        <h2 class="top">All Reservations</h2>
     </div>
 
 
     <div class="everybody">
-        <h2 class="top">All Reservations</h2>
-        <div class="left">
+        <div class="down">
             <table class="content-table">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Date</th>
                         <th>TimeSlot</th>
+                        <th>Reason</th>
                         <th>Table Nr.</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.soloList)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Date))
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TimeSlot)
-                            </td>
-                            <td class="tableid">
-                                @Html.DisplayFor(modelItem => item.TableId)
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Date))
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TimeSlot)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.Reason)
+                        </td>
+                        <td class="tableid">
+                            @Html.DisplayFor(modelItem => item.TableId)
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
         </div>
 
-        <div class="left">
+        <div class="down">
             <table class="content-table">
                 <thead>
                     <tr>
-
-                        <th>Name</th>
                         <th>Team Name</th>
                         <th>Date</th>
                         <th>TimeSlot</th>
+                        <th>Reason</th>
                         <th>Table Nr</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.groupList)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Teamname)
-                            </td>
-                            <td>
-                                @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Date))
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TimeSlot)
-                            </td>
-                            <td class="tableid">
-                                @Html.DisplayFor(modelItem => item.TableId)
-                            </td>
-                        </tr>
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Teamname)
+                        </td>
+                        <td>
+                            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Date))
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TimeSlot)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.Reason)
+                        </td>
+                        <td class="tableid">
+                            @Html.DisplayFor(modelItem => item.TableId)
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
