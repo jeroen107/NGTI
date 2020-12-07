@@ -1,28 +1,25 @@
-﻿body {
-    background-color: #1C1C20;
-    color: #9F8974;
-    font: Arial;
+﻿.card-header {
+    margin-left: 225px;
+    text-align: center;
+    background: #9F8974;
 }
 
-h1 {
-    background-color: #1C1C20;
-    color: #5F5F62;
-    border: 10px;
-    border-color: #9F8974;
-    font: Arial;
-    font-size: 24px;
-}
-
-p {
-    margin-top: 50px;
-    margin-left: 50px;
-    font: Arial;
+.content {
+    position: absolute;
+    left: 30%;
+    margin-left: -100px;
+    width: 75%;
 }
 
 .content-table {
-    width: 65%;
-    margin-left: 50px;
-    font: Arial;
+    border-collapse: collapse;
+    margin: 25px 0;
+    margin-left: 80px;
+    font-size: 0.9em;
+    min-width: 1000px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
     .content-table thead tr {
@@ -30,57 +27,40 @@ p {
         vertical-align: middle;
         text-align: right;
         vertical-align: middle;
-        background-color: #151517;
+        background-color: #1C1C20;
         color: #ffffff;
         text-align: left;
         font-weight: bold;
-        font: Arial;
-        border-bottom: 2px;
-        border-bottom-color: black;
     }
 
-a:hover span{
-    color: black;
-}
-
-a {
-    color: white;
-    text-decoration: none;
-    -webkit-transition: color 0.2s linear;
-    -moz-transition: color 0.2s linear;
-    -ms-transition: color 0.2s linear;
-    -o-transition: color 0.2s linear;
-    transition: color 0.2s linear;
-}
-
-    a:hover {
-        color: #9F8974;
+    .content-table tbody tr:hover {
+        background: #ffebc7;
     }
 
-.content-table th,
-.content-table td {
-    padding: 12px 15px;
-}
-
-.content-table th {
-    color: #5F5F62;
-}
+    .content-table th,
+    .content-table td {
+        padding: 15px 18px;
+    }
 
     .content-table tbody tr {
-        border-bottom: 1px solid #151517;
+        border-bottom: 1px solid #5F5F62;
         margin-left: 5px;
     }
 
-.content-table tbody tr {
-    background-color: #151517;
-}
+    .content-table tbody tr {
+        background-color: #9F8974;
+        border-bottom: 2px solid #5F5F62;
+        border-right: 2px solid #5F5F62;
+        border-left: 2px solid #5F5F62;
+    }
 
         .content-table tbody tr:last-of-type {
-            border-top: 2px;
-            border-top-color: black;
+            border-bottom: 2px solid #5F5F62;
+            border-right: 2px solid #5F5F62;
+            border-left: 2px solid #5F5F62;
         }
 
         .content-table tbody tr.active-row {
             font-weight: bold;
-            color: #9F8974;
+            color: #FFFFFF;
         }

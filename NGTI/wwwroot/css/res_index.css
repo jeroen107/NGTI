@@ -1,24 +1,17 @@
-﻿h1 {
-    margin left: 75%;
-    color: #9F8974;
+﻿.card-header {
+    margin-left: 225px;
+    text-align: center;
+    background: #9F8974;
 }
 
-a:hover {
-    background: #5F5F62;
-    color: white;
-}
-.up {
-    display: inline-block;
-    margin-left: 25%;
-}
-
-.down {
-    display: inline-block;
-    margin-left: 25%;
+.content {
+    position: absolute;
+    left: 30%;
+    margin-left: -100px;
+    width: 75%;
 }
 
 .content-table {
-
     border-collapse: collapse;
     margin: 25px 0;
     margin-left: 80px;
@@ -40,13 +33,13 @@ a:hover {
         font-weight: bold;
     }
 
-        .content-table tbody tr:hover {
-            background: #ffebc7;
-        }
+    .content-table tbody tr:hover {
+        background: #ffebc7;
+    }
 
     .content-table th,
     .content-table td {
-        padding: 12px 15px;
+        padding: 15px 18px;
     }
 
     .content-table tbody tr {
@@ -61,24 +54,13 @@ a:hover {
         border-left: 2px solid #5F5F62;
     }
 
-            .content-table tbody tr:last-of-type {
-                border-bottom: 2px solid #5F5F62;
-                border-right: 2px solid #5F5F62;
-                border-left: 2px solid #5F5F62;
-            }
+        .content-table tbody tr:last-of-type {
+            border-bottom: 2px solid #5F5F62;
+            border-right: 2px solid #5F5F62;
+            border-left: 2px solid #5F5F62;
+        }
 
         .content-table tbody tr.active-row {
             font-weight: bold;
             color: #FFFFFF;
         }
-
-
-
-.tableid {
-    text-align: center;
-    vertical-align: middle;
-}
-
-.form-group {
-    background-color: #9F8974;
-}
