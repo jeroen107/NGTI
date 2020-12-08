@@ -1,14 +1,26 @@
-﻿.card-header {
+﻿
+.card-header {
     margin-left: 225px;
     text-align: center;
     background: #9F8974;
 }
 
 .content {
+    margin-top: 10em;
     position: absolute;
     left: 30%;
     margin-left: -100px;
     width: 75%;
+}
+
+.create {
+    margin-top: 3em;
+    background: #2b2b2b;
+    position: absolute;
+    text-align: center;
+    color: #9F8974;
+    margin-left: 50%;
+    font-weight: 100;
 }
 
 .content-table {
