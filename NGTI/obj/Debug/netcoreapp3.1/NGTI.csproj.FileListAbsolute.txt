@@ -625,7 +625,6 @@ C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\Index.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Delete.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Details.cshtml.g.cs
-C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Edit.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Reservations\Planner.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Overview.cshtml.g.cs
@@ -928,3 +927,5 @@ C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\staticwebassets\N
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\NGTI.dll
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\NGTI.pdb
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\NGTI.genruntimeconfig.cache
+C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\EditGroup.cshtml.g.cs
+C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\EditSolo.cshtml.g.cs

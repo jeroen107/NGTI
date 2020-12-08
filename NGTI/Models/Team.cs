@@ -12,11 +12,7 @@ namespace NGTI.Models
         public string TeamName { get; set; }
         public int Members { get; set; }
     }
-    public class TeamMembers
-    {
-        public string EmpEmail { get; set; }
-        public string Name { get; set; }
-    }
+    
     public class EditTeam
     {
         public List<Employee> TeamMembers;
