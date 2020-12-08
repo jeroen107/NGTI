@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NGTI.Models;
 
@@ -10,8 +11,35 @@ namespace NGTI.Controllers
 {
     public class Admin_TeamController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManger;
+        public Admin_TeamController(UserManager<ApplicationUser> userManager)
+        {
+            _userManger = userManager;
+        }
         //sql connectionstring var
         string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
+        public IActionResult Overview()
+        {
+            SqlConnection conn = new SqlConnection(connectionString); 
+            var id = _userManger.GetUserId(HttpContext.User);
+            string sql = $"SELECT t.TeamName, COUNT(tm.UserId) AS count FROM Teams t LEFT JOIN TeamMembers tm ON t.TeamName = tm.TeamName WHERE t.teamname IN(SELECT DISTINCT teamname from teammembers WHERE userid = N'{id}') GROUP BY t.TeamName;";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            var model = new List<Team>();
+            conn.Open();
+            using (conn)
+            {
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var obj = new Team();
+                    obj.TeamName = (string)rdr["TeamName"];
+                    obj.Members = (int)rdr["count"];
+                    model.Add(obj);
+                }
+            }
+            conn.Close();
+            return View(model);
+        }
         public IActionResult Index()
         {
             SqlConnection conn = new SqlConnection(connectionString);
