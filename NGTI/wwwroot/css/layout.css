@@ -93,6 +93,10 @@ main {
                 background-image: url("../img/adminIcon.png");
             }
 
+            .menu ul li.icon-team {
+                background-image: url("../img/teamIcon.png")
+            }
+
             .menu ul li:hover {
                 background-color: #9F8974
             }
