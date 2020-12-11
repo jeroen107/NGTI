@@ -8,7 +8,6 @@ namespace NGTI.Models
 {
     public class ApplicationUser : IdentityUser
     {
-       
         public bool BHV { get; set; }
         public bool Admin { get; set; }
     }

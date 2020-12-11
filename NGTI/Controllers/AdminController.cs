@@ -321,49 +321,23 @@ namespace NGTI.Controllers
             }
             return RedirectToAction("Reservations");
         }
-        public async Task<IActionResult> EditSolo(int? id)
+        public ActionResult EditSolo(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var soloReservation = await _context.SoloReservations.FindAsync(id);
-            if (soloReservation == null)
-            {
-                return NotFound();
-            }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
-            return View(soloReservation);
+            return View();
         }
 
-        // POST: SoloReservations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditSolo(int id, [Bind("IdSoloReservation,Name,Date,TimeSlot,Reason,TableId")] SoloReservation soloReservation)
+        public ActionResult EditSolo(int id, IFormCollection collection)
         {
-            if (id != soloReservation.IdSoloReservation)
+            try
             {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(soloReservation);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    return NotFound();
-                }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
-            return View(soloReservation);
+            catch
+            {
+                return View();
+            }
         }
 
         public async Task<IActionResult> EditGroup(int? id)

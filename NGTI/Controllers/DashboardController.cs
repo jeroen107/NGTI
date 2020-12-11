@@ -5,9 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using NGTI.Data;
 //using MongoDB.Driver.Core.Configuration;
 using NGTI.Models;
 
@@ -15,15 +12,7 @@ namespace NGTI.Controllers
 {
     public class DashboardController : Controller
     {
-
-        private readonly ApplicationDbContext _context;
         string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
-        
-        public DashboardController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
         public IActionResult Overview()
         {
             // Sql connection
@@ -85,22 +74,9 @@ namespace NGTI.Controllers
         }
 
         // GET: SoloReservationController/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var soloReservation = await _context.SoloReservations
-                .Include(s => s.Table)
-                .FirstOrDefaultAsync(m => m.IdSoloReservation == id);
-            if (soloReservation == null)
-            {
-                return NotFound();
-            }
-
-            return View(soloReservation);
+            return View();
         }
 
         // GET: SoloReservationController/Create
@@ -130,95 +106,24 @@ namespace NGTI.Controllers
         }
 
         // GET: SoloReservationController/Edit/5
-        public async Task<IActionResult> EditSolo(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var soloReservation = await _context.SoloReservations.FindAsync(id);
-            if (soloReservation == null)
-            {
-                return NotFound();
-            }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
-            return View(soloReservation);
+            return View();
         }
 
-        // POST: SoloReservations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: SoloReservationController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditSolo(int id, [Bind("IdSoloReservation,Name,Date,TimeSlot,Reason,TableId")] SoloReservation soloReservation)
+        public ActionResult Edit(int id, IFormCollection collection)
         {
-            if (id != soloReservation.IdSoloReservation)
+            try
             {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(soloReservation);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    return NotFound();
-                }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
-            return View(soloReservation);
-        }
-
-        // GET: GroupReservations/Edit/5
-        public async Task<IActionResult> EditGroup(int? id)
-        {
-            if (id == null)
+            catch
             {
-                return NotFound();
+                return View();
             }
-
-            var groupReservation = await _context.GroupReservations.FindAsync(id);
-            if (groupReservation == null)
-            {
-                return NotFound();
-            }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
-            return View(groupReservation);
-        }
-
-        // POST: GroupReservations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditGroup(int id, [Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,TableId")] GroupReservation groupReservation)
-        {
-            if (id != groupReservation.IdGroupReservation)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(groupReservation);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    return NotFound();
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
-            return View(groupReservation);
         }
 
         // GET: SoloReservationController/Delete/5

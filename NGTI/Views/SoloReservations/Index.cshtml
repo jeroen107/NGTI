@@ -41,7 +41,7 @@
         @Html.DisplayFor(modelItem => item.Name)
     </td>
     <td>
-        @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Date))
+        @Html.DisplayFor(modelItem => item.Date)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.TimeSlot)
