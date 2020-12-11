@@ -1,5 +1,9 @@
-﻿
-.personal {
+﻿.personal {
+    width: 25%;
+    margin: 0 auto;
+}
+
+.everybody {
     width: 25%;
     margin: 0 auto;
 }
@@ -9,21 +13,6 @@
     margin: 0 auto;
 }
 
-.everybody {
-    margin-left: 25%;
-    display: inline-block;
-    vertical-align: top;
-}
-
-.down {
-    display: inline-block;
-    vertical-align: top;
-}
-
-.down {
-    display: inline-block;
-    vertical-align: top;
-}
 
 
 .content-table {
@@ -43,14 +32,14 @@
         text-align: center;
         vertical-align: middle;
         background-color: #1C1C20;
-        color: #f7d9ab;
+        color: #9F8974;
         text-align: left;
         font-weight: bold;
     }
 
     .content-table th,
     .content-table td {
-        padding: 9px 9px;
+        padding: 12px 15px;
     }
 
     .content-table tbody tr {
@@ -61,16 +50,8 @@
             background-color: #faeee1;
         }
 
-        .content-table tbody tr:hover {
-            background-color: #f7d9ab;
-        }
-
         .content-table tbody tr:nth-of-type(odd) {
             background-color: #faeee1;
-        }
-
-        .content-table tbody tr:hover {
-            background-color: #f7d9ab;
         }
 
 
@@ -85,3 +66,5 @@
     text-align: center;
     vertical-align: middle;
 }
+
+
