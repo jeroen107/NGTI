@@ -17,11 +17,19 @@ namespace NGTI.Data
         public DbSet<Table> Tables { get; set; }
         public DbSet<GroupReservation> GroupReservations { get; set; }
         public DbSet<SoloReservation> SoloReservations { get; set; }
-        
+        public DbSet<Teams> Teams { get; set; }
+
+        public DbSet<TeamMembers> TeamMembers { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<GroupReservation>().HasOne(groupreservation => groupreservation.Table).WithMany(table => table.GroupReservations);
+            modelBuilder.Entity<GroupReservation>().HasOne(groupreservation => groupreservation.TeamName).WithMany(Teams => Teams.GroupReservations);
             modelBuilder.Entity<SoloReservation>().HasOne(soloreservation => soloreservation.Table).WithMany(table => table.SoloReservations);
+            modelBuilder.Entity<TeamMembers>()
+            .HasKey(tm => new { tm.TeamName, tm.UserId });
+
         }
         public DbSet<NGTI.Models.Team> Team { get; set; }
 
