@@ -1,0 +1,33 @@
+﻿.card-header {
+    margin-left: 225px;
+    text-align: center;
+    background: #9F8974;
+}
+
+.row {
+    text-align: match-parent;
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    width: 50%;
+    color: white;
+}
+
+.exit {
+    text-align: match-parent;
+    top: 40%;
+    color: white;
+    position: absolute;
+    left: 50%;
+}
+
+.submit {
+    color: #151517;
+    background: #9F8974;
+    border-radius: 15px;
+}
+
+    .submit:hover {
+        background: white;
+        color: #9F8974;
+    }

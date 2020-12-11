@@ -1,24 +1,41 @@
-﻿.top {
-    font: "sans-serif";
-    font-weight: 700;
-    color: #000;
-    position: absolute;
-    left: 50%;
-    top: 10%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+﻿.card-header {
+    margin-left:225px;
+    text-align: center;
+    background: #9F8974;
 }
 
-.form-horizontal {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-
-.subres {
+.label {
+    font-weight: bold;
     color: white;
-    background-color: #0B7A75;
-    left: 0%;
+}
+
+
+.row {
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    width: 57%;
+    color: white;
+}
+
+.submit {
+    margin-left: 40%;
+    font-weight: bold;
+    color: #151517;
+    background: #9F8974;
+    border-radius: 15px;
+}
+
+    .submit:hover {
+        background: white;
+        color: #9F8974;
+    }
+
+input:focus {
+    background-color: #9F8974
+}
+
+
+select.focus {
+    background-color: #9F8974
 }

@@ -1,0 +1,94 @@
+﻿.card-header {
+    margin-left: 225px;
+    text-align: center;
+    background: #9F8974;
+}
+
+.content {
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+}
+
+.content-table {
+    margin: 50px;
+    width: 30%;
+    background-color: #151517;
+}
+
+    .content-table td {
+        margin: 50px;
+        width: 70%;
+        color: #9F8974;
+    }
+
+    .content-table th {
+        margin: 100px;
+        width: 41%;
+        color: #9F8974;
+    }
+
+
+.form-control {
+    padding: 12px;
+    width: 20%;
+    border: none;
+    background-color: #5F5F62 !important;
+    color: white !important;
+    margin-left: 50px;
+    margin-bottom: 50px;
+}
+
+a {
+    color: white;
+    -webkit-transition: color 0.2s linear;
+    -moz-transition: color 0.2s linear;
+    -ms-transition: color 0.2s linear;
+    -o-transition: color 0.2s linear;
+    transition: color 0.2s linear;
+}
+
+    a:hover {
+        color: #9F8974;
+    }
+
+.form-control {
+    padding: 12px;
+    width: 62%;
+    border: none;
+    background-color: #5F5F62;
+    color: white;
+    margin-bottom: 50px;
+}
+
+input[type=submit] {
+    color: black;
+    background-color: #9F8974;
+    border-color: #9F8974;
+    margin-left: 50px;
+}
+
+    input[type=submit]:hover {
+        color: black;
+        background-color: white;
+        border-color: white;
+    }
+
+input[type=checkbox]:checked + span {
+    color: black;
+    background-color: white;
+    border-color: white;
+}
+
+.submit {
+    margin-left: 40%;
+    font-weight: bold;
+    color: #151517;
+    background: #9F8974;
+    border-radius: 15px;
+}
+
+    .submit:hover {
+        background: white;
+        color: #9F8974;
+    }

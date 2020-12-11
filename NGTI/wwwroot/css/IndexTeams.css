@@ -1,0 +1,78 @@
+﻿
+.card-header {
+    margin-left: 225px;
+    text-align: center;
+    background: #9F8974;
+}
+
+.content {
+    margin-top: 10em;
+    position: absolute;
+    left: 30%;
+    margin-left: -100px;
+    width: 75%;
+}
+
+.create {
+    margin-top: 3em;
+    background: #2b2b2b;
+    position: absolute;
+    text-align: center;
+    color: #9F8974;
+    margin-left: 50%;
+    font-weight: 100;
+}
+
+.content-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    margin-left: 80px;
+    font-size: 0.9em;
+    min-width: 1000px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+    .content-table thead tr {
+        text-align: center;
+        vertical-align: middle;
+        text-align: right;
+        vertical-align: middle;
+        background-color: #1C1C20;
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .content-table tbody tr:hover {
+        background: #ffebc7;
+    }
+
+    .content-table th,
+    .content-table td {
+        padding: 15px 18px;
+    }
+
+    .content-table tbody tr {
+        border-bottom: 1px solid #5F5F62;
+        margin-left: 5px;
+    }
+
+    .content-table tbody tr {
+        background-color: #9F8974;
+        border-bottom: 2px solid #5F5F62;
+        border-right: 2px solid #5F5F62;
+        border-left: 2px solid #5F5F62;
+    }
+
+        .content-table tbody tr:last-of-type {
+            border-bottom: 2px solid #5F5F62;
+            border-right: 2px solid #5F5F62;
+            border-left: 2px solid #5F5F62;
+        }
+
+        .content-table tbody tr.active-row {
+            font-weight: bold;
+            color: #FFFFFF;
+        }
