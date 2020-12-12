@@ -1,21 +1,13 @@
-﻿.card-header {
-    margin-left:225px;
-    text-align: center;
+﻿
+input:focus {
     background: #9F8974;
 }
-
-.label {
-    font-weight: bold;
-    color: white;
-}
-
 
 .row {
     position: absolute;
     left: 50%;
     margin-left: -100px;
     width: 57%;
-    color: white;
 }
 
 .submit {
@@ -31,11 +23,8 @@
         color: #9F8974;
     }
 
-input:focus {
-    background-color: #9F8974
-}
-
-
-select.focus {
-    background-color: #9F8974
+.card-header {
+    margin-left: 225px;
+    text-align: center;
+    background: #9F8974;
 }

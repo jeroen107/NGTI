@@ -1,17 +1,19 @@
-﻿body {
-    background-color: #1C1C20;
-    color: white;
-    font: Arial;
+﻿.card-header{
+margin-left: 225px;
+text-align: center;
+background: #9F8974;
 }
 
-h1 {
-    background-color: #1C1C20;
-    color: #5F5F62;
-    border: 10px;
-    border-color: #1C1C20;
-    font: Arial;
-    font-size: 24px;
+.row {
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    width: 57%;
+    color: white;
 }
+
+
+
 
 .form-group {
     margin-left: 50px;
@@ -43,7 +45,7 @@ h1 {
     padding: 12px;
     width: 62%;
     border: none;
-    background-color: #5F5F62 !important;
+    background-color: white !important;
     color: #9F8974 !important;
     margin-bottom: 50px;
 }

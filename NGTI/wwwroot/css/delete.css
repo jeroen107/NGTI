@@ -1,26 +1,27 @@
 ﻿.card-header {
-    margin-left:225px;
+    margin-left: 225px;
     text-align: center;
     background: #9F8974;
 }
 
-.label {
-    font-weight: bold;
-    color: white;
-}
-
-
 .row {
+    text-align: match-parent;
     position: absolute;
     left: 50%;
     margin-left: -100px;
-    width: 57%;
+    width: 50%;
     color: white;
 }
 
+.exit {
+    text-align: match-parent;
+    top: 40%;
+    color: white;
+    position: absolute;
+    left: 50%;
+}
+
 .submit {
-    margin-left: 40%;
-    font-weight: bold;
     color: #151517;
     background: #9F8974;
     border-radius: 15px;
@@ -30,12 +31,3 @@
         background: white;
         color: #9F8974;
     }
-
-input:focus {
-    background-color: #9F8974
-}
-
-
-select.focus {
-    background-color: #9F8974
-}
