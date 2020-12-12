@@ -10,7 +10,10 @@ namespace NGTI.Models
     {
         [Key][Required]
         public string TeamName { get; set; }
+        
         public int Members { get; set; }
+
+        
     }
     
     public class EditTeam
