@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NGTI.Models;
@@ -409,6 +410,14 @@ namespace NGTI.Controllers
             System.Diagnostics.Debug.WriteLine(limit);
             SqlMethods.QueryVoid("UPDATE Limit SET limit = " + limit);
             return RedirectToAction("Index");
+        }
+        public FileStreamResult CreateFile()
+        {
+            string data = "test";
+            var bytearray = Encoding.ASCII.GetBytes(data);
+            var stream = new System.IO.MemoryStream(bytearray);
+            DateTime w = DateTime.Now;
+            return File(stream, "text/plain", w.ToString()+".txt");
         }
     }
 }
