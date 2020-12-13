@@ -90,6 +90,57 @@ namespace NGTI.Models
             conn.Close();
             return model;
         }
+        public static  List<GroupReservation> getGroupReservations(string sql)
+        {
+            string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
+            SqlConnection conn = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            var model = new List<GroupReservation>();
+            conn.Open();
+            using (conn)
+            {
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var groupRes = new GroupReservation();
+                    groupRes.IdGroupReservation = (int)rdr["IdGroupReservation"];
+                    groupRes.Name = (string)rdr["Name"];
+                    groupRes.Teamname = (string)rdr["Teamname"];
+                    groupRes.Date = (DateTime)rdr["Date"];
+                    groupRes.TimeSlot = (string)rdr["TimeSlot"];
+                    groupRes.Reason = (string)rdr["Reason"];
+                    groupRes.TableId = (int)rdr["TableId"];
+                    model.Add(groupRes);
+                }
+            }
+            conn.Close();
+            return(model);
+        }
+        public static List<SoloReservation> getSoloReservations(string sql)
+        {
+            string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
+            SqlConnection conn = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            var model = new List<SoloReservation>();
+            conn.Open();
+            using (conn)
+            {
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var soloRes = new SoloReservation();
+                    soloRes.IdSoloReservation = (int)rdr["IdSoloReservation"];
+                    soloRes.Name = (string)rdr["Name"];
+                    soloRes.Date = (DateTime)rdr["Date"];
+                    soloRes.TimeSlot = (string)rdr["TimeSlot"];
+                    soloRes.Reason = (string)rdr["Reason"];
+                    soloRes.TableId = (int)rdr["TableId"];
+                    model.Add(soloRes);
+                }
+            }
+            conn.Close();
+            return (model);
+        }
 
     }
 }

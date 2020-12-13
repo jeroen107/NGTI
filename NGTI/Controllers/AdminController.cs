@@ -42,55 +42,12 @@ namespace NGTI.Controllers
         }
         public IActionResult Reservations()
         {
-            // Sql connection
-            SqlConnection conn = new SqlConnection(connectionString);
+            //get all reservations solo/group
             string sql = "SELECT * FROM SoloReservations ORDER BY Date ASC";
             string sql2 = "SELECT * FROM GroupReservations ORDER BY Date ASC";
-            string[] sqls = new string[2] { sql, sql2 };
-
-            var solo = new List<SoloReservation>();
-            var group = new List<GroupReservation>();
-
-            conn.Open();
-            using (conn)
-            {
-                //read all reservations and add them to tuple<solo,group>
-                for (int x = 0; x < 2; x++)
-                {
-                    SqlCommand cmd = new SqlCommand(sqls[x], conn);
-                    SqlDataReader rdr = cmd.ExecuteReader();
-                    if (x == 0)
-                    {
-                        while (rdr.Read())
-                        {
-                            var res = new SoloReservation();
-                            res.IdSoloReservation = (int)rdr["IdSoloReservation"];
-                            res.Name = (string)rdr["Name"];
-                            res.Date = (DateTime)rdr["Date"];
-                            res.TimeSlot = (string)rdr["TimeSlot"];
-                            res.Reason = (string)rdr["Reason"];
-                            res.TableId = (int)rdr["TableId"];
-                            solo.Add(res);
-                        }
-                    }
-                    else if (x == 1)
-                    {
-                        while (rdr.Read())
-                        {
-                            var res = new GroupReservation();
-                            res.IdGroupReservation = (int)rdr["IdGroupReservation"];
-                            res.Teamname = (string)rdr["Teamname"];
-                            res.Name = (string)rdr["Name"];
-                            res.Date = (DateTime)rdr["Date"];
-                            res.TimeSlot = (string)rdr["TimeSlot"];
-                            res.Reason = (string)rdr["Reason"];
-                            res.TableId = (int)rdr["TableId"];
-                            group.Add(res);
-                        }
-                    }
-                }
-            }
-            conn.Close();
+            List<SoloReservation> solo = SqlMethods.getSoloReservations(sql);
+            List<GroupReservation> group = SqlMethods.getGroupReservations(sql2);
+            
             var model = new ReservationsViewModel() { soloList = solo, groupList = group };
             return View(model);
         }
@@ -295,31 +252,16 @@ namespace NGTI.Controllers
         public IActionResult DeleteConfirmed(int id, string type)
         {
             System.Diagnostics.Debug.WriteLine("deleteConfirmed : [" + id + "] [" + type + "]");
-
+            string sql = "";
             if (type == "Solo")
             {
-                SqlConnection conn = new SqlConnection(connectionString);
-                string sql = "DELETE FROM SoloReservations WHERE IdSoloReservation = " + id;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                conn.Open();
-                using (conn)
-                {
-                    SqlDataReader rdr = cmd.ExecuteReader();
-                }
-                conn.Close();
+                sql = "DELETE FROM SoloReservations WHERE IdSoloReservation = " + id;               
             }
             else if (type == "Group")
             {
-                SqlConnection conn = new SqlConnection(connectionString);
-                string sql = "DELETE FROM GroupReservations WHERE IdGroupReservation = " + id;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                conn.Open();
-                using (conn)
-                {
-                    SqlDataReader rdr = cmd.ExecuteReader();
-                }
-                conn.Close();
+                sql = "DELETE FROM GroupReservations WHERE IdGroupReservation = " + id;
             }
+            SqlMethods.QueryVoid(sql);
             return RedirectToAction("Reservations");
         }
         public ActionResult EditSolo(int id)
@@ -413,10 +355,37 @@ namespace NGTI.Controllers
         }
         public FileStreamResult CreateFile()
         {
-            string data = "test";
+            DateTime w = DateTime.Now;
+            string data = $"{w}\n\n";
+            data += "--SoloReservations--\n\n";
+            List<SoloReservation> solo = SqlMethods.getSoloReservations("SELECT * FROM SoloReservations WHERE Date >= GETDATE() AND Date <= GETDATE() + 7 ORDER BY Date ASC;");
+            List<GroupReservation> group = SqlMethods.getGroupReservations("SELECT * FROM GroupReservations WHERE Date >= GETDATE() AND Date <= GETDATE() + 7 ORDER BY Date ASC;");
+            foreach (SoloReservation res in solo)
+            {
+                data += "{\n";
+                data += $"  IdSoloReservation = {res.IdSoloReservation} \n";
+                data += $"  Date = {res.Date} \n";
+                data += $"  Name = {res.Name} \n";
+                data += $"  TimeSlot = {res.TimeSlot} \n";
+                data += $"  Reason = {res.Reason} \n";
+                data += $"  TableId = {res.TableId} \n";
+                data += "}\n";
+            }
+            data += "\n--GroupReservations--\n\n";
+            foreach (GroupReservation res in group)
+            {
+                data += "{\n";
+                data += $"  IdGroupReservation = {res.IdGroupReservation} \n";
+                data += $"  Date = {res.Date} \n";
+                data += $"  Name = {res.Name} \n";
+                data += $"  TeamName = {res.Teamname} \n";
+                data += $"  TimeSlot = {res.TimeSlot} \n";
+                data += $"  Reason = {res.Reason} \n";
+                data += $"  TableId = {res.TableId} \n";
+                data += "}\n";
+            }
             var bytearray = Encoding.ASCII.GetBytes(data);
             var stream = new System.IO.MemoryStream(bytearray);
-            DateTime w = DateTime.Now;
             return File(stream, "text/plain", w.ToString()+".txt");
         }
     }
