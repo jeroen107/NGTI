@@ -1,0 +1,30 @@
+﻿
+input:focus {
+    background: #9F8974;
+}
+
+.row {
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    width: 57%;
+}
+
+.submit {
+    margin-left: 40%;
+    font-weight: bold;
+    color: #151517;
+    background: #9F8974;
+    border-radius: 15px;
+}
+
+    .submit:hover {
+        background: white;
+        color: #9F8974;
+    }
+
+.card-header {
+    margin-left: 225px;
+    text-align: center;
+    background: #9F8974;
+}

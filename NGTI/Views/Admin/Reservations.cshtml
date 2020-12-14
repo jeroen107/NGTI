@@ -11,12 +11,14 @@
 </head>
 <body>
     <div class="up">
+    <h1>Manage Solo Reservations</h1>
     <table class="content-table">
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Start</th>
-                <th>End</th>
+                <th>Date</th>
+                <th>Timeslot</th>
+                <th>Reason</th>
                 <th>Table Nr.</th>
                 <th>Actions</th>
             </tr>
@@ -24,39 +26,42 @@
         <tbody>
             @foreach (var item in Model.soloList)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TimeSlot)
-                    </td>
-                    <td class="tableid">
-                        @Html.DisplayFor(modelItem => item.TableId)
-                    </td>
-                    <td>
-                        <a asp-action="EditSolo" asp-route-id="@item.IdSoloReservation">Edit</a> | |
-                        @Html.ActionLink("Details", "Details", new { id = item.IdSoloReservation, type = "Solo" }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.IdSoloReservation, type = "Solo" })
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Date))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeSlot)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reason)
+                </td>
+                <td class="tableid">
+                    @Html.DisplayFor(modelItem => item.TableId)
+                </td>
+                <td>
+                    <a asp-action="EditSolo" asp-route-id="@item.IdSoloReservation">Edit</a> |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdSoloReservation, type = "Solo" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdSoloReservation, type = "Solo" })
+                </td>
+            </tr>
             }
         </tbody>
     </table>
         </div>
 
-    <div class="down">
+    <div class="up">
+    <h1>Manage Team Reservations</h1>
     <table class="content-table">
         <thead>
             <tr>
-
-                <th>Name</th>
                 <th>Team Name</th>
-                <th>Start</th>
-                <th>End</th>
+                <th>Date</th>
+                <th>TimeSlot</th>
+                <th>Reason</th>
                 <th>Table Nr</th>
                 <th>Actions</th>
             </tr>
@@ -66,16 +71,16 @@
             {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Teamname)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Date)
+                    @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Date))
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TimeSlot)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Reason)
                 </td>
                 <td class="tableid">
                     @Html.DisplayFor(modelItem => item.TableId)

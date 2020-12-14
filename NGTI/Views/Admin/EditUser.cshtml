@@ -4,43 +4,62 @@
     ViewData["Title"] = "EditUser";
 }
 
-<h1>Edit</h1>
 
-<h4>Edit User</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditUser">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
+<!doctype html>
 
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BHV" class="control-label"></label>
-                <input asp-for="BHV" class="form-control" />
-                <span asp-validation-for="BHV" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Admin" class="control-label"></label>
-                <input asp-for="Admin" class="form-control" />
-                <span asp-validation-for="Admin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
 
-        </form>
+    <title>The HTML5 Herald</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="~/css/editUser.css">
+
+</head>
+
+<body>
+    <div class="card-header">
+        <h1>Edit User</h1>
     </div>
-</div>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="EditUser">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
 
-<div>
-    <a asp-action="ListUsers">Back to List</a>
-</div>
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BHV" class="control-label"></label>
+                    <input asp-for="BHV" class="form-control" />
+                    <span asp-validation-for="BHV" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Admin" class="control-label"></label>
+                    <input asp-for="Admin" class="form-control" />
+                    <span asp-validation-for="Admin" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="submit" />
+                </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="ListUsers">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>
+</html>
+

@@ -3,46 +3,64 @@
     ViewData["Title"] = "ListUsers";
 }
 
-<h1>ListUsers</h1>
+<!doctype html>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BHV)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Admin)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title></title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="~/css/IndexTeams.css">
+
+</head>
+
+<body>
+    <div class="card-header">
+        <h1>All Users</h1>
+    </div>
+    <div class="content">
+    <table class="content-table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => user.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => user.BHV)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => user.Admin)
-                </td>
-                <td>
-                    <a asp-action="EditUser" asp-controller="Admin" asp-route-id="@user.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@user.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BHV)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Admin)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => user.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => user.BHV)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => user.Admin)
+                    </td>
+                    <td>
+                        <a asp-action="EditUser" asp-controller="Admin" asp-route-id="@user.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@user.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+        </div>
+</body>
+</html>
+
 

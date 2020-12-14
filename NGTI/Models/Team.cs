@@ -17,4 +17,9 @@ namespace NGTI.Models
         public string EmpEmail { get; set; }
         public string Name { get; set; }
     }
+    public class EditTeam
+    {
+        public List<Employee> TeamMembers;
+        public List<Employee> Users;
+    }
 }
