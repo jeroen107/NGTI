@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ertug\\source\\repos\\NGTI\\NGTI\\NGTI.csproj": {}
+    "C:\\Users\\jeroe\\source\\repos\\NGTI\\NGTI\\NGTI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ertug\\source\\repos\\NGTI\\NGTI\\NGTI.csproj": {
+    "C:\\Users\\jeroe\\source\\repos\\NGTI\\NGTI\\NGTI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ertug\\source\\repos\\NGTI\\NGTI\\NGTI.csproj",
+        "projectUniqueName": "C:\\Users\\jeroe\\source\\repos\\NGTI\\NGTI\\NGTI.csproj",
         "projectName": "NGTI",
-        "projectPath": "C:\\Users\\ertug\\source\\repos\\NGTI\\NGTI\\NGTI.csproj",
-        "packagesPath": "C:\\Users\\ertug\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ertug\\source\\repos\\NGTI\\NGTI\\obj\\",
+        "projectPath": "C:\\Users\\jeroe\\source\\repos\\NGTI\\NGTI\\NGTI.csproj",
+        "packagesPath": "C:\\Users\\jeroe\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jeroe\\source\\repos\\NGTI\\NGTI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ertug\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jeroe\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +26,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,7 +37,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
@@ -103,7 +101,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
