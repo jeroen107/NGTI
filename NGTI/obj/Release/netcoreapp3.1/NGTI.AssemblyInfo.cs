@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-NGTI-153BC2AA-5F64-4DAE-8892-D91751ED9A30")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("NGTI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
