@@ -33,12 +33,12 @@
                         <section>
                             <ul class="style">
                                 <li class="fa fa-calendar">
-                                    <a asp-action="Reservations" style="text-decoration:none"> <h3>Reservations</h3></a>
-                                        <span>Edit Reservations <br /> Delete Reservations <br> See Reservations </span>
-</li>
+                                    <a asp-action="Reservations" style="text-decoration:none"> <h3>Manage Reservations</h3></a>
+                                    <span>Edit Reservations <br /> Delete Reservations <br> See Reservations </span>
+                                </li>
                                 <li class="fa fa-edit">
-                                    <a asp-controller="Admin_Team" asp-action="Index" style="text-decoration:none"> <h3>Edit Users</h3></a>
-                                    <span>Edit Roles and permissions.</span>
+                                    <a asp-action="ListUsers" style="text-decoration: none"><h3>Edit Users</h3></a>
+                                    <span>User Roles <br /> User Permissions <br>              </span>
                                 </li>
                             </ul>
                         </section>
@@ -47,11 +47,11 @@
                         <section>
                             <ul class="style">
                                 <li class="fa fa-plus">
-                                    <a asp-controller="Admin_Team" asp-action="Index" style="text-decoration:none"> <h3>Make Group</h3></a>
-                                    <span>Add A Team <br /> Delete A Team <br> See All Teams</span>
-                                </li>
+                                    <a asp-controller="Admin_Team" asp-action="Index"style="text-decoration: none"> <h3>Make Team</h3> </a>
+                                    <a asp-controller="Admin_Team" asp-action="CreateTeam" style="text-decoration: none"><span>Add A Team <br /> Delete A Team <br> See All Teams</span></a>
+</li>
                                 <li class="fa fa-heart">
-                                    <a asp-action="covidmeasure" style="text-decoration:none"> <h3>Covid measures</h3></a>
+                                    <a asp-action="covidmeasure" style="text-decoration:none"> <h3>Covid Measures</h3> </a>
                                     <span>Adjust Limit <br /> Cancell All Reservations <br> Announce Positive test</span>
                                 </li>
                             </ul>

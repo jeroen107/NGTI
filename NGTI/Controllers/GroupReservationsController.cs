@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,13 +13,17 @@ using NGTI.Models;
 
 namespace NGTI.Controllers
 {
+    [Authorize]
     public class GroupReservationsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManger;
+        string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
 
-        public GroupReservationsController(ApplicationDbContext context)
+        public GroupReservationsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManger = userManager;
         }
 
         // GET: GroupReservations
@@ -48,7 +55,33 @@ namespace NGTI.Controllers
         // GET: GroupReservations/Create
         public IActionResult Create()
         {
+            var teams = new List<Team>();
+            var fake = new Team();
+            fake.TeamName = "Pick A Team";
+            fake.Members = 0;
+            teams.Add(fake);
+            SqlConnection conn = new SqlConnection(connectionString);
+            var id = _userManger.GetUserId(HttpContext.User);
+            string sql = $"SELECT t.TeamName, COUNT(tm.UserId) AS count FROM Teams t LEFT JOIN TeamMembers tm ON t.TeamName = tm.TeamName WHERE t.teamname IN(SELECT DISTINCT teamname from teammembers WHERE userid = N'{id}') GROUP BY t.TeamName;";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            var model = new List<Team>();
+            conn.Open();
+            using (conn)
+            {
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var obj = new Team();
+                    obj.TeamName = (string)rdr["TeamName"];
+                    obj.Members = 1;
+                    teams.Add(obj);
+                    System.Diagnostics.Debug.WriteLine(teams.Count);
+                }
+            }
+            conn.Close();
+            ViewData["TeamName"] = new SelectList(teams, "TeamName", "TeamName");
             ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId");
+            System.Diagnostics.Debug.WriteLine(teams.Count);
             return View();
         }
 

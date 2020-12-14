@@ -10,7 +10,7 @@
 /* Basic */
 
 body {
-	background: #ffffff;
+	background: #636363;
 }
 
 body, span, input, select, textarea {
@@ -21,9 +21,8 @@ body, span, input, select, textarea {
 	line-height: 1.65em;
 }
 
-a {
-	color: #d84780;
-	text-decoration: underline;
+a:hover {
+	background: #9F8974
 }
 
 strong, b {

@@ -8,136 +8,130 @@
 }
 
 
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <link rel="stylesheet" href="~/css/dashboard.css" />
-    </head>
-    <body>
-        <div class="all">
-            <h2 class="top">UPCOMING RESERVATIONS</h2>
-            <table class="content-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Table Nr.</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.soloList)
-                    {
-                        if (item.Name == @User.Identity.Name)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Date)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TimeSlot)
-                                </td>
-                                <td class="tableid">
-                                    @Html.DisplayFor(modelItem => item.TableId)
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.IdSoloReservation">Edit</a> |
-                                    <a asp-action="Details" asp-route-id="@item.IdSoloReservation">Details</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.IdSoloReservation">Delete</a>
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
-
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+</head>
+<body>
+    <div class="personal">
+        <h2 class="top">Upcoming Reservations</h2>
         <table class="content-table">
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Start</th>
-                    <th>End</th>
+                    <th>Date</th>
+                    <th>Time Slot</th>
+                    <th>Reason</th>
                     <th>Table Nr.</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model.soloList)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Date)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TimeSlot)
-                        </td>
-                        <td class="tableid">
-                            @Html.DisplayFor(modelItem => item.TableId)
-                        </td>
-                        <td>
-                            <a asp-action="EditSolo" asp-route-id="@item.IdSoloReservation">Edit</a> | |
-                            @Html.ActionLink("Details", "Details", new { id = item.IdSoloReservation, type = "Solo" }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.IdSoloReservation, type = "Solo" })
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        </div>
-
-        <div class="down">
-            <table class="content-table">
-                <thead>
-                    <tr>
-
-                        <th>Name</th>
-                        <th>Team Name</th>
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Table Nr</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.groupList)
+                    if (item.Name == @User.Identity.Name)
                     {
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Teamname)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Date)
+                                @Convert.ToString(string.Format("{0:ddd d MMMM}", item.Date)) 
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.TimeSlot)
                             </td>
+                            <td>
+                                @Html.DisplayFor(modelitem => item.Reason)
+                            </td>
                             <td class="tableid">
                                 @Html.DisplayFor(modelItem => item.TableId)
                             </td>
-                            <td>
-                                <a asp-action="EditGroup" asp-route-id="@item.IdGroupReservation">Edit</a> |
-                                @Html.ActionLink("Details", "Details", new { id = item.IdGroupReservation, type = "Group" }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.IdGroupReservation, type = "Group" })
-                            </td>
                         </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <h2 class="top">All Reservations</h2>
+    </div>
+
+
+    <div class="everybody">
+        <div class="down">
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Time Slot</th>
+                        <th>Reason</th>
+                        <th>Table Nr.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.soloList)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Convert.ToString(string.Format("{0:ddd d MMMM}", item.Date))
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TimeSlot)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.Reason)
+                        </td>
+                        <td class="tableid">
+                            @Html.DisplayFor(modelItem => item.TableId)
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
         </div>
 
-    }
-    
+        <div class="down">
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Team Name</th>
+                        <th>Date</th>
+                        <th>TimeSlot</th>
+                        <th>Reason</th>
+                        <th>Table Nr</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.groupList)
+                    {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Teamname)
+                        </td>
+                        <td>
+                            @Convert.ToString(string.Format("{0:ddd d MMMM}", item.Date))
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TimeSlot)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.Reason)
+                        </td>
+                        <td class="tableid">
+                            @Html.DisplayFor(modelItem => item.TableId)
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
 
 </body>
 </html>

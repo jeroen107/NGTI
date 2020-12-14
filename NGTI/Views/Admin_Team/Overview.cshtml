@@ -16,13 +16,12 @@
 </head>
 <body>
     <div class="card-header">
-        <h1>Manage Teams</h1>
+        <h3>My Teams</h3>
     </div>
-    <h1>Teams</h1>
 
-    <p>
-        <a asp-action="CreateTeam">Create New</a>
-    </p>
+    <div class="create">
+        <a asp-controller="Admin_Team" asp-action="CreateTeam"><h1>Make new team</h1></a>
+    </div>
     <div class="content">
     <table class="content-table">
         <thead>
