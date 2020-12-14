@@ -358,7 +358,7 @@ namespace NGTI.Controllers
             DateTime w = DateTime.Now;
             string data = $"{w} reservations of this week\n\n";
             data += "--SoloReservations--\n\n";
-            List<SoloReservation> solo = SqlMethods.getSoloReservations("SELECT * FROM SoloReservations WHERE Date >= CAST(GETDATE()) AND Date <= CAST(GETDATE() + 7) ORDER BY Date ASC;");
+            List<SoloReservation> solo = SqlMethods.getSoloReservations("SELECT * FROM SoloReservations WHERE Date >= CAST(GETDATE() AS Date) AND Date <= CAST(GETDATE() + 7 AS Date) ORDER BY Date ASC;");
             List<GroupReservation> group = SqlMethods.getGroupReservations("SELECT * FROM GroupReservations WHERE Date >= GETDATE() AND Date <= GETDATE() + 7 ORDER BY Date ASC;");
             foreach (SoloReservation res in solo)
             {
