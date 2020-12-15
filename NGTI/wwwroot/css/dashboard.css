@@ -68,3 +68,12 @@
 }
 
 
+@media screen and (max-width: 900px) {
+    .personal {
+        width: 70%;
+    }
+
+    .everybody {
+        width: 70%;
+    }
+}

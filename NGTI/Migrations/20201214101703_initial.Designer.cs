@@ -10,8 +10,8 @@ using NGTI.Data;
 namespace NGTI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201212215232_test4")]
-    partial class test4
+    [Migration("20201214101703_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
