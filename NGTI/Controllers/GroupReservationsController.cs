@@ -96,6 +96,7 @@ namespace NGTI.Controllers
             {
                 _context.Add(groupReservation);
                 await _context.SaveChangesAsync();
+                TempData["GroupReservation"] = groupReservation;
                 return RedirectToAction(nameof(Index));
             }
             ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);

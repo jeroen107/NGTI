@@ -2,12 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Apis.Calendar.v3;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NGTI.Data;
 using NGTI.Models;
+using System.IO;
+using System.Threading;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Calendar.v3.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
+
+
 
 namespace NGTI.Controllers
 {
@@ -15,7 +26,11 @@ namespace NGTI.Controllers
     public class SoloReservationsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        public List<string> GoogleEvents = new List<string>();
+        static string[] Scopes = { CalendarService.Scope.Calendar };
+        static string ApplicationName = "Google Calendar API .NET NGTI";
+        private readonly IHttpContextAccessor _contextAccessor;
+        private readonly ILogger<HomeController> _logger;
         public SoloReservationsController(ApplicationDbContext context)
         {
             _context = context;
@@ -65,12 +80,108 @@ namespace NGTI.Controllers
             {
                 _context.Add(soloReservation);
                 await _context.SaveChangesAsync();
+                //SoloReservation obj = new SoloReservation();
+                
+                
+
+                UserCredential credential;
+
+
+
+
+                //string path = Path.Combine(Directory.GetCurrentDirectory(), "credentials.json");
+                using (var stream =
+                    new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+                {
+                    // The file token.json stores the user's access and refresh tokens, and is created
+                    // automatically when the authorization flow completes for the first time.
+                    string credPath = "token.json";
+                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                        GoogleClientSecrets.Load(stream).Secrets,
+                        Scopes,
+                        "user",
+                        CancellationToken.None,
+                        new FileDataStore(credPath, true)).Result;
+
+                }
+
+                // Create Google Calendar API service.
+                var service = new CalendarService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = ApplicationName,
+                });
+
+                // Define parameters of request.
+                Event newEvent = new Event()
+                {
+                    Summary = "Kantoor reservering",
+                    Location = $"tafelnummer: {soloReservation.TableId}",
+                    Description = soloReservation.Reason,
+
+                    Start = new EventDateTime()
+                    {
+
+                        DateTime= soloReservation.Date,
+                        TimeZone = "America/Los_Angeles",
+                    },
+                    End = new EventDateTime()
+                    {
+                        DateTime = soloReservation.Date,
+                        TimeZone = "America/Los_Angeles",
+                    },
+
+
+                };                                          
+                if (soloReservation.TimeSlot == "Morning") 
+                {
+                    TimeSpan tspanStart = new System.TimeSpan(0, 8, 0, 0);
+                    TimeSpan tspanEnd = new System.TimeSpan(0, 12, 0, 0);
+                    newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
+                    newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
+                }
+                else if (soloReservation.TimeSlot == "Afternoon")
+                {
+                    TimeSpan tspanStart = new System.TimeSpan(0, 12, 0, 0);
+                    TimeSpan tspanEnd = new System.TimeSpan(0, 16, 0, 0);
+                    newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
+                    newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
+                }
+                else if (soloReservation.TimeSlot == "Evening")
+                {
+                    TimeSpan tspanStart = new System.TimeSpan(0, 16, 0, 0);
+                    TimeSpan tspanEnd = new System.TimeSpan(0, 20, 0, 0);
+                    newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
+                    newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
+                }
+
+
+                String calendarId = "primary";
+                EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
+                Event createdEvent = request.Execute();
+                Console.WriteLine("Event created: {0}", createdEvent.HtmlLink);
+
+
+
+
+                // List events.
+                /* Events events = request.Execute();
+                 Console.WriteLine("Upcoming events:");
+                 if (events.Items != null && events.Items.Count > 0)
+                 {
+                     foreach (var eventItem in events.Items)
+                     {
+                         GoogleEvents.Add(eventItem.Summary);
+                     }
+                 }*/
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
             return View(soloReservation);
         }
-
+        
+        
         // GET: SoloReservations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -158,5 +269,16 @@ namespace NGTI.Controllers
         {
             return _context.SoloReservations.Any(e => e.IdSoloReservation == id);
         }
+
+        protected void MyEvent(object sender, EventArgs e)
+        {
+            SendtoCalendar();
+        }
+
+        private void SendtoCalendar()
+        {
+            
+        }
+
     }
 }

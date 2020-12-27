@@ -49,19 +49,21 @@
                         <select asp-for="TableId" class="form-control" asp-items="ViewBag.TableId"></select>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Create" class="submit" />
+                        <input type="submit" value="Create" class="submit" onclick="MyEvent()" />
                     </div>
                 </form>
                 <a asp-action="Index">Go to Overview</a>
             </div>
         </div>
 
+       
 
         @section Scripts {
             @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+               
         }
     </div>
-
+ 
 
 </body>
 </html>
