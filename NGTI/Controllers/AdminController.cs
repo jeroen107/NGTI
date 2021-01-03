@@ -15,15 +15,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace NGTI.Controllers
 {
-   
+
     public class AdminController : Controller
     {
-        //sql connection var
-        public string connectionString; 
+        //sql connectionstring
+        public string connectionString;
 
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ApplicationDbContext _context;
@@ -35,11 +33,12 @@ namespace NGTI.Controllers
             this.connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
         }
 
-        // GET: /<controller>/
+        // index view
         public IActionResult Index()
         {
             return View();
         }
+        //all reservations view
         public IActionResult Reservations()
         {
             //get all reservations solo/group
@@ -47,17 +46,21 @@ namespace NGTI.Controllers
             string sql2 = "SELECT * FROM GroupReservations ORDER BY Date ASC";
             List<SoloReservation> solo = SqlMethods.getSoloReservations(sql);
             List<GroupReservation> group = SqlMethods.getGroupReservations(sql2);
-            
+
+            // send object of reservationlists to view
             var model = new ReservationsViewModel() { soloList = solo, groupList = group };
             return View(model);
         }
-        [HttpGet]
-        public IActionResult ListUsers()
+        //users view
+        public IActionResult ListUsers(string search)
         {
-            var users = userManager.Users;
+            System.Diagnostics.Debug.WriteLine($"search = {search}");
+            var users = userManager.Users.Where(x => x.Email.Contains(search) || search == "" || search == null);
+
             return View(users);
         }
 
+        //edit chosen user
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
@@ -108,7 +111,8 @@ namespace NGTI.Controllers
 
 
         }
-        public IActionResult Details(int id, string type) //check if obj is solo or group and redirect
+        //check if reservation is solo or group and redirect
+        public IActionResult Details(int id, string type) 
         {
             if (type == "Solo")
             {
@@ -123,7 +127,7 @@ namespace NGTI.Controllers
                 return NotFound();
             }
         }
-        // Details of solo or group model
+        // View details of soloreservation
         public IActionResult DetailsSolo(int id)
         {
             SqlConnection conn = new SqlConnection(connectionString);
@@ -149,34 +153,15 @@ namespace NGTI.Controllers
             conn.Close();
             return View(model);
         }
+        //View details of groupreservation
         public IActionResult DetailsGroup(int id)
         {
-            SqlConnection conn = new SqlConnection(connectionString);
-            string sql = "SELECT * FROM GroupReservations WHERE IdGroupReservation = " + id;
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            var model = new GroupReservation();
-            conn.Open();
-            using (conn)
-            {
-                SqlDataReader rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    var res = new GroupReservation();
-                    res.IdGroupReservation = (int)rdr["IdGroupReservation"];
-                    res.Teamname = (string)rdr["Teamname"];
-                    res.Name = (string)rdr["Name"];
-                    res.Date = (DateTime)rdr["Date"];
-                    res.TimeSlot = (string)rdr["TimeSlot"];
-                    res.Reason = (string)rdr["Reason"];
-                    res.TableId = (int)rdr["TableId"];
-                    model = res;
-                }
-            }
-            conn.Close();
+            GroupReservation model = SqlMethods.getGroupReservation("SELECT * FROM GroupReservations WHERE IdGroupReservation = " + id);
+            
             return View(model);
         }
 
-        // GET: /<controller>/
+        //check if type of reservation solo/group then redirect to delete view
         public IActionResult Delete(int id, string type)
         {
             if (type == "Solo")
@@ -192,6 +177,7 @@ namespace NGTI.Controllers
                 return NotFound();
             }
         }
+        //delete soloreservation
         public IActionResult DeleteSolo(int id, string type)
         {
             System.Diagnostics.Debug.WriteLine("deleteSolo : [" + id + "] [" + type + "]");
@@ -218,6 +204,7 @@ namespace NGTI.Controllers
             conn.Close();
             return View(model);
         }
+        //delete groupreservation
         public IActionResult DeleteGroup(int id, string type)
         {
             System.Diagnostics.Debug.WriteLine("deleteGroup : [" + id + "] [" + type + "]");
@@ -247,7 +234,7 @@ namespace NGTI.Controllers
             return View(model);
         }
 
-        // POST: /<controller>/   
+        //Delete reservation and go back to reservation view  
         [HttpPost]
         public IActionResult DeleteConfirmed(int id, string type)
         {
@@ -264,6 +251,7 @@ namespace NGTI.Controllers
             SqlMethods.QueryVoid(sql);
             return RedirectToAction("Reservations");
         }
+        //editsolo view
         public ActionResult EditSolo(int id)
         {
             return View();
@@ -338,13 +326,14 @@ namespace NGTI.Controllers
         {
             return _context.GroupReservations.Any(e => e.IdGroupReservation == id);
         }
-
+        //view covidmeasure
         public IActionResult covidmeasure()
         {
             int limit = SqlMethods.QueryLimit();
             TempData["limit"] = limit;
             return View();
         }
+        //change limit integer 
         [HttpPost]
         public IActionResult covidmeasure(string limit)
         {
@@ -353,6 +342,7 @@ namespace NGTI.Controllers
             SqlMethods.QueryVoid("UPDATE Limit SET limit = " + limit);
             return RedirectToAction("Index");
         }
+        //user downloads txt of reservations
         public FileStreamResult CreateFile()
         {
             DateTime w = DateTime.Now;

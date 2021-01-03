@@ -12,17 +12,17 @@ namespace NGTI.Models
         public static void QueryVoid(string query)
         {
             string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
-
             SqlConnection conn = new SqlConnection(connectionString);
             string sql = query;
             SqlCommand cmd = new SqlCommand(sql, conn);
             conn.Open();
-            using (conn)
-            {
-                SqlDataReader rdr = cmd.ExecuteReader();
-            }
-            conn.Close();
+                using (conn)
+                {
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                }
+                conn.Close();
         }
+        
         public static int QueryLimit() 
         {
             string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
@@ -90,7 +90,8 @@ namespace NGTI.Models
             conn.Close();
             return model;
         }
-        public static  List<GroupReservation> getGroupReservations(string sql)
+        //sql list of groupreservations filter with sql string.
+        public static List<GroupReservation> getGroupReservations(string sql)
         {
             string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
             SqlConnection conn = new SqlConnection(connectionString);
@@ -116,6 +117,33 @@ namespace NGTI.Models
             conn.Close();
             return(model);
         }
+        public static GroupReservation getGroupReservation(string sql)
+        {
+            string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
+            SqlConnection conn = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            var model = new GroupReservation();
+            conn.Open();
+            using (conn)
+            {
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var res = new GroupReservation();
+                    res.IdGroupReservation = (int)rdr["IdGroupReservation"];
+                    res.Teamname = (string)rdr["Teamname"];
+                    res.Name = (string)rdr["Name"];
+                    res.Date = (DateTime)rdr["Date"];
+                    res.TimeSlot = (string)rdr["TimeSlot"];
+                    res.Reason = (string)rdr["Reason"];
+                    res.TableId = (int)rdr["TableId"];
+                    model = res;
+                }
+            }
+            conn.Close();
+            return model;
+        }
+        //get list of soloreservations filter with sql string.
         public static List<SoloReservation> getSoloReservations(string sql)
         {
             string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
