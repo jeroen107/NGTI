@@ -928,4 +928,3 @@ C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\NGTI.dll
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\NGTI.pdb
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\NGTI.genruntimeconfig.cache
 C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\Overview.cshtml.g.cs
-C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin\testzoek.cshtml.g.cs

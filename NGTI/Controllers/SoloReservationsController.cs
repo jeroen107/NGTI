@@ -59,13 +59,31 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,Date,TimeSlot,Reason,TableId")] SoloReservation soloReservation)
+        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,Date,TimeSlot,Reason,TableId")] SoloReservation soloReservation, bool entireWeek)
         {
+            
             if (ModelState.IsValid)
             {
-                _context.Add(soloReservation);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                System.Diagnostics.Debug.WriteLine($"testbox = {entireWeek}");
+                //reserveren voor hele week
+                if (entireWeek == true)
+                {
+                    for (int x = 0; x < 7; x++)
+                    {
+                        _context.Add(soloReservation);
+                        await _context.SaveChangesAsync();
+                        System.Diagnostics.Debug.WriteLine($"added {x}");
+                        soloReservation.Date = soloReservation.Date.AddDays(1);
+                        soloReservation.IdSoloReservation = 0;
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    _context.Add(soloReservation);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
             ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
             return View(soloReservation);
