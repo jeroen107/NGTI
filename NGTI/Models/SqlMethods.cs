@@ -11,6 +11,7 @@ namespace NGTI.Models
 
         public static void QueryVoid(string query)
         {
+            System.Diagnostics.Debug.WriteLine($"query = {query}");
             string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
             SqlConnection conn = new SqlConnection(connectionString);
             string sql = query;

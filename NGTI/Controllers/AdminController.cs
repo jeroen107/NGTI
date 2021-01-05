@@ -238,16 +238,16 @@ namespace NGTI.Controllers
         [HttpPost]
         public IActionResult DeleteConfirmed(int id, string type)
         {
-            System.Diagnostics.Debug.WriteLine("deleteConfirmed : [" + id + "] [" + type + "]");
             string sql = "";
-            if (type == "Solo")
+            if (type == "solo")
             {
                 sql = "DELETE FROM SoloReservations WHERE IdSoloReservation = " + id;               
             }
-            else if (type == "Group")
+            else if (type == "group")
             {
                 sql = "DELETE FROM GroupReservations WHERE IdGroupReservation = " + id;
             }
+
             SqlMethods.QueryVoid(sql);
             return RedirectToAction("Reservations");
         }

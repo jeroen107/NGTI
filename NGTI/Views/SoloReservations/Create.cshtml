@@ -2,6 +2,35 @@
 
 @{
     ViewData["Title"] = "Solo Reservations";
+    int year = DateTime.Now.Year;
+    DateTime firstDay = new DateTime(year, 1, 1);
+    firstDay = correctToMonday(firstDay);
+    int weekNr = (DateTime.Today - firstDay).Days / 7 + 1;
+    //initialize selectlist for weeknrs and fill
+    int[] selectlist = new int[6];
+    string[] selectdate = new string[6];
+    //set weeks in select html
+    for(int x = 0; x < selectlist.Length; x++)
+    {
+        selectlist[x] = weekNr + x;
+        DateTime F = firstDay.AddDays((selectlist[x] - 1) * 7);
+        DateTime L = firstDay.AddDays(selectlist[x] * 7 - 1);
+        System.Diagnostics.Debug.WriteLine($"F-{F} L-{L}");
+        selectdate[x] = $"({F.Day}-{F.Month}-{F.Year})->({L.Day}-{L.Month}-{L.Year})";
+    }
+    //return date of the monday of the given date
+    DateTime correctToMonday(DateTime fday)
+    {
+        DayOfWeek dow = fday.DayOfWeek;
+        if( dow == DayOfWeek.Monday)
+        {
+            return fday;
+        }
+        else
+        {
+            return correctToMonday(fday.AddDays(-1));
+        }
+    }
 }
 
 
@@ -10,14 +39,40 @@
 <head>
     <link rel="stylesheet" href="~/css/create.css" />
 </head>
+
 <body>
+    <script>
+        //choose or automatic week reservation
+        function entireWeek(res)
+        {
+            var div = document.getElementById("days").children;
+            if (res == "true") {
+                for (var x = 0; x < div.length; x++) {
+                    div[x].checked = false;
+                    div[x].disable = true;
+                }
+            }
+            else
+            {
+                for (var x = 0; x < div.length; x++) {
+                    div[x].disable = false;
+                }
+            }
+        }
+        //dates in week checkboxes changed to correct dates of the week
+        function changeWeekNr(nr)
+        {
+
+        }
+    </script>
     <div class="total">
         <div class="card-header">
             <h1>New Solo Reservation</h1>
         </div>
+        <div id="test"></div>
         <div class="row">
             <div class="col-md-4">
-                <form asp-action="Create">
+                <form asp-action="Create" id="form">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <!--<label asp-for="Name" class="control-label"></label>-->
@@ -25,12 +80,27 @@
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Date" class="control-label"></label>
+                        <!--<label asp-for="Date" class="control-label"></label>
                         <input asp-for="Date" type="date" asp-format="{0:dd:mm:yyyy}" class="form-control" />
-                        <span asp-validation-for="Date" class="text-danger"></span>
+                        <span asp-validation-for="Date" class="text-danger"></span>-->
+                        <!-- choose or entireweek -->
                         <div>
-                            <p>reserveren hele week</p>
-                            @Html.CheckBox("entireWeek")
+                            <select id="select_id">
+                                @for (int x = 0; x < 6; x++)
+                                {
+                                    <option value="@selectlist[x]">@selectlist[x] @selectdate[x]</option>
+                                }
+                            </select>
+                            <label>choose<input type="radio" name="entireWeek" id="noWeek" checked="checked" onclick="entireWeek('false')" /></label>
+                            <label>whole week<input type="radio" name="entireWeek" id="yesWeek" onclick="entireWeek('true')" /></label>
+                        </div>
+                        <!-- choose days -->
+                        <div id="days">
+                            Ma: <input type="checkbox" name="d" value="Maandag">
+                            Di: <input type="checkbox" name="d" value="Dinsdag">
+                            Wo: <input type="checkbox" name="d" value="Woensdag">
+                            Do: <input type="checkbox" name="d" value="Donderdag">
+                            Vr: <input type="checkbox" name="d" value="Vrijdag">
                         </div>
                     </div>
                     <div class="form-group">
