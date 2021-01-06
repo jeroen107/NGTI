@@ -41,30 +41,6 @@
 </head>
 
 <body>
-    <script>
-        //choose or automatic week reservation
-        function entireWeek(res)
-        {
-            var div = document.getElementById("days").children;
-            if (res == "true") {
-                for (var x = 0; x < div.length; x++) {
-                    div[x].checked = false;
-                    div[x].disable = true;
-                }
-            }
-            else
-            {
-                for (var x = 0; x < div.length; x++) {
-                    div[x].disable = false;
-                }
-            }
-        }
-        //dates in week checkboxes changed to correct dates of the week
-        function changeWeekNr(nr)
-        {
-
-        }
-    </script>
     <div class="total">
         <div class="card-header">
             <h1>New Solo Reservation</h1>
@@ -91,16 +67,16 @@
                                     <option value="@selectlist[x]">@selectlist[x] @selectdate[x]</option>
                                 }
                             </select>
-                            <label>choose<input type="radio" name="entireWeek" id="noWeek" checked="checked" onclick="entireWeek('false')" /></label>
-                            <label>whole week<input type="radio" name="entireWeek" id="yesWeek" onclick="entireWeek('true')" /></label>
+                            <label>choose<input type="radio" name="entireWeek" id="noWeek" checked="checked" onclick="clickWeek('true')" /></label>
+                            <label>whole week<input type="radio" name="entireWeek" id="yesWeek" onclick="clickWeek('false')" /></label>
                         </div>
                         <!-- choose days -->
                         <div id="days">
-                            Ma: <input type="checkbox" name="d" value="Maandag">
-                            Di: <input type="checkbox" name="d" value="Dinsdag">
-                            Wo: <input type="checkbox" name="d" value="Woensdag">
-                            Do: <input type="checkbox" name="d" value="Donderdag">
-                            Vr: <input type="checkbox" name="d" value="Vrijdag">
+                            <label>Ma<input type="checkbox" value=""></label>
+                            <label>Di<input type="checkbox" value=""></label>
+                            <label>Wo<input type="checkbox" value=""></label>
+                            <label>Do<input type="checkbox" value=""></label>
+                            <label>Vr<input type="checkbox" value=""></label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -135,7 +111,30 @@
             @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
         }
     </div>
+    <script>
+        //choose or automatic week reservation
+        function clickWeek(res) {
+            alert("clicked");
+            var div = document.getElementById("days").children;
+            if (res == "false") {
+                for (var x = 0; x < div.length; x++)
+                {
+                    child = div[x].children[0];
+                    child.checked = false;
+                    child.disabled = true;
 
+                }
+            }
+            else {
+                for (var x = 0; x < div.length; x++)
+                {
 
+                    child = div[x].children[0];
+                    child.disabled = false;
+                }
+            }
+        }
+        //dates in week checkboxes changed to correct dates of the week
+    </script>
 </body>
 </html>
