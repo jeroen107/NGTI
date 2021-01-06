@@ -59,30 +59,51 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,Date,TimeSlot,Reason,TableId")] SoloReservation soloReservation, bool entireWeek)
+        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,TimeSlot,Reason,TableId")] SoloReservation soloReservation,bool entireWeek, IEnumerable<int> days, int selectedWeek)
         {
-            
-            if (ModelState.IsValid)
+            int year = DateTime.Now.Year;
+            DateTime firstDay = new DateTime(year, 1, 1);
+            firstDay = correctToMonday(firstDay);
+            firstDay = firstDay.AddDays(7 * (selectedWeek - 1));
+            soloReservation.Date = firstDay;
+            System.Diagnostics.Debug.WriteLine("entireweek = "+entireWeek.ToString()); 
+            //modelstate is not valid when trying to set multiple dates
+            if (ModelState.IsValid || !ModelState.IsValid)
             {
                 System.Diagnostics.Debug.WriteLine($"testbox = {entireWeek}");
-                //reserveren voor hele week
+                //reserve whole week automatic
                 if (entireWeek == true)
                 {
                     for (int x = 0; x < 7; x++)
                     {
-                        _context.Add(soloReservation);
-                        await _context.SaveChangesAsync();
-                        System.Diagnostics.Debug.WriteLine($"added {x}");
+                        if (soloReservation.Date >= DateTime.Today)
+                        {
+                            _context.Add(soloReservation);
+                            await _context.SaveChangesAsync();
+                            System.Diagnostics.Debug.WriteLine($"added {x}");
+                        }
                         soloReservation.Date = soloReservation.Date.AddDays(1);
                         soloReservation.IdSoloReservation = 0;
                     }
                     return RedirectToAction(nameof(Index));
                 }
+                //reserve chosen days
                 else
                 {
-                    _context.Add(soloReservation);
-                    await _context.SaveChangesAsync();
+                    foreach(int day in days)
+                    {
+                        soloReservation.Date = soloReservation.Date.AddDays(day);
+                        if (soloReservation.Date >= DateTime.Today)
+                        {
+                            _context.Add(soloReservation);
+                            await _context.SaveChangesAsync();
+                            System.Diagnostics.Debug.WriteLine($"added {day}");
+                        }
+                        soloReservation.Date = firstDay;
+                        soloReservation.IdSoloReservation = 0;
+                    }
                     return RedirectToAction(nameof(Index));
+
                 }
             }
             ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
@@ -175,6 +196,18 @@ namespace NGTI.Controllers
         private bool SoloReservationExists(int id)
         {
             return _context.SoloReservations.Any(e => e.IdSoloReservation == id);
+        }
+        DateTime correctToMonday(DateTime fday)
+        {
+            DayOfWeek dow = fday.DayOfWeek;
+            if (dow == DayOfWeek.Monday)
+            {
+                return fday;
+            }
+            else
+            {
+                return correctToMonday(fday.AddDays(-1));
+            }
         }
     }
 }

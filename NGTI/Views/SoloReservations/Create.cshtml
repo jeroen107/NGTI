@@ -10,19 +10,18 @@
     int[] selectlist = new int[6];
     string[] selectdate = new string[6];
     //set weeks in select html
-    for(int x = 0; x < selectlist.Length; x++)
+    for (int x = 0; x < selectlist.Length; x++)
     {
         selectlist[x] = weekNr + x;
         DateTime F = firstDay.AddDays((selectlist[x] - 1) * 7);
         DateTime L = firstDay.AddDays(selectlist[x] * 7 - 1);
-        System.Diagnostics.Debug.WriteLine($"F-{F} L-{L}");
         selectdate[x] = $"({F.Day}-{F.Month}-{F.Year})->({L.Day}-{L.Month}-{L.Year})";
     }
     //return date of the monday of the given date
     DateTime correctToMonday(DateTime fday)
     {
         DayOfWeek dow = fday.DayOfWeek;
-        if( dow == DayOfWeek.Monday)
+        if (dow == DayOfWeek.Monday)
         {
             return fday;
         }
@@ -61,23 +60,24 @@
                         <span asp-validation-for="Date" class="text-danger"></span>-->
                         <!-- choose or entireweek -->
                         <div>
-                            <select id="select_id">
+                            <select id="select_id" name="selectedWeek" class="form-control">
                                 @for (int x = 0; x < 6; x++)
                                 {
-                                    <option value="@selectlist[x]">@selectlist[x] @selectdate[x]</option>
+                                    <option value=@selectlist[x]>@selectlist[x] @selectdate[x].</option>
                                 }
                             </select>
-                            <label>choose<input type="radio" name="entireWeek" id="noWeek" checked="checked" onclick="clickWeek('true')" /></label>
-                            <label>whole week<input type="radio" name="entireWeek" id="yesWeek" onclick="clickWeek('false')" /></label>
+                            <label>choose<input type="radio" name="entireWeek"  checked="checked" onclick="clickWeek('false')" value=false /></label>
+                            <label>whole week<input type="radio" name="entireWeek" onclick="clickWeek('true')" value=true /></label>
                         </div>
                         <!-- choose days -->
-                        <div id="days">
-                            <label>Ma<input type="checkbox" value=""></label>
-                            <label>Di<input type="checkbox" value=""></label>
-                            <label>Wo<input type="checkbox" value=""></label>
-                            <label>Do<input type="checkbox" value=""></label>
-                            <label>Vr<input type="checkbox" value=""></label>
+                        <div>
+                            <label>Ma<input type="checkbox" name="days" value=0></label>
+                            <label>Di<input type="checkbox" name="days" value=1></label>
+                            <label>Wo<input type="checkbox" name="days" value=2></label>
+                            <label>Do<input type="checkbox" name="days" value=3></label>
+                            <label>Vr<input type="checkbox" name="days" value=4></label>
                         </div>
+                        <input type="button" onclick="tests()"/>
                     </div>
                     <div class="form-group">
                         <label asp-for="TimeSlot" class="control-label"></label>
@@ -114,27 +114,26 @@
     <script>
         //choose or automatic week reservation
         function clickWeek(res) {
-            alert("clicked");
-            var div = document.getElementById("days").children;
-            if (res == "false") {
+            alert(res);
+            var div = document.getElementsByName("days");
+            if (res == "true") {
                 for (var x = 0; x < div.length; x++)
                 {
-                    child = div[x].children[0];
-                    child.checked = true;
-                    child.disabled = true;
-
+                    d = div[x];
+                    d.checked = true;
+                    d.disabled = true;
                 }
             }
             else {
                 for (var x = 0; x < div.length; x++)
                 {
-                    child = div[x].children[0];
-                    child.disabled = false;
-                    child.checked = false;
+                    d = div[x];
+                    d.disabled = false;
+                    d.checked = false;
                 }
             }
         }
-        //dates in week checkboxes changed to correct dates of the week
+
     </script>
 </body>
 </html>
