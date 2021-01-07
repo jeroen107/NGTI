@@ -109,6 +109,18 @@ namespace NGTI.Controllers
             ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
             return View(soloReservation);
         }
+        DateTime correctToMonday(DateTime fday)
+        {
+            DayOfWeek dow = fday.DayOfWeek;
+            if (dow == DayOfWeek.Monday)
+            {
+                return fday;
+            }
+            else
+            {
+                return correctToMonday(fday.AddDays(-1));
+            }
+        }
 
         // GET: SoloReservations/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -196,18 +208,6 @@ namespace NGTI.Controllers
         private bool SoloReservationExists(int id)
         {
             return _context.SoloReservations.Any(e => e.IdSoloReservation == id);
-        }
-        DateTime correctToMonday(DateTime fday)
-        {
-            DayOfWeek dow = fday.DayOfWeek;
-            if (dow == DayOfWeek.Monday)
-            {
-                return fday;
-            }
-            else
-            {
-                return correctToMonday(fday.AddDays(-1));
-            }
         }
     }
 }

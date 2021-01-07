@@ -15,7 +15,7 @@
         selectlist[x] = weekNr + x;
         DateTime F = firstDay.AddDays((selectlist[x] - 1) * 7);
         DateTime L = firstDay.AddDays(selectlist[x] * 7 - 1);
-        selectdate[x] = $"({F.Day}-{F.Month}-{F.Year})->({L.Day}-{L.Month}-{L.Year})";
+        selectdate[x] = $"[{F.Day}-{F.Month}-{F.Year}] t/m [{L.Day}-{L.Month}-{L.Year}]";
     }
     //return date of the monday of the given date
     DateTime correctToMonday(DateTime fday)
@@ -60,6 +60,7 @@
                         <span asp-validation-for="Date" class="text-danger"></span>-->
                         <!-- choose or entireweek -->
                         <div>
+                            <label for="selectedWeek" class="control-label">Week</label>
                             <select id="select_id" name="selectedWeek" class="form-control">
                                 @for (int x = 0; x < 6; x++)
                                 {
