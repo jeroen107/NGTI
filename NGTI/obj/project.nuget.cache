@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "39H0+y0BW6f3aoNYWBxt46M7GXwRtkywF2D/sc4lOrMUZ29kjWaeZQaQR6tNsX2e2pZ654Uo+2m0bXNk/iibUg==",
+  "dgSpecHash": "/ZJqI8W0NTGWBronykPkBdGFlx1y9TXL4mGxF8RS0GeVyNfy5l9nAQzgqqcN5jJAMYRz5y+v4EamtA/xBnbW6g==",
   "success": true,
   "projectFilePath": "C:\\Users\\jeroe\\source\\repos\\NGTI\\NGTI\\NGTI.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\jeroe\\.nuget\\packages\\google.apis.auth\\1.49.0\\google.apis.auth.1.49.0.nupkg.sha512",
     "C:\\Users\\jeroe\\.nuget\\packages\\google.apis.calendar.v3\\1.49.0.2161\\google.apis.calendar.v3.1.49.0.2161.nupkg.sha512",
     "C:\\Users\\jeroe\\.nuget\\packages\\google.apis.core\\1.49.0\\google.apis.core.1.49.0.nupkg.sha512",
+    "C:\\Users\\jeroe\\.nuget\\packages\\microsoft.aspnet.identity.core\\2.2.3\\microsoft.aspnet.identity.core.2.2.3.nupkg.sha512",
     "C:\\Users\\jeroe\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
     "C:\\Users\\jeroe\\.nuget\\packages\\microsoft.aspnet.webapi.core\\5.2.7\\microsoft.aspnet.webapi.core.5.2.7.nupkg.sha512",
     "C:\\Users\\jeroe\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\3.1.9\\microsoft.aspnetcore.authentication.google.3.1.9.nupkg.sha512",
@@ -193,6 +194,16 @@
     "C:\\Users\\jeroe\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
   "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.Identity.Core 2.2.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Identity.Core",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
     {
       "code": "NU1701",
       "level": "Warning",

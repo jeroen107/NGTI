@@ -17,8 +17,8 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
-
-
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace NGTI.Controllers
 {
@@ -81,12 +81,11 @@ namespace NGTI.Controllers
                 _context.Add(soloReservation);
                 await _context.SaveChangesAsync();
                 //SoloReservation obj = new SoloReservation();
-                
-                
 
                 UserCredential credential;
 
-
+                //var userId = User.Identity.GetUserId();
+                //var user = UserManager<>.FindByIdAsync(userId);
 
 
                 //string path = Path.Combine(Directory.GetCurrentDirectory(), "credentials.json");

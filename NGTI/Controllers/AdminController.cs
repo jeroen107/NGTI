@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace NGTI.Controllers
 {
-   
+    [Authorize(Policy = "AdminOnly")]
     public class AdminController : Controller
     {
         //sql connection var

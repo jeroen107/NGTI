@@ -41,7 +41,8 @@ namespace NGTI.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     BHV = table.Column<bool>(nullable: false),
-                    Admin = table.Column<bool>(nullable: false)
+                    Admin = table.Column<bool>(nullable: false),
+                    Token = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -248,23 +249,22 @@ namespace NGTI.Migrations
                 columns: table => new
                 {
                     TeamName = table.Column<string>(nullable: false),
-                    UserId = table.Column<string>(nullable: false),
-                    ApplicationUserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TeamMembers", x => new { x.TeamName, x.UserId });
                     table.ForeignKey(
-                        name: "FK_TeamMembers_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_TeamMembers_Teams_TeamName",
                         column: x => x.TeamName,
                         principalTable: "Teams",
                         principalColumn: "TeamName",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TeamMembers_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -323,9 +323,9 @@ namespace NGTI.Migrations
                 column: "TableId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeamMembers_ApplicationUserId",
+                name: "IX_TeamMembers_UserId",
                 table: "TeamMembers",
-                column: "ApplicationUserId");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -364,10 +364,10 @@ namespace NGTI.Migrations
                 name: "Tables");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Teams");
 
             migrationBuilder.DropTable(
-                name: "Teams");
+                name: "AspNetUsers");
         }
     }
 }

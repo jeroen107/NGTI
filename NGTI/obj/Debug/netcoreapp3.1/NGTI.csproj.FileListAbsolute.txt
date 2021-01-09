@@ -935,9 +935,6 @@ C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\Google.Apis.Core.d
 C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
 C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\System.Web.Http.dll
 C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
-C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.csproj.CoreCompileInputs.cache
-C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\Microsoft.Data.Sqlite.dll
 C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Sqlite.dll
@@ -959,3 +956,7 @@ C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\runtimes\win-arm\n
 C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\Microsoft.AspNet.Identity.Core.dll
+C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.csproj.CoreCompileInputs.cache
+C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.MvcApplicationPartsAssemblyInfo.cache
