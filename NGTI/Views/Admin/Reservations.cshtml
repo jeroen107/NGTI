@@ -54,47 +54,47 @@
         </div>
 
     <div class="up">
-    <h1>Manage Team Reservations</h1>
-    <table class="content-table">
-        <thead>
-            <tr>
-                <th>Team Name</th>
-                <th>Date</th>
-                <th>TimeSlot</th>
-                <th>Reason</th>
-                <th>Table Nr</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.groupList)
-            {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Teamname)
-                </td>
-                <td>
-                    @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Date))
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TimeSlot)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Reason)
-                </td>
-                <td class="tableid">
-                    @Html.DisplayFor(modelItem => item.TableId)
-                </td>
-                <td>
-                    <a asp-action="EditGroup" asp-route-id="@item.IdGroupReservation">Edit</a> |
-                    @Html.ActionLink("Details", "Details", new { id = item.IdGroupReservation, type = "Group" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.IdGroupReservation, type = "Group" })
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
+        <h1>Manage Team Reservations</h1>
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Team Name</th>
+                    <th>Date</th>
+                    <th>TimeSlot</th>
+                    <th>Reason</th>
+                    <th>Table Nr</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.groupList)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Teamname)
+                        </td>
+                        <td>
+                            @Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.Date))
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TimeSlot)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Reason)
+                        </td>
+                        <td class="tableid">
+                            @Html.DisplayFor(modelItem => item.TableId)
+                        </td>
+                        <td>
+                            <a asp-action="EditGroup" asp-route-id="@item.IdGroupReservation">Edit</a> |
+                            @Html.ActionLink("Details", "Details", new { id = item.IdGroupReservation, type = "Group" }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.IdGroupReservation, type = "Group" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.ActionLink("Download reservations", "CreateFile", "Admin")
     </div>
-    
 </body>
 </html>
