@@ -78,7 +78,6 @@
                             <label>Do<input type="checkbox" name="days" value=3></label>
                             <label>Vr<input type="checkbox" name="days" value=4></label>
                         </div>
-                        <input type="button" onclick="tests()"/>
                     </div>
                     <div class="form-group">
                         <label asp-for="TimeSlot" class="control-label"></label>
@@ -115,7 +114,6 @@
     <script>
         //choose or automatic week reservation
         function clickWeek(res) {
-            alert(res);
             var div = document.getElementsByName("days");
             if (res == "true") {
                 for (var x = 0; x < div.length; x++)
