@@ -10,7 +10,7 @@
 /* Basic */
 
 body {
-	background: #636363;
+	background: #fff;
 }
 
 body, span, input, select, textarea {
@@ -322,4 +322,12 @@ table {
 	padding: 6em 0;
 	background: #d84780;
 	color: white;
+}
+
+
+@media screen and (max-width: 800px) {
+	.container {
+		margin-left: 0%;
+		width: 35%;
+	}
 }
