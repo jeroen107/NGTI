@@ -40,6 +40,7 @@ namespace NGTI.Controllers
             conn.Close();
             return View(model);
         }
+        //view teams
         public IActionResult Index()
         {
             SqlConnection conn = new SqlConnection(connectionString);
