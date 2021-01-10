@@ -2,6 +2,34 @@
 
 @{
     ViewData["Title"] = "Solo Reservations";
+    int year = DateTime.Now.Year;
+    DateTime firstDay = new DateTime(year, 1, 1);
+    firstDay = correctToMonday(firstDay);
+    int weekNr = (DateTime.Today - firstDay).Days / 7 + 1;
+    //initialize selectlist for weeknrs and fill
+    int[] selectlist = new int[6];
+    string[] selectdate = new string[6];
+    //set weeks in select html
+    for (int x = 0; x < selectlist.Length; x++)
+    {
+        selectlist[x] = weekNr + x;
+        DateTime F = firstDay.AddDays((selectlist[x] - 1) * 7);
+        DateTime L = firstDay.AddDays(selectlist[x] * 7 - 1);
+        selectdate[x] = $"[{F.Day}-{F.Month}-{F.Year}] t/m [{L.Day}-{L.Month}-{L.Year}]";
+    }
+    //return date of the monday of the given date
+    DateTime correctToMonday(DateTime fday)
+    {
+        DayOfWeek dow = fday.DayOfWeek;
+        if (dow == DayOfWeek.Monday)
+        {
+            return fday;
+        }
+        else
+        {
+            return correctToMonday(fday.AddDays(-1));
+        }
+    }
 }
 
 
@@ -10,14 +38,16 @@
 <head>
     <link rel="stylesheet" href="~/css/create.css" />
 </head>
+
 <body>
     <div class="total">
         <div class="card-header">
             <h1>New Solo Reservation</h1>
         </div>
+        <div id="test"></div>
         <div class="row">
             <div class="col-md-4">
-                <form asp-action="Create">
+                <form asp-action="Create" id="form">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <!--<label asp-for="Name" class="control-label"></label>-->
@@ -32,9 +62,29 @@
                         
                     </div>-->
                     <div class="form-group">
-                        <label asp-for="Date" class="control-label"></label>
+                        <!--<label asp-for="Date" class="control-label"></label>
                         <input asp-for="Date" type="date" asp-format="{0:dd:mm:yyyy}" class="form-control" />
-                        <span asp-validation-for="Date" class="text-danger"></span>
+                        <span asp-validation-for="Date" class="text-danger"></span>-->
+                        <!-- choose or entireweek -->
+                        <div>
+                            <label for="selectedWeek" class="control-label">Week</label>
+                            <select id="select_id" name="selectedWeek" class="form-control">
+                                @for (int x = 0; x < 6; x++)
+                                {
+                                    <option value=@selectlist[x]>@selectlist[x] @selectdate[x].</option>
+                                }
+                            </select>
+                            <label>choose<input type="radio" name="entireWeek"  checked="checked" onclick="clickWeek('false')" value=false /></label>
+                            <label>whole week<input type="radio" name="entireWeek" onclick="clickWeek('true')" value=true /></label>
+                        </div>
+                        <!-- choose days -->
+                        <div>
+                            <label>Ma<input type="checkbox" name="days" value=0></label>
+                            <label>Di<input type="checkbox" name="days" value=1></label>
+                            <label>Wo<input type="checkbox" name="days" value=2></label>
+                            <label>Do<input type="checkbox" name="days" value=3></label>
+                            <label>Vr<input type="checkbox" name="days" value=4></label>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label asp-for="TimeSlot" class="control-label"></label>
@@ -70,7 +120,28 @@
                
         }
     </div>
- 
+    <script>
+        //choose or automatic week reservation
+        function clickWeek(res) {
+            var div = document.getElementsByName("days");
+            if (res == "true") {
+                for (var x = 0; x < div.length; x++)
+                {
+                    d = div[x];
+                    d.checked = true;
+                    d.disabled = true;
+                }
+            }
+            else {
+                for (var x = 0; x < div.length; x++)
+                {
+                    d = div[x];
+                    d.disabled = false;
+                    d.checked = false;
+                }
+            }
+        }
 
+    </script>
 </body>
 </html>

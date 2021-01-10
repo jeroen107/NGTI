@@ -21,6 +21,10 @@
 <body>
     <div class="card-header">
         <h1>All Users</h1>
+        <form asp-action="ListUsers">
+            <input type="text" id="search" name="search"/>
+            <input type="submit" value="Zoeken" class="submit" />
+        </form>
     </div>
     <div class="content">
     <table class="content-table">
