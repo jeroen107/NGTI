@@ -899,7 +899,6 @@ C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Group
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\GroupReservations\Details.cshtml.g.cs
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\GroupReservations\Edit.cshtml.g.cs
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\GroupReservations\Index.cshtml.g.cs
-C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\GroupReservation\Create.cshtml.g.cs
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Reservations\Planner.cshtml.g.cs
@@ -928,3 +927,4 @@ C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\staticwebassets\N
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\NGTI.dll
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\NGTI.pdb
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\NGTI.genruntimeconfig.cache
+C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\Overview.cshtml.g.cs
