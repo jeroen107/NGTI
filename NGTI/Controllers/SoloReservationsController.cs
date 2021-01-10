@@ -94,6 +94,12 @@ namespace NGTI.Controllers
                 {
                     // The file token.json stores the user's access and refresh tokens, and is created
                     // automatically when the authorization flow completes for the first time.
+
+                    //var userId = this.User.Identity.GetUserId();
+                    //var dbContext = new ApplicationDbContext(DbContextOptions<ApplicationDbContext> options);
+                    //var user = dbContext.Set<ApplicationUser>().Find(userId);
+                   
+
                     string credPath = "token.json";
                     credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                         GoogleClientSecrets.Load(stream).Secrets,
@@ -101,8 +107,55 @@ namespace NGTI.Controllers
                         "user",
                         CancellationToken.None,
                         new FileDataStore(credPath, true)).Result;
-
+                    //user.Token = "New value";
                 }
+                /* 
+                 *   public List<Employee> GetMembers(string name)
+                 {
+                 SqlConnection conn = new SqlConnection(connectionString);
+                 string sql = "SELECT a.Id, a.Email, a.BHV, a.Admin FROM AspNetUsers a JOIN TeamMembers tm ON a.Id = tm.UserId WHERE tm.TeamName = '" + name + "'";
+                 SqlCommand cmd = new SqlCommand(sql, conn);
+                 var model = new List<Employee>();
+                 conn.Open();
+                 using (conn)
+                 {
+                     SqlDataReader rdr = cmd.ExecuteReader();
+                     while (rdr.Read())
+                     {
+                         var obj = new Employee();
+                         obj.Id = (string)rdr["Id"];
+                         obj.Email = (string)rdr["Email"];
+                         obj.BHV = (bool)rdr["BHV"];
+                         obj.Admin = (bool)rdr["Admin"];
+                         model.Add(obj);
+                     }
+                 }
+                 conn.Close();
+                 return model;
+             }
+                     * 
+                 * 
+                 * 
+                 * var userStore = new UserStore<ApplicationUser>(new
+                                ApplicationDbContext());
+                 var appManager = new UserManager<ApplicationUser>(userStore);
+
+                 // here you can do a foreach loop and get the email and assign new datas
+                 foreach (var i in model)
+                 {
+                     var currentUser = appManager.FindByEmail(i.Email);
+
+                     // here you can assign the updated values
+                     currentUser.userFname = i.userFname;
+                     // and rest fields are goes here
+                     await appManager.UpdateAsync(currentUser);
+                 }
+                 var ctx = userStore.Context;
+                 ctx.SaveChanges();
+                 // now you can redirect to some other method or-else you can return 
+                 // to this view itself by returning the data
+
+                 return RedirectToAction("SomeActionMethod");*/
 
                 // Create Google Calendar API service.
                 var service = new CalendarService(new BaseClientService.Initializer()

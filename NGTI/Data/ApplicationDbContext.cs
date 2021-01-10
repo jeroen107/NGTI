@@ -13,6 +13,11 @@ namespace NGTI.Data
             : base(options)
         {
         }
+
+        public ApplicationDbContext()
+        {
+        }
+
         // tabllen die hij gaat aanmaken in de database dbset pakt de models
         public DbSet<Table> Tables { get; set; }
         public DbSet<ApplicationUser> AspNetUsers {get; set;}
