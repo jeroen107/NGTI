@@ -252,7 +252,7 @@ namespace NGTI.Controllers
             return RedirectToAction("Reservations");
         }
         //editsolo view
-        public ActionResult EditSolo(int id)
+        public async Task<ActionResult> EditSoloAsync(int id)
         {
             if (id == null)
             {

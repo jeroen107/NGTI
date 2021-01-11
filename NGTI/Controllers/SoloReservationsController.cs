@@ -29,8 +29,7 @@ namespace NGTI.Controllers
         public List<string> GoogleEvents = new List<string>();
         static string[] Scopes = { CalendarService.Scope.Calendar };
         static string ApplicationName = "Google Calendar API .NET NGTI";
-        private readonly IHttpContextAccessor _contextAccessor;
-        private readonly ILogger<HomeController> _logger;
+        
         public SoloReservationsController(ApplicationDbContext context)
         {
             _context = context;
@@ -74,14 +73,14 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,TimeSlot,Reason,TableId")] SoloReservation soloReservation,bool entireWeek, IEnumerable<int> days, int selectedWeek)
+        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,TimeSlot,Reason,TableId")] SoloReservation soloReservation, bool entireWeek, IEnumerable<int> days, int selectedWeek)
         {
             int year = DateTime.Now.Year;
             DateTime firstDay = new DateTime(year, 1, 1);
             firstDay = correctToMonday(firstDay);
             firstDay = firstDay.AddDays(7 * (selectedWeek - 1));
             soloReservation.Date = firstDay;
-            System.Diagnostics.Debug.WriteLine("entireweek = "+entireWeek.ToString()); 
+            System.Diagnostics.Debug.WriteLine("entireweek = " + entireWeek.ToString());
             //modelstate is not valid when trying to set multiple dates
             if (ModelState.IsValid || !ModelState.IsValid)
             {
@@ -96,6 +95,106 @@ namespace NGTI.Controllers
                             _context.Add(soloReservation);
                             await _context.SaveChangesAsync();
                             System.Diagnostics.Debug.WriteLine($"added {x}");
+
+                            UserCredential credential;
+
+                            //var userId = User.Identity.GetUserId();
+                            //var user = UserManager<>.FindByIdAsync(userId);
+
+
+                            //string path = Path.Combine(Directory.GetCurrentDirectory(), "credentials.json");
+                            using (var stream =
+                                new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+                            {
+                                // The file token.json stores the user's access and refresh tokens, and is created
+                                // automatically when the authorization flow completes for the first time.
+
+                                //var userId = this.User.Identity.GetUserId();
+                                //var dbContext = new ApplicationDbContext(DbContextOptions<ApplicationDbContext> options);
+                                //var user = dbContext.Set<ApplicationUser>().Find(userId);
+
+
+                                string credPath = "token.json";
+                                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                                    GoogleClientSecrets.Load(stream).Secrets,
+                                    Scopes,
+                                    "user",
+                                    CancellationToken.None,
+                                    new FileDataStore(credPath, true)).Result;
+                                //user.Token = "New value";
+                            }
+
+
+                            // Create Google Calendar API service.
+                            var service = new CalendarService(new BaseClientService.Initializer()
+                            {
+                                HttpClientInitializer = credential,
+                                ApplicationName = ApplicationName,
+                            });
+
+                            // Define parameters of request.
+                            Event newEvent = new Event()
+                            {
+                                Summary = "Kantoor reservering",
+                                Location = $"tafelnummer: {soloReservation.TableId}",
+                                Description = soloReservation.Reason,
+
+                                Start = new EventDateTime()
+                                {
+
+                                    DateTime = soloReservation.Date,
+                                    TimeZone = "America/Los_Angeles",
+                                },
+                                End = new EventDateTime()
+                                {
+                                    DateTime = soloReservation.Date,
+                                    TimeZone = "America/Los_Angeles",
+                                },
+
+
+                            };
+                            if (soloReservation.TimeSlot == "Morning")
+                            {
+                                TimeSpan tspanStart = new System.TimeSpan(0, 8, 0, 0);
+                                TimeSpan tspanEnd = new System.TimeSpan(0, 12, 0, 0);
+                                newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
+                                newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
+                            }
+                            else if (soloReservation.TimeSlot == "Afternoon")
+                            {
+                                TimeSpan tspanStart = new System.TimeSpan(0, 12, 0, 0);
+                                TimeSpan tspanEnd = new System.TimeSpan(0, 16, 0, 0);
+                                newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
+                                newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
+                            }
+                            else if (soloReservation.TimeSlot == "Evening")
+                            {
+                                TimeSpan tspanStart = new System.TimeSpan(0, 16, 0, 0);
+                                TimeSpan tspanEnd = new System.TimeSpan(0, 20, 0, 0);
+                                newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
+                                newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
+                            }
+
+
+                            String calendarId = "primary";
+                            EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
+                            Event createdEvent = request.Execute();
+                            Console.WriteLine("Event created: {0}", createdEvent.HtmlLink);
+
+
+
+
+                            // List events.
+                            /* Events events = request.Execute();
+                             Console.WriteLine("Upcoming events:");
+                             if (events.Items != null && events.Items.Count > 0)
+                             {
+                                 foreach (var eventItem in events.Items)
+                                 {
+                                     GoogleEvents.Add(eventItem.Summary);
+                                 }
+                             }*/
+
                         }
                         soloReservation.Date = soloReservation.Date.AddDays(1);
                         soloReservation.IdSoloReservation = 0;
@@ -105,7 +204,7 @@ namespace NGTI.Controllers
                 //reserve chosen days
                 else
                 {
-                    foreach(int day in days)
+                    foreach (int day in days)
                     {
                         soloReservation.Date = soloReservation.Date.AddDays(day);
                         if (soloReservation.Date >= DateTime.Today)
@@ -113,6 +212,107 @@ namespace NGTI.Controllers
                             _context.Add(soloReservation);
                             await _context.SaveChangesAsync();
                             System.Diagnostics.Debug.WriteLine($"added {day}");
+
+
+                            UserCredential credential;
+
+                            //var userId = User.Identity.GetUserId();
+                            //var user = UserManager<>.FindByIdAsync(userId);
+
+
+                            //string path = Path.Combine(Directory.GetCurrentDirectory(), "credentials.json");
+                            using (var stream =
+                                new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+                            {
+                                // The file token.json stores the user's access and refresh tokens, and is created
+                                // automatically when the authorization flow completes for the first time.
+
+                                //var userId = this.User.Identity.GetUserId();
+                                //var dbContext = new ApplicationDbContext(DbContextOptions<ApplicationDbContext> options);
+                                //var user = dbContext.Set<ApplicationUser>().Find(userId);
+
+
+                                string credPath = "token.json";
+                                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                                    GoogleClientSecrets.Load(stream).Secrets,
+                                    Scopes,
+                                    "user",
+                                    CancellationToken.None,
+                                    new FileDataStore(credPath, true)).Result;
+                                //user.Token = "New value";
+                            }
+
+
+                            // Create Google Calendar API service.
+                            var service = new CalendarService(new BaseClientService.Initializer()
+                            {
+                                HttpClientInitializer = credential,
+                                ApplicationName = ApplicationName,
+                            });
+
+                            // Define parameters of request.
+                            Event newEvent = new Event()
+                            {
+                                Summary = "Kantoor reservering",
+                                Location = $"tafelnummer: {soloReservation.TableId}",
+                                Description = soloReservation.Reason,
+
+                                Start = new EventDateTime()
+                                {
+
+                                    DateTime = soloReservation.Date,
+                                    TimeZone = "America/Los_Angeles",
+                                },
+                                End = new EventDateTime()
+                                {
+                                    DateTime = soloReservation.Date,
+                                    TimeZone = "America/Los_Angeles",
+                                },
+
+
+                            };
+                            if (soloReservation.TimeSlot == "Morning")
+                            {
+                                TimeSpan tspanStart = new System.TimeSpan(0, 8, 0, 0);
+                                TimeSpan tspanEnd = new System.TimeSpan(0, 12, 0, 0);
+                                newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
+                                newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
+                            }
+                            else if (soloReservation.TimeSlot == "Afternoon")
+                            {
+                                TimeSpan tspanStart = new System.TimeSpan(0, 12, 0, 0);
+                                TimeSpan tspanEnd = new System.TimeSpan(0, 16, 0, 0);
+                                newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
+                                newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
+                            }
+                            else if (soloReservation.TimeSlot == "Evening")
+                            {
+                                TimeSpan tspanStart = new System.TimeSpan(0, 16, 0, 0);
+                                TimeSpan tspanEnd = new System.TimeSpan(0, 20, 0, 0);
+                                newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
+                                newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
+                            }
+
+
+                            String calendarId = "primary";
+                            EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
+                            Event createdEvent = request.Execute();
+                            Console.WriteLine("Event created: {0}", createdEvent.HtmlLink);
+
+
+
+
+                            // List events.
+                            /* Events events = request.Execute();
+                             Console.WriteLine("Upcoming events:");
+                             if (events.Items != null && events.Items.Count > 0)
+                             {
+                                 foreach (var eventItem in events.Items)
+                                 {
+                                     GoogleEvents.Add(eventItem.Summary);
+                                 }
+                             }*/
+
                         }
                         soloReservation.Date = firstDay;
                         soloReservation.IdSoloReservation = 0;
@@ -120,7 +320,12 @@ namespace NGTI.Controllers
                     return RedirectToAction(nameof(Index));
 
                 }
-        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,Date,TimeSlot,Reason,TableId")] SoloReservation soloReservation)
+
+            }
+            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
+            return View(soloReservation);
+        }
+       /* public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,Date,TimeSlot,Reason,TableId")] SoloReservation soloReservation)
         {
             if (ModelState.IsValid)
             {
@@ -128,156 +333,13 @@ namespace NGTI.Controllers
                 await _context.SaveChangesAsync();
                 //SoloReservation obj = new SoloReservation();
 
-                UserCredential credential;
-
-                //var userId = User.Identity.GetUserId();
-                //var user = UserManager<>.FindByIdAsync(userId);
-
-
-                //string path = Path.Combine(Directory.GetCurrentDirectory(), "credentials.json");
-                using (var stream =
-                    new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
-                {
-                    // The file token.json stores the user's access and refresh tokens, and is created
-                    // automatically when the authorization flow completes for the first time.
-
-                    //var userId = this.User.Identity.GetUserId();
-                    //var dbContext = new ApplicationDbContext(DbContextOptions<ApplicationDbContext> options);
-                    //var user = dbContext.Set<ApplicationUser>().Find(userId);
-                   
-
-                    string credPath = "token.json";
-                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                        GoogleClientSecrets.Load(stream).Secrets,
-                        Scopes,
-                        "user",
-                        CancellationToken.None,
-                        new FileDataStore(credPath, true)).Result;
-                    //user.Token = "New value";
-                }
-                /* 
-                 *   public List<Employee> GetMembers(string name)
-                 {
-                 SqlConnection conn = new SqlConnection(connectionString);
-                 string sql = "SELECT a.Id, a.Email, a.BHV, a.Admin FROM AspNetUsers a JOIN TeamMembers tm ON a.Id = tm.UserId WHERE tm.TeamName = '" + name + "'";
-                 SqlCommand cmd = new SqlCommand(sql, conn);
-                 var model = new List<Employee>();
-                 conn.Open();
-                 using (conn)
-                 {
-                     SqlDataReader rdr = cmd.ExecuteReader();
-                     while (rdr.Read())
-                     {
-                         var obj = new Employee();
-                         obj.Id = (string)rdr["Id"];
-                         obj.Email = (string)rdr["Email"];
-                         obj.BHV = (bool)rdr["BHV"];
-                         obj.Admin = (bool)rdr["Admin"];
-                         model.Add(obj);
-                     }
-                 }
-                 conn.Close();
-                 return model;
-             }
-                     * 
-                 * 
-                 * 
-                 * var userStore = new UserStore<ApplicationUser>(new
-                                ApplicationDbContext());
-                 var appManager = new UserManager<ApplicationUser>(userStore);
-
-                 // here you can do a foreach loop and get the email and assign new datas
-                 foreach (var i in model)
-                 {
-                     var currentUser = appManager.FindByEmail(i.Email);
-
-                     // here you can assign the updated values
-                     currentUser.userFname = i.userFname;
-                     // and rest fields are goes here
-                     await appManager.UpdateAsync(currentUser);
-                 }
-                 var ctx = userStore.Context;
-                 ctx.SaveChanges();
-                 // now you can redirect to some other method or-else you can return 
-                 // to this view itself by returning the data
-
-                 return RedirectToAction("SomeActionMethod");*/
-
-                // Create Google Calendar API service.
-                var service = new CalendarService(new BaseClientService.Initializer()
-                {
-                    HttpClientInitializer = credential,
-                    ApplicationName = ApplicationName,
-                });
-
-                // Define parameters of request.
-                Event newEvent = new Event()
-                {
-                    Summary = "Kantoor reservering",
-                    Location = $"tafelnummer: {soloReservation.TableId}",
-                    Description = soloReservation.Reason,
-
-                    Start = new EventDateTime()
-                    {
-
-                        DateTime= soloReservation.Date,
-                        TimeZone = "America/Los_Angeles",
-                    },
-                    End = new EventDateTime()
-                    {
-                        DateTime = soloReservation.Date,
-                        TimeZone = "America/Los_Angeles",
-                    },
-
-
-                };                                          
-                if (soloReservation.TimeSlot == "Morning") 
-                {
-                    TimeSpan tspanStart = new System.TimeSpan(0, 8, 0, 0);
-                    TimeSpan tspanEnd = new System.TimeSpan(0, 12, 0, 0);
-                    newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
-                    newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
-                }
-                else if (soloReservation.TimeSlot == "Afternoon")
-                {
-                    TimeSpan tspanStart = new System.TimeSpan(0, 12, 0, 0);
-                    TimeSpan tspanEnd = new System.TimeSpan(0, 16, 0, 0);
-                    newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
-                    newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
-                }
-                else if (soloReservation.TimeSlot == "Evening")
-                {
-                    TimeSpan tspanStart = new System.TimeSpan(0, 16, 0, 0);
-                    TimeSpan tspanEnd = new System.TimeSpan(0, 20, 0, 0);
-                    newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
-                    newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
-                }
-
-
-                String calendarId = "primary";
-                EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
-                Event createdEvent = request.Execute();
-                Console.WriteLine("Event created: {0}", createdEvent.HtmlLink);
-
-
-
-
-                // List events.
-                /* Events events = request.Execute();
-                 Console.WriteLine("Upcoming events:");
-                 if (events.Items != null && events.Items.Count > 0)
-                 {
-                     foreach (var eventItem in events.Items)
-                     {
-                         GoogleEvents.Add(eventItem.Summary);
-                     }
-                 }*/
+                
 
                 return RedirectToAction(nameof(Index));
             }
             ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
             return View(soloReservation);
-        }
+        }*/
         DateTime correctToMonday(DateTime fday)
         {
             DayOfWeek dow = fday.DayOfWeek;

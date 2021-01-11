@@ -10,7 +10,7 @@ using NGTI.Models;
 
 namespace NGTI.Controllers
 {
-    [Authorize(Policy = "AdminOnly")]
+    
     public class Admin_TeamController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManger;

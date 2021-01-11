@@ -957,6 +957,9 @@ C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\runtimes\win-arm64
 C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\Microsoft.AspNet.Identity.Core.dll
+C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
+C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\EntityFramework.dll
+C:\Users\jeroe\source\repos\NGTI\NGTI\bin\Debug\netcoreapp3.1\System.CodeDom.dll
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.csproj.CoreCompileInputs.cache
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\NGTI.MvcApplicationPartsAssemblyInfo.cache

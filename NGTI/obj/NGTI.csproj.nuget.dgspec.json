@@ -38,6 +38,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
             "Google.Apis.Calendar.v3": {
               "target": "Package",
               "version": "[1.49.0.2161, )"
