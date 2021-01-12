@@ -1,12 +1,17 @@
 ﻿
 .personal {
     width: 25%;
-    margin: 0 auto;
+    margin: auto;
 }
 
-.top {
-    width: 50%;
-    margin: 0 auto;
+.top1 {
+    width: 100%;
+    margin-left: 50px;
+}
+
+.top2 {
+    width: auto;
+    margin-left:100px;
 }
 
 .everybody {
@@ -15,73 +20,172 @@
     vertical-align: top;
 }
 
-.down {
-    display: inline-block;
-    vertical-align: top;
-}
 
-.down {
-    display: inline-block;
-    vertical-align: top;
+
+.top1,
+.top2{
+    padding: 50px;
 }
 
 
-.content-table {
-    margin: 0 auto;
+.content-table1 {
     border-collapse: collapse;
     margin: 25px 0;
+    margin-left: -220px;
     font-size: 0.9em;
-    min-width: 400px;
+    min-width: 1000px;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-    .content-table thead tr {
+    .content-table1 thead tr {
         text-align: center;
         vertical-align: middle;
-        text-align: center;
+        text-align: right;
         vertical-align: middle;
         background-color: #1C1C20;
-        color: #f7d9ab;
+        color: #ffffff;
         text-align: left;
         font-weight: bold;
     }
 
-    .content-table th,
-    .content-table td {
-        padding: 9px 9px;
+    .content-table1 tbody tr:hover {
+        background: #ffebc7;
     }
 
-    .content-table tbody tr {
-        border-bottom: 1px solid #dddddd;
+    .content-table1 th,
+    .content-table1 td {
+        padding: 15px 18px;
     }
 
-        .content-table tbody tr:nth-of-type(even) {
-            background-color: #faeee1;
+    .content-table1 tbody tr {
+        border-bottom: 1px solid #5F5F62;
+        margin-left: 5px;
+    }
+
+    .content-table1 tbody tr {
+        background-color: #9F8974;
+        border-bottom: 2px solid #5F5F62;
+        border-right: 2px solid #5F5F62;
+        border-left: 2px solid #5F5F62;
+    }
+
+        .content-table1 tbody tr:last-of-type {
+            border-bottom: 2px solid #5F5F62;
+            border-right: 2px solid #5F5F62;
+            border-left: 2px solid #5F5F62;
         }
 
-        .content-table tbody tr:hover {
-            background-color: #f7d9ab;
-        }
-
-        .content-table tbody tr:nth-of-type(odd) {
-            background-color: #faeee1;
-        }
-
-        .content-table tbody tr:hover {
-            background-color: #f7d9ab;
-        }
-
-
-        .content-table tbody tr.active-row {
+        .content-table1 tbody tr.active-row {
             font-weight: bold;
-            color: #f5fff5;
+            color: #FFFFFF;
         }
 
-
-
-.tableid {
-    text-align: center;
-    vertical-align: middle;
+.content-table2 {
+    border-collapse: collapse;
+    margin: 25px 0;
+    margin-left: 22px;
+    font-size: 0.9em;
+    min-width: 1000px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
+
+    .content-table2 thead tr {
+        text-align: center;
+        vertical-align: middle;
+        text-align: right;
+        vertical-align: middle;
+        background-color: #1C1C20;
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .content-table2 tbody tr:hover {
+        background: #ffebc7;
+    }
+
+    .content-table2 th,
+    .content-table2 td {
+        padding: 15px 18px;
+    }
+
+    .content-table2 tbody tr {
+        border-bottom: 1px solid #5F5F62;
+        margin-left: 5px;
+    }
+
+    .content-table2 tbody tr {
+        background-color: #9F8974;
+        border-bottom: 2px solid #5F5F62;
+        border-right: 2px solid #5F5F62;
+        border-left: 2px solid #5F5F62;
+    }
+
+        .content-table2 tbody tr:last-of-type {
+            border-bottom: 2px solid #5F5F62;
+            border-right: 2px solid #5F5F62;
+            border-left: 2px solid #5F5F62;
+        }
+
+        .content-table2 tbody tr.active-row {
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+
+.content-table3 {
+    border-collapse: collapse;
+    margin: 25px 0;
+    margin-left: 22px;
+    font-size: 0.9em;
+    min-width: 1000px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+    .content-table3 thead tr {
+        text-align: center;
+        vertical-align: middle;
+        text-align: right;
+        vertical-align: middle;
+        background-color: #1C1C20;
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .content-table3 tbody tr:hover {
+        background: #ffebc7;
+    }
+
+    .content-table3 th,
+    .content-table3 td {
+        padding: 15px 18px;
+    }
+
+    .content-table3 tbody tr {
+        border-bottom: 1px solid #5F5F62;
+        margin-left: 5px;
+    }
+
+    .content-table3 tbody tr {
+        background-color: #9F8974;
+        border-bottom: 2px solid #5F5F62;
+        border-right: 2px solid #5F5F62;
+        border-left: 2px solid #5F5F62;
+    }
+
+        .content-table3 tbody tr:last-of-type {
+            border-bottom: 2px solid #5F5F62;
+            border-right: 2px solid #5F5F62;
+            border-left: 2px solid #5F5F62;
+        }
+
+        .content-table3 tbody tr.active-row {
+            font-weight: bold;
+            color: #FFFFFF;
+        }
