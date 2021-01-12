@@ -27,7 +27,7 @@
                 @Html.DisplayNameFor(model => model.Date):
             </dt>
             <dd class="col-sm-10">
-                @Convert.ToString(string.Format("{0:dd/MM/yyyy}", Model.Date))
+                                           @Convert.ToString(string.Format("{0:ddd d MMMM}", Model.Date))
             </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.TimeSlot):
@@ -50,7 +50,7 @@
         </dl>
     </div>
     <div class="exit">
-        <form asp-action="Delete">
+        <form asp-action="DeleteConfirmed">
             <input type="hidden" asp-for="IdGroupReservation" />
             <input type="submit" value="Delete" class="submit" /> |
             <a asp-action="Index">Back to List</a>
