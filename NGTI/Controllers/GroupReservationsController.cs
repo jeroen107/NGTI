@@ -29,8 +29,9 @@ namespace NGTI.Controllers
         // GET: GroupReservations
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.GroupReservations.Include(g => g.Table);
-            return View(await applicationDbContext.ToListAsync());
+            var applicationDbContext = _context.GroupReservations;
+            var temp = applicationDbContext.OrderBy(x => x.Date).ToList();
+            return View(temp.ToList());
         }
 
         // GET: GroupReservations/Details/5
@@ -42,7 +43,7 @@ namespace NGTI.Controllers
             }
 
             var groupReservation = await _context.GroupReservations
-                .Include(g => g.Table)
+                .Include(g => g.Seat)
                 .FirstOrDefaultAsync(m => m.IdGroupReservation == id);
             if (groupReservation == null)
             {
@@ -80,7 +81,7 @@ namespace NGTI.Controllers
             }
             conn.Close();
             ViewData["TeamName"] = new SelectList(teams, "TeamName", "TeamName");
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId");
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat");
             System.Diagnostics.Debug.WriteLine(teams.Count);
             return View();
         }
@@ -90,7 +91,7 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,TableId")] GroupReservation groupReservation)
+        public async Task<IActionResult> Create([Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,Seat")] GroupReservation groupReservation)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +99,7 @@ namespace NGTI.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", groupReservation.Seat);
             return View(groupReservation);
         }
 
@@ -115,7 +116,7 @@ namespace NGTI.Controllers
             {
                 return NotFound();
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", groupReservation.Seat);
             return View(groupReservation);
         }
 
@@ -124,7 +125,7 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,TableId")] GroupReservation groupReservation)
+        public async Task<IActionResult> Edit(int id, [Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,Seat")] GroupReservation groupReservation)
         {
             if (id != groupReservation.IdGroupReservation)
             {
@@ -151,7 +152,7 @@ namespace NGTI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", groupReservation.Seat);
             return View(groupReservation);
         }
 
@@ -164,7 +165,7 @@ namespace NGTI.Controllers
             }
 
             var groupReservation = await _context.GroupReservations
-                .Include(g => g.Table)
+                .Include(g => g.Seat)
                 .FirstOrDefaultAsync(m => m.IdGroupReservation == id);
             if (groupReservation == null)
             {

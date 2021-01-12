@@ -68,7 +68,7 @@ namespace NGTI.Controllers
                             res.Date = (DateTime)rdr["Date"];
                             res.TimeSlot = (string)rdr["TimeSlot"];
                             res.Reason = (string)rdr["Reason"];
-                            res.TableId = (int)rdr["TableId"];
+                            res.Seat = (string)rdr["Seat"];
                             solo.Add(res);
                         }
                     }
@@ -83,7 +83,7 @@ namespace NGTI.Controllers
                             res.Date = (DateTime)rdr["Date"];
                             res.TimeSlot = (string)rdr["TimeSlot"];
                             res.Reason = (string)rdr["Reason"];
-                            res.TableId = (int)rdr["TableId"];
+                            res.Seat = (string)rdr["Seat"];
                             group.Add(res);
                         }
                     }
@@ -184,7 +184,7 @@ namespace NGTI.Controllers
                     soloRes.Date = (DateTime)rdr["Date"];
                     soloRes.TimeSlot = (string)rdr["TimeSlot"];
                     soloRes.Reason = (string)rdr["Reason"];
-                    soloRes.TableId = (int)rdr["TableId"];
+                    soloRes.Seat = (string)rdr["Seat"];
                     model = soloRes;
                 }
             }
@@ -210,7 +210,7 @@ namespace NGTI.Controllers
                     res.Date = (DateTime)rdr["Date"];
                     res.TimeSlot = (string)rdr["TimeSlot"];
                     res.Reason = (string)rdr["Reason"];
-                    res.TableId = (int)rdr["TableId"];
+                    res.Seat = (string)rdr["Seat"];
                     model = res;
                 }
             }
@@ -253,7 +253,7 @@ namespace NGTI.Controllers
                     soloRes.Date = (DateTime)rdr["Date"];
                     soloRes.TimeSlot = (string)rdr["TimeSlot"];
                     soloRes.Reason = (string)rdr["Reason"];
-                    soloRes.TableId = (int)rdr["TableId"];
+                    soloRes.Seat = (string)rdr["Seat"];
                     model = soloRes;
                 }
             }
@@ -281,7 +281,7 @@ namespace NGTI.Controllers
                     soloRes.Date = (DateTime)rdr["Date"];
                     soloRes.TimeSlot = (string)rdr["TimeSlot"];
                     soloRes.Reason = (string)rdr["Reason"];
-                    soloRes.TableId = (int)rdr["TableId"];
+                    soloRes.Seat = (string)rdr["Seat"];
                     model = soloRes;
                 }
             }
@@ -352,7 +352,7 @@ namespace NGTI.Controllers
             {
                 return NotFound();
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", groupReservation.Seat);
             return View(groupReservation);
         }
 
@@ -360,7 +360,7 @@ namespace NGTI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditGroup(int id, [Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,TableId")] GroupReservation groupReservation)
+        public async Task<IActionResult> EditGroup(int id, [Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,Seat")] GroupReservation groupReservation)
         {
             if (id != groupReservation.IdGroupReservation)
             {
@@ -387,7 +387,7 @@ namespace NGTI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", groupReservation.Seat);
             return View(groupReservation);
         }
 
