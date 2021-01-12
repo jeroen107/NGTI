@@ -27,14 +27,14 @@
                 <span asp-validation-for="TeamName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="submit" />
             </div>
         </form>
     </div>
 </div>
 
 <div class="link">
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Admin_Team" asp-action="Overview">Back to List</a>
 </div>
 
 @section Scripts {

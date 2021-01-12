@@ -1,7 +1,12 @@
 ﻿.card-header {
     margin-left: 225px;
     text-align: center;
-    background: #9F8974;
+    color: #9F8974;
+    background-color: #151517;
+}
+
+.control-label {
+    color: #151517;
 }
 
 .content {
@@ -20,6 +25,7 @@
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    color: #9F8974;
 }
 
     .content-table thead tr {
@@ -31,6 +37,7 @@
         color: #ffffff;
         text-align: left;
         font-weight: bold;
+        color: #9F8974;
     }
 
     .content-table tbody tr:hover {
@@ -62,5 +69,5 @@
 
         .content-table tbody tr.active-row {
             font-weight: bold;
-            color: #FFFFFF;
+            color:#9F8974;
         }

@@ -12,4 +12,12 @@ namespace NGTI.Models
         public List<SoloReservation> soloList { get; set; }
         public List<GroupReservation> groupList { get; set; }
     }
+
+    public class DashboardViewModel
+    {
+        public List<SoloReservation> soloList { get; set; }
+        public List<GroupReservation> groupList { get; set; }
+
+        public List<GroupReservation> mygroupList { get; set; }
+    }
 }

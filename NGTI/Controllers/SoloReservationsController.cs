@@ -24,8 +24,9 @@ namespace NGTI.Controllers
         // GET: SoloReservations
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.SoloReservations.Include(s => s.Table);
-            return View(await applicationDbContext.ToListAsync());
+            var applicationDbContext = _context.SoloReservations; //.Include(s => s.Seat)
+            var temp = applicationDbContext.OrderBy(x => x.Date).ToList();
+            return View( temp.ToList());
         }
 
         // GET: SoloReservations/Details/5
@@ -37,7 +38,7 @@ namespace NGTI.Controllers
             }
 
             var soloReservation = await _context.SoloReservations
-                .Include(s => s.Table)
+                //.Include(s => s.Seat)
                 .FirstOrDefaultAsync(m => m.IdSoloReservation == id);
             if (soloReservation == null)
             {
@@ -50,27 +51,102 @@ namespace NGTI.Controllers
         // GET: SoloReservations/Create
         public IActionResult Create()
         {
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId");
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat");
             return View();
         }
 
+        public bool limitTest(SoloReservation res)
+        {
+            int limit = SqlMethods.QueryLimit();
+            TempData["limit"] = limit;
+
+            var applicationDbContext = _context.SoloReservations;
+            int i = 0;
+            foreach(SoloReservation solo in applicationDbContext)
+            {
+                if (solo.Date == res.Date && solo.TimeSlot == res.TimeSlot)
+                {
+                    i++;
+                    System.Diagnostics.Debug.WriteLine(i);
+                }
+            }
+            System.Diagnostics.Debug.WriteLine(i);
+
+            if( i < limit)
+            {
+                return false;
+            }
+
+            return true;
+        }
         // POST: SoloReservations/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,Date,TimeSlot,Reason,TableId")] SoloReservation soloReservation)
+        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,TimeSlot,Reason,TableId")] SoloReservation soloReservation, bool entireWeek, IEnumerable<int> days, int selectedWeek)
         {
-            if (ModelState.IsValid)
+
+            int year = DateTime.Now.Year;
+            DateTime firstDay = new DateTime(year, 1, 1);
+            firstDay = correctToMonday(firstDay);
+            firstDay = firstDay.AddDays(7 * (selectedWeek - 1));
+            soloReservation.Date = firstDay;
+            System.Diagnostics.Debug.WriteLine("entireweek = " + entireWeek.ToString());
+            //modelstate is not valid when trying to set multiple dates
+            if (ModelState.IsValid || !ModelState.IsValid)
             {
-                _context.Add(soloReservation);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                System.Diagnostics.Debug.WriteLine($"testbox = {entireWeek}");
+                //reserve whole week automatic
+                if (entireWeek == true)
+                {
+                    for (int x = 0; x < 7; x++)
+                    {
+                        if (soloReservation.Date >= DateTime.Today)
+                        {
+                            _context.Add(soloReservation);
+                            await _context.SaveChangesAsync();
+                            System.Diagnostics.Debug.WriteLine($"added {x}");
+                        }
+                        soloReservation.Date = soloReservation.Date.AddDays(1);
+                        soloReservation.IdSoloReservation = 0;
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                //reserve chosen days
+                else
+                {
+                    foreach (int day in days)
+                    {
+                        soloReservation.Date = soloReservation.Date.AddDays(day);
+                        if (soloReservation.Date >= DateTime.Today)
+                        {
+                            _context.Add(soloReservation);
+                            await _context.SaveChangesAsync();
+                            System.Diagnostics.Debug.WriteLine($"added {day}");
+                        }
+                        soloReservation.Date = firstDay;
+                        soloReservation.IdSoloReservation = 0;
+                    }
+                    return RedirectToAction(nameof(Index));
+
+                }
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", soloReservation.Seat);
             return View(soloReservation);
         }
-
+        DateTime correctToMonday(DateTime fday)
+        {
+            DayOfWeek dow = fday.DayOfWeek;
+            if (dow == DayOfWeek.Monday)
+            {
+                return fday;
+            }
+            else
+            {
+                return correctToMonday(fday.AddDays(-1));
+            }
+        }
         // GET: SoloReservations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -84,7 +160,7 @@ namespace NGTI.Controllers
             {
                 return NotFound();
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", soloReservation.Seat);
             return View(soloReservation);
         }
 
@@ -93,7 +169,7 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdSoloReservation,Name,Date,TimeSlot,Reason,TableId")] SoloReservation soloReservation)
+        public async Task<IActionResult> Edit(int id, [Bind("IdSoloReservation,Name,Date,TimeSlot,Reason,Seat")] SoloReservation soloReservation)
         {
             if (id != soloReservation.IdSoloReservation)
             {
@@ -120,7 +196,7 @@ namespace NGTI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", soloReservation.TableId);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", soloReservation.Seat);
             return View(soloReservation);
         }
 
@@ -133,7 +209,7 @@ namespace NGTI.Controllers
             }
 
             var soloReservation = await _context.SoloReservations
-                .Include(s => s.Table)
+                //.Include(s => s.Seat)
                 .FirstOrDefaultAsync(m => m.IdSoloReservation == id);
             if (soloReservation == null)
             {
