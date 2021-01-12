@@ -1,11 +1,11 @@
 ﻿body {
-    background-color: #1C1C20;
+    background-color: #fff;
     color: white;
     font: Arial;
 }
 
 h4 {
-    background-color: #1C1C20;
+    background-color: #fff;
     color: #5F5F62;
     border: 10px;
     border-color: #9F8974;
@@ -86,3 +86,13 @@ a {
     a:hover {
         color: #9F8974;
     }
+
+.m25{
+    margin-left: 25%;
+}
+
+@media screen and (max-width: 800px) {
+    .m25{
+        margin-left: 0%;
+    }
+}

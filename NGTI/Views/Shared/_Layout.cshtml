@@ -11,7 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - NGTI</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    
+    <link rel="stylesheet" href="~/css/layout.css" />
 
 
     <meta name="google-signin-scope" content="profile email">
@@ -66,26 +67,39 @@
         </header>
 
         <ul>
-            <li tabindex="0" class="icon-dashboard"><a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Overview"><span>Dashboard</span></a></li>
-            <li tabindex="0" class="icon-customers"><a class="nav-link text-dark" asp-area="" asp-controller="Reservations" asp-action="Planner"><span>Planner</span></a></li>
-            <li tabindex="0" class="icon-team"><a class="nav-link text-dark" asp-controller="Admin_Team" asp-action="Overview"><span>Teams</span></a></li>
-            <li tabindex="0" class="icon-users"><a class="nav-link text-dark" href="https://calendar.google.com/calendar/" target="_blank"> <span>Agenda</span></a></li>
-            <li tabindex="0" class="icon-settings"><a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index"><span>Admin</span></a></li>
+            <li tabindex="0" class="icon-dashboard"><a class="nav-link text-light" asp-area="" asp-controller="Dashboard" asp-action="Overview"><span>Dashboard</span></a></li>
+            <li tabindex="0" class="icon-customers"><a class="nav-link text-light" asp-area="" asp-controller="Reservations" asp-action="Planner"><span>Planner</span></a></li>
+            <li tabindex="0" class="icon-team"><a class="nav-link text-light" asp-controller="Admin_Team" asp-action="Index"><span>Teams</span></a></li>
+            <li tabindex="0" class="icon-users"><a class="nav-link text-light" href="https://calendar.google.com/calendar/" target="_blank"> <span>Agenda</span></a></li>
+            <li tabindex="0" class="icon-settings"><a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="Index"><span>Admin</span></a></li>
         </ul>
 
     </nav>
 
-    <main>
 
-    </main>
+    @*<div class="notification-box">
+        <a class="hbell" asp-area="" asp-controller="Notification" asp-action="Index">
+            <span class="notification-count">6</span>
+            <div class="notification-bell">
+                <span class="bell-top"></span>
+                <span class="bell-middle"></span>
+                <span class="bell-bottom"></span>
+                <span class="bell-rad"></span>
+            </div>
+        </a>    
+        </div>*@
+
+        <main>
+
+        </main>
 
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="/js/app.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
-    @RenderBody()
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="/js/app.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+        @RenderBody()
 </body>
 </html>
 

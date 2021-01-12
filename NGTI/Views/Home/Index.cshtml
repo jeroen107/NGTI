@@ -1,7 +1,15 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<NGTI.Models.SoloReservation>
+
+@{
+    ViewData["Title"] = "Index";
 }
 
 <div class="text-center">
-    
+    <table class="table" style="width: 50%; margin-left: 30%; margin-top:15%;">
+        <tbody>
+            <tr>
+                <th scope="row">Er is morgen geen BAV'er aanwezig. Zo mogelijk plan uw zelf nu in!@* @Html.DisplayNameFor(model => model.Name)*@</th>
+            </tr>
+        </tbody>
+    </table>
 </div>

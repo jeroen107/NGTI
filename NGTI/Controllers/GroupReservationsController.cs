@@ -91,16 +91,68 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,Seat")] GroupReservation groupReservation)
+        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,TimeSlot,Reason,TableId")] SoloReservation soloReservation, bool entireWeek, IEnumerable<int> days, int selectedWeek)
         {
-            if (ModelState.IsValid)
+
+            int year = DateTime.Now.Year;
+            DateTime firstDay = new DateTime(year, 1, 1);
+            firstDay = correctToMonday(firstDay);
+            firstDay = firstDay.AddDays(7 * (selectedWeek - 1));
+            soloReservation.Date = firstDay;
+            System.Diagnostics.Debug.WriteLine("entireweek = " + entireWeek.ToString());
+            //modelstate is not valid when trying to set multiple dates
+            if (ModelState.IsValid || !ModelState.IsValid)
             {
-                _context.Add(groupReservation);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                System.Diagnostics.Debug.WriteLine($"testbox = {entireWeek}");
+                //reserve whole week automatic
+                if (entireWeek == true)
+                {
+                    for (int x = 0; x < 7; x++)
+                    {
+                        if (soloReservation.Date >= DateTime.Today)
+                        {
+                            _context.Add(soloReservation);
+                            await _context.SaveChangesAsync();
+                            System.Diagnostics.Debug.WriteLine($"added {x}");
+                        }
+                        soloReservation.Date = soloReservation.Date.AddDays(1);
+                        soloReservation.IdSoloReservation = 0;
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                //reserve chosen days
+                else
+                {
+                    foreach (int day in days)
+                    {
+                        soloReservation.Date = soloReservation.Date.AddDays(day);
+                        if (soloReservation.Date >= DateTime.Today)
+                        {
+                            _context.Add(soloReservation);
+                            await _context.SaveChangesAsync();
+                            System.Diagnostics.Debug.WriteLine($"added {day}");
+                        }
+                        soloReservation.Date = firstDay;
+                        soloReservation.IdSoloReservation = 0;
+                    }
+                    return RedirectToAction(nameof(Index));
+
+                }
             }
-            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", groupReservation.Seat);
-            return View(groupReservation);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", soloReservation.Seat);
+            return View(soloReservation);
+        }
+        DateTime correctToMonday(DateTime fday)
+        {
+            DayOfWeek dow = fday.DayOfWeek;
+            if (dow == DayOfWeek.Monday)
+            {
+                return fday;
+            }
+            else
+            {
+                return correctToMonday(fday.AddDays(-1));
+            }
         }
 
         // GET: GroupReservations/Edit/5
