@@ -20,7 +20,8 @@ namespace NGTI.Data
         public DbSet<GroupReservation> GroupReservations { get; set; }
         public DbSet<SoloReservation> SoloReservations { get; set; }
         public DbSet<Teams> Teams { get; set; }
-       
+        public DbSet<Notification> Notifications { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,7 +35,8 @@ namespace NGTI.Data
             modelBuilder.Entity<GroupReservation>().HasOne(groupreservation => groupreservation.Table).WithMany(table => table.GroupReservations);
             //modelBuilder.Entity<GroupReservation>().HasOne(groupreservation => groupreservation.TeamName).WithMany(Teams => Teams.GroupReservations);
             modelBuilder.Entity<SoloReservation>().HasOne(soloreservation => soloreservation.Table).WithMany(table => table.SoloReservations);
-            
+            //modelBuilder.Entity<Notification>().HasOne(Notification => Notification.userId).WithMany(Users => Users.Notifications);
+
             //modelBuilder.Entity<TeamMembers>().HasKey(tm => new { tm.TeamName, tm.UserId });
         }
         public DbSet<NGTI.Models.Team> Team { get; set; }
