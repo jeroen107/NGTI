@@ -318,7 +318,6 @@ C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\GroupR
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\GroupReservations\Details.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\GroupReservations\Edit.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\GroupReservations\Index.cshtml.g.cs
-C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\GroupReservation\Create.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\SoloReservations\Create.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\SoloReservations\Delete.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\SoloReservations\Details.cshtml.g.cs
@@ -624,7 +623,6 @@ C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\Index.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Delete.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Details.cshtml.g.cs
-C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Edit.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Index.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Reservations\Planner.cshtml.g.cs
 C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Overview.cshtml.g.cs
@@ -929,3 +927,6 @@ C:\Users\m_cel\Source\Repos\jeroen107\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Vi
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\Overview.cshtml.g.cs
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\EditGroup.cshtml.g.cs
 C:\Users\zoon_\source\repos\NGTI2\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\EditSolo.cshtml.g.cs
+C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Admin_Team\Overview.cshtml.g.cs
+C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\EditGroup.cshtml.g.cs
+C:\Users\jeroe\source\repos\NGTI\NGTI\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\EditSolo.cshtml.g.cs
