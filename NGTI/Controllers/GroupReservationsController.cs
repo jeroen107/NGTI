@@ -102,14 +102,14 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,TimeSlot,Reason,TableId")] SoloReservation soloReservation, bool entireWeek, IEnumerable<int> days, int selectedWeek)
+        public async Task<IActionResult> Create([Bind("IdGroupReservation,Teamname,TimeSlot,Reason,Seat")] GroupReservation groupReservation, bool entireWeek, IEnumerable<int> days, int selectedWeek)
         {
 
             int year = DateTime.Now.Year;
             DateTime firstDay = new DateTime(year, 1, 1);
             firstDay = correctToMonday(firstDay);
             firstDay = firstDay.AddDays(7 * (selectedWeek - 1));
-            soloReservation.Date = firstDay;
+            groupReservation.Date = firstDay;
             System.Diagnostics.Debug.WriteLine("entireweek = " + entireWeek.ToString());
             //modelstate is not valid when trying to set multiple dates
             if (ModelState.IsValid || !ModelState.IsValid)
@@ -120,9 +120,9 @@ namespace NGTI.Controllers
                 {
                     for (int x = 0; x < 7; x++)
                     {
-                        if (soloReservation.Date >= DateTime.Today)
+                        if (groupReservation.Date >= DateTime.Today)
                         {
-                            _context.Add(soloReservation);
+                            _context.Add(groupReservation);
                             await _context.SaveChangesAsync();
                             System.Diagnostics.Debug.WriteLine($"added {x}");
 
@@ -185,7 +185,7 @@ namespace NGTI.Controllers
                             Event newEvent = new Event()
                             {
                                 Summary = "Kantoor reservering",
-                                Location = $"tafelnummer: {groupReservation.TableId}",
+                                Location = $"tafelnummer: {groupReservation.Seat}",
                                 Description = groupReservation.Reason,
 
                                 Start = new EventDateTime()
@@ -260,8 +260,8 @@ namespace NGTI.Controllers
 
 
                         }
-                        soloReservation.Date = soloReservation.Date.AddDays(1);
-                        soloReservation.IdSoloReservation = 0;
+                        groupReservation.Date = groupReservation.Date.AddDays(1);
+                        groupReservation.IdGroupReservation = 0;
                     }
                     return RedirectToAction(nameof(Index));
                 }
@@ -270,10 +270,10 @@ namespace NGTI.Controllers
                 {
                     foreach (int day in days)
                     {
-                        soloReservation.Date = soloReservation.Date.AddDays(day);
-                        if (soloReservation.Date >= DateTime.Today)
+                        groupReservation.Date = groupReservation.Date.AddDays(day);
+                        if (groupReservation.Date >= DateTime.Today)
                         {
-                            _context.Add(soloReservation);
+                            _context.Add(groupReservation);
                             await _context.SaveChangesAsync();
                             System.Diagnostics.Debug.WriteLine($"added {day}");
 
@@ -337,7 +337,7 @@ namespace NGTI.Controllers
                             Event newEvent = new Event()
                             {
                                 Summary = "Kantoor reservering",
-                                Location = $"tafelnummer: {groupReservation.TableId}",
+                                Location = $"tafelnummer: {groupReservation.Seat}",
                                 Description = groupReservation.Reason,
 
                                 Start = new EventDateTime()
@@ -413,15 +413,15 @@ namespace NGTI.Controllers
 
 
                         }
-                        soloReservation.Date = firstDay;
-                        soloReservation.IdSoloReservation = 0;
+                        groupReservation.Date = firstDay;
+                        groupReservation.IdGroupReservation = 0;
                     }
                     return RedirectToAction(nameof(Index));
 
                 }
             }
             //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", soloReservation.Seat);
-            return View(soloReservation);
+            return View(groupReservation);
         }
         DateTime correctToMonday(DateTime fday)
         {

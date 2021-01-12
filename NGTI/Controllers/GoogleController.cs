@@ -62,7 +62,7 @@ namespace NGTI.Controllers
             Event newEvent = new Event()
             {
                 Summary = "Kantoor reservering",
-                Location = $"{Reservation.TableId}",
+                Location = $"{Reservation.Seat}",
                 Description = Reservation.Reason,
 
                 Start = new EventDateTime()

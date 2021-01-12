@@ -163,7 +163,7 @@ namespace NGTI.Controllers
                             Event newEvent = new Event()
                             {
                                 Summary = "Kantoor reservering",
-                                Location = $"tafelnummer: {soloReservation.TableId}",
+                                Location = $"tafelnummer: {soloReservation.Seat}",
                                 Description = soloReservation.Reason,
 
                                 Start = new EventDateTime()
@@ -281,7 +281,7 @@ namespace NGTI.Controllers
                             Event newEvent = new Event()
                             {
                                 Summary = "Kantoor reservering",
-                                Location = $"tafelnummer: {soloReservation.TableId}",
+                                Location = $"tafelnummer: {soloReservation.Seat}",
                                 Description = soloReservation.Reason,
 
                                 Start = new EventDateTime()
