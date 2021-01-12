@@ -13,6 +13,11 @@ namespace NGTI.Data
             : base(options)
         {
         }
+
+        public ApplicationDbContext()
+        {
+        }
+
         // tabllen die hij gaat aanmaken in de database dbset pakt de models
         //public DbSet<Seat> Seats { get; set; }
         public DbSet<GroupReservation> GroupReservations { get; set; }

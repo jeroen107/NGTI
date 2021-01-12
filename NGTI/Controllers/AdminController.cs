@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace NGTI.Controllers
 {
-   
+    [Authorize(Policy = "AdminOnly")]
     public class AdminController : Controller
     {
         //sql connection var
@@ -321,7 +321,8 @@ namespace NGTI.Controllers
             }
             return RedirectToAction("Reservations");
         }
-        public async Task<IActionResult> EditSolo(int? id)
+        //editsolo view
+        public async Task<ActionResult> EditSoloAsync(int id)
         {
             if (id == null)
             {

@@ -1,8 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Calendar.v3;
+using Google.Apis.Calendar.v3.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +24,10 @@ namespace NGTI.Controllers
     public class GroupReservationsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        public List<string> GoogleEvents = new List<string>();
+        static string[] Scopes = { CalendarService.Scope.Calendar };
+        static string ApplicationName = "Google Calendar API .NET NGTI";
+        
         private readonly UserManager<ApplicationUser> _userManger;
         string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
 
@@ -114,6 +125,140 @@ namespace NGTI.Controllers
                             _context.Add(soloReservation);
                             await _context.SaveChangesAsync();
                             System.Diagnostics.Debug.WriteLine($"added {x}");
+
+                            UserCredential credential;
+
+                            //var userId = User.Identity.GetUserId();
+                            //var user = UserManager<>.FindByIdAsync(userId);
+
+
+                            //string path = Path.Combine(Directory.GetCurrentDirectory(), "credentials.json");
+                            using (var stream =
+                                new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+                            {
+                                // The file token.json stores the user's access and refresh tokens, and is created
+                                // automatically when the authorization flow completes for the first time.
+
+                                //var userId = this.User.Identity.GetUserId();
+                                //var dbContext = new ApplicationDbContext(DbContextOptions<ApplicationDbContext> options);
+                                //var user = dbContext.Set<ApplicationUser>().Find(userId);
+
+
+                                string credPath = "token.json";
+                                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                                    GoogleClientSecrets.Load(stream).Secrets,
+                                    Scopes,
+                                    "user",
+                                    CancellationToken.None,
+                                    new FileDataStore(credPath, true)).Result;
+                                //user.Token = "New value";
+                            }
+
+
+                            // Create Google Calendar API service.
+                            var service = new CalendarService(new BaseClientService.Initializer()
+                            {
+                                HttpClientInitializer = credential,
+                                ApplicationName = ApplicationName,
+                            });
+
+                            SqlConnection conn = new SqlConnection(connectionString);
+                            string sql = "SELECT a.Id, a.Email, a.BHV, a.Admin FROM AspNetUsers a JOIN TeamMembers tm ON a.Id = tm.UserId WHERE tm.TeamName = '" + groupReservation.Teamname + "'";
+                            SqlCommand cmd = new SqlCommand(sql, conn);
+                            var model = new List<Employee>();
+                            conn.Open();
+                            using (conn)
+                            {
+                                SqlDataReader rdr = cmd.ExecuteReader();
+                                while (rdr.Read())
+                                {
+                                    var obj = new Employee();
+
+                                    obj.Email = (string)rdr["Email"];
+
+                                    model.Add(obj);
+                                }
+                            }
+                            conn.Close();
+
+                            // Define parameters of request.
+                            Event newEvent = new Event()
+                            {
+                                Summary = "Kantoor reservering",
+                                Location = $"tafelnummer: {groupReservation.TableId}",
+                                Description = groupReservation.Reason,
+
+                                Start = new EventDateTime()
+                                {
+
+                                    DateTime = groupReservation.Date,
+                                    TimeZone = "America/Los_Angeles",
+                                },
+                                End = new EventDateTime()
+                                {
+                                    DateTime = groupReservation.Date,
+                                    TimeZone = "America/Los_Angeles",
+                                },
+                                Recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=2" },
+
+                                Attendees = new EventAttendee[] {
+                                //new EventAttendee() { Email = "lpage@example.com" },
+                                //new EventAttendee() { Email = "sbrin@example.com" },
+                                
+
+                                 },
+
+
+
+                            };
+                            if (groupReservation.TimeSlot == "Morning")
+                            {
+                                TimeSpan tspanStart = new System.TimeSpan(0, 8, 0, 0);
+                                TimeSpan tspanEnd = new System.TimeSpan(0, 12, 0, 0);
+                                newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
+                                newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
+                            }
+                            else if (groupReservation.TimeSlot == "Afternoon")
+                            {
+                                TimeSpan tspanStart = new System.TimeSpan(0, 12, 0, 0);
+                                TimeSpan tspanEnd = new System.TimeSpan(0, 16, 0, 0);
+                                newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
+                                newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
+                            }
+                            else if (groupReservation.TimeSlot == "Evening")
+                            {
+                                TimeSpan tspanStart = new System.TimeSpan(0, 16, 0, 0);
+                                TimeSpan tspanEnd = new System.TimeSpan(0, 20, 0, 0);
+                                newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
+                                newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
+                            }
+                            newEvent.Attendees = new EventAttendee[model.Count];
+                            for (int i = 0; i < model.Count; i++)
+                            {
+                                newEvent.Attendees[i] = new EventAttendee() { Email = model[i].Email };
+                            }
+
+
+                            String calendarId = "primary";
+                            EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
+                            Event createdEvent = request.Execute();
+                            Console.WriteLine("Event created: {0}", createdEvent.HtmlLink);
+
+
+
+
+                            // List events.
+                            /* Events events = request.Execute();
+                             Console.WriteLine("Upcoming events:");
+                             if (events.Items != null && events.Items.Count > 0)
+                             {
+                                 foreach (var eventItem in events.Items)
+                                 {
+                                     GoogleEvents.Add(eventItem.Summary);
+                                 }
+                             }*/
+
+
                         }
                         soloReservation.Date = soloReservation.Date.AddDays(1);
                         soloReservation.IdSoloReservation = 0;
@@ -131,6 +276,142 @@ namespace NGTI.Controllers
                             _context.Add(soloReservation);
                             await _context.SaveChangesAsync();
                             System.Diagnostics.Debug.WriteLine($"added {day}");
+
+                            UserCredential credential;
+
+                            //var userId = User.Identity.GetUserId();
+                            //var user = UserManager<>.FindByIdAsync(userId);
+
+
+                            //string path = Path.Combine(Directory.GetCurrentDirectory(), "credentials.json");
+                            using (var stream =
+                                new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
+                            {
+                                // The file token.json stores the user's access and refresh tokens, and is created
+                                // automatically when the authorization flow completes for the first time.
+
+                                //var userId = this.User.Identity.GetUserId();
+                                //var dbContext = new ApplicationDbContext(DbContextOptions<ApplicationDbContext> options);
+                                //var user = dbContext.Set<ApplicationUser>().Find(userId);
+
+
+                                string credPath = "token.json";
+                                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                                    GoogleClientSecrets.Load(stream).Secrets,
+                                    Scopes,
+                                    "user",
+                                    CancellationToken.None,
+                                    new FileDataStore(credPath, true)).Result;
+                                //user.Token = "New value";
+                            }
+
+
+                            // Create Google Calendar API service.
+                            var service = new CalendarService(new BaseClientService.Initializer()
+                            {
+                                HttpClientInitializer = credential,
+                                ApplicationName = ApplicationName,
+                            });
+
+                            SqlConnection conn = new SqlConnection(connectionString);
+                            string sql = "SELECT a.Id, a.Email, a.BHV, a.Admin FROM AspNetUsers a JOIN TeamMembers tm ON a.Id = tm.UserId WHERE tm.TeamName = '" + groupReservation.Teamname + "'";
+                            SqlCommand cmd = new SqlCommand(sql, conn);
+                            var model = new List<Employee>();
+                            conn.Open();
+                            using (conn)
+                            {
+                                SqlDataReader rdr = cmd.ExecuteReader();
+                                while (rdr.Read())
+                                {
+                                    var obj = new Employee();
+
+                                    obj.Email = (string)rdr["Email"];
+
+                                    model.Add(obj);
+                                }
+                            }
+                            
+                            conn.Close();
+
+                            // Define parameters of request.
+                            Event newEvent = new Event()
+                            {
+                                Summary = "Kantoor reservering",
+                                Location = $"tafelnummer: {groupReservation.TableId}",
+                                Description = groupReservation.Reason,
+
+                                Start = new EventDateTime()
+                                {
+
+                                    DateTime = groupReservation.Date,
+                                    TimeZone = "America/Los_Angeles",
+                                },
+                                End = new EventDateTime()
+                                {
+                                    DateTime = groupReservation.Date,
+                                    TimeZone = "America/Los_Angeles",
+                                },
+                                Recurrence = new String[] { "RRULE:FREQ=DAILY;COUNT=2" },
+
+                                Attendees = new EventAttendee[] {
+                                //new EventAttendee() { Email = "lpage@example.com" },
+                                //new EventAttendee() { Email = "sbrin@example.com" },
+                                
+
+                                 },
+
+
+
+                            };
+                            if (groupReservation.TimeSlot == "Morning")
+                            {
+                                TimeSpan tspanStart = new System.TimeSpan(0, 8, 0, 0);
+                                TimeSpan tspanEnd = new System.TimeSpan(0, 12, 0, 0);
+                                newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
+                                newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
+                            }
+                            else if (groupReservation.TimeSlot == "Afternoon")
+                            {
+                                TimeSpan tspanStart = new System.TimeSpan(0, 12, 0, 0);
+                                TimeSpan tspanEnd = new System.TimeSpan(0, 16, 0, 0);
+                                newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
+                                newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
+                            }
+                            else if (groupReservation.TimeSlot == "Evening")
+                            {
+                                TimeSpan tspanStart = new System.TimeSpan(0, 16, 0, 0);
+                                TimeSpan tspanEnd = new System.TimeSpan(0, 20, 0, 0);
+                                newEvent.Start.DateTime = newEvent.Start.DateTime + tspanStart;
+                                newEvent.End.DateTime = newEvent.End.DateTime + tspanEnd;
+                            }
+                            newEvent.Attendees = new EventAttendee[model.Count];
+                            for (int i = 0; i < model.Count; i++)
+                            {
+                                newEvent.Attendees[i] = new EventAttendee() { Email = model[i].Email };
+                            }
+
+
+                            String calendarId = "primary";
+                            EventsResource.InsertRequest request = service.Events.Insert(newEvent, calendarId);
+                            Event createdEvent = request.Execute();
+                            Console.WriteLine("Event created: {0}", createdEvent.HtmlLink);
+
+
+
+
+                            // List events.
+                            /* Events events = request.Execute();
+                             Console.WriteLine("Upcoming events:");
+                             if (events.Items != null && events.Items.Count > 0)
+                             {
+                                 foreach (var eventItem in events.Items)
+                                 {
+                                     GoogleEvents.Add(eventItem.Summary);
+                                 }
+                             }*/
+
+
+
                         }
                         soloReservation.Date = firstDay;
                         soloReservation.IdSoloReservation = 0;
