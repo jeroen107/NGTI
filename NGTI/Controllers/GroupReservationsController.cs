@@ -29,8 +29,9 @@ namespace NGTI.Controllers
         // GET: GroupReservations
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.GroupReservations.Include(g => g.Table);
-            return View(await applicationDbContext.ToListAsync());
+            var applicationDbContext = _context.GroupReservations;
+            var temp = applicationDbContext.OrderBy(x => x.Date).ToList();
+            return View(temp.ToList());
         }
 
         // GET: GroupReservations/Details/5
@@ -42,7 +43,7 @@ namespace NGTI.Controllers
             }
 
             var groupReservation = await _context.GroupReservations
-                .Include(g => g.Table)
+                .Include(g => g.Seat)
                 .FirstOrDefaultAsync(m => m.IdGroupReservation == id);
             if (groupReservation == null)
             {
@@ -80,7 +81,7 @@ namespace NGTI.Controllers
             }
             conn.Close();
             ViewData["TeamName"] = new SelectList(teams, "TeamName", "TeamName");
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId");
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat");
             System.Diagnostics.Debug.WriteLine(teams.Count);
             return View();
         }
@@ -90,67 +91,16 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,TableId")] GroupReservation groupReservation, bool entireWeek, IEnumerable<int> days, int selectedWeek)
+        public async Task<IActionResult> Create([Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,Seat")] GroupReservation groupReservation)
         {
-            int year = DateTime.Now.Year;
-            DateTime firstDay = new DateTime(year, 1, 1);
-            firstDay = correctToMonday(firstDay);
-            firstDay = firstDay.AddDays(7 * (selectedWeek - 1));
-            groupReservation.Date = firstDay;
-            System.Diagnostics.Debug.WriteLine("entireweek = " + entireWeek.ToString());
-            //modelstate is not valid when trying to set multiple dates
-            if (ModelState.IsValid || !ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                System.Diagnostics.Debug.WriteLine($"testbox = {entireWeek}");
-                //reserve whole week automatic
-                if (entireWeek == true)
-                {
-                    for (int x = 0; x < 7; x++)
-                    {
-                        if (groupReservation.Date >= DateTime.Today)
-                        {
-                            _context.Add(groupReservation);
-                            await _context.SaveChangesAsync();
-                            System.Diagnostics.Debug.WriteLine($"added {x}");
-                        }
-                        groupReservation.Date = groupReservation.Date.AddDays(1);
-                        groupReservation.IdGroupReservation = 0;
-                    }
-                    return RedirectToAction(nameof(Index));
-                }
-                //reserve chosen days
-                else
-                {
-                    foreach (int day in days)
-                    {
-                        groupReservation.Date = groupReservation.Date.AddDays(day);
-                        if (groupReservation.Date >= DateTime.Today)
-                        {
-                            _context.Add(groupReservation);
-                            await _context.SaveChangesAsync();
-                            System.Diagnostics.Debug.WriteLine($"added {day}");
-                        }
-                        groupReservation.Date = firstDay;
-                        groupReservation.IdGroupReservation = 0;
-                    }
-                    return RedirectToAction(nameof(Index));
-
-                }
+                _context.Add(groupReservation);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", groupReservation.Seat);
             return View(groupReservation);
-        }
-        DateTime correctToMonday(DateTime fday)
-        {
-            DayOfWeek dow = fday.DayOfWeek;
-            if (dow == DayOfWeek.Monday)
-            {
-                return fday;
-            }
-            else
-            {
-                return correctToMonday(fday.AddDays(-1));
-            }
         }
 
         // GET: GroupReservations/Edit/5
@@ -166,7 +116,7 @@ namespace NGTI.Controllers
             {
                 return NotFound();
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", groupReservation.Seat);
             return View(groupReservation);
         }
 
@@ -175,7 +125,7 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,TableId")] GroupReservation groupReservation)
+        public async Task<IActionResult> Edit(int id, [Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,Seat")] GroupReservation groupReservation)
         {
             if (id != groupReservation.IdGroupReservation)
             {
@@ -202,7 +152,7 @@ namespace NGTI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", groupReservation.Seat);
             return View(groupReservation);
         }
 
@@ -215,7 +165,7 @@ namespace NGTI.Controllers
             }
 
             var groupReservation = await _context.GroupReservations
-                .Include(g => g.Table)
+                .Include(g => g.Seat)
                 .FirstOrDefaultAsync(m => m.IdGroupReservation == id);
             if (groupReservation == null)
             {

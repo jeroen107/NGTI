@@ -340,3 +340,9 @@ ASALocalRun/
 healthchecksdb
 *.dll
 *.dll
+*.cache
+*.json
+*.props
+*.json
+*.xml
+*.cache

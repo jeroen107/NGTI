@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-@model NGTI.Models.ReservationsViewModel;
+@model NGTI.Models.DashboardViewModel;
 @{
     ViewData["Title"] = "Dashboard";
 
@@ -15,15 +15,16 @@
 </head>
 <body>
     <div class="personal">
-        <h2 class="top1">Upcoming Reservations</h2>
-        <table class="content-table1">
+        <h2 class="top">Upcoming Reservations</h2>
+        <div class="up">
+        <table class="content-table">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Date</th>
                     <th>Time Slot</th>
                     <th>Reason</th>
-                    <th>Table Nr.</th>
+                    <th>Seat Nr.</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,7 +37,7 @@
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
                             <td>
-                                @Convert.ToString(string.Format("{0:ddd d MMMM}", item.Date)) 
+                                @Convert.ToString(string.Format("{0:ddd d MMMM}", item.Date))
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.TimeSlot)
@@ -45,27 +46,66 @@
                                 @Html.DisplayFor(modelitem => item.Reason)
                             </td>
                             <td class="tableid">
-                                @Html.DisplayFor(modelItem => item.TableId)
+                                @Html.DisplayFor(modelItem => item.Seat)
                             </td>
                         </tr>
                     }
                 }
             </tbody>
         </table>
-        <h2 class="top2">All Reservations</h2>
+        </div>
+        <div class="up">
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Team Name</th>
+                    <th>Date</th>
+                    <th>Time Slot</th>
+                    <th>Reason</th>
+                    <th>Seat Nr.</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.mygroupList)
+                {
+                    if (item.Name == @User.Identity.Name)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Teamname)
+                            </td>
+                            <td>
+                                @Convert.ToString(string.Format("{0:ddd d MMMM}", item.Date))
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TimeSlot)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelitem => item.Reason)
+                            </td>
+                            <td class="tableid">
+                                @Html.DisplayFor(modelItem => item.Seat)
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+        <h2 class="top">All Reservations</h2>
     </div>
 
 
     <div class="everybody">
         <div class="down">
-            <table class="content-table2">
+            <table class="content-table">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Date</th>
                         <th>Time Slot</th>
                         <th>Reason</th>
-                        <th>Table Nr.</th>
+                        <th>Seat Nr.</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,7 +125,7 @@
                             @Html.DisplayFor(modelitem => item.Reason)
                         </td>
                         <td class="tableid">
-                            @Html.DisplayFor(modelItem => item.TableId)
+                            @Html.DisplayFor(modelItem => item.Seat)
                         </td>
                     </tr>
                     }
@@ -94,14 +134,14 @@
         </div>
 
         <div class="down">
-            <table class="content-table3">
+            <table class="content-table">
                 <thead>
                     <tr>
                         <th>Team Name</th>
                         <th>Date</th>
                         <th>TimeSlot</th>
                         <th>Reason</th>
-                        <th>Table Nr</th>
+                        <th>Seat Nr</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,7 +162,7 @@
                             @Html.DisplayFor(modelitem => item.Reason)
                         </td>
                         <td class="tableid">
-                            @Html.DisplayFor(modelItem => item.TableId)
+                            @Html.DisplayFor(modelItem => item.Seat)
                         </td>
                     </tr>
                     }
