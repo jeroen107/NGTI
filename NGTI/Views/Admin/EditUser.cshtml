@@ -17,6 +17,7 @@
 
     <link rel="stylesheet" href="~/css/editUser.css">
 
+
 </head>
 
 <body>
@@ -31,23 +32,23 @@
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group">
 
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="BHV" class="control-label"></label>
-                    <input asp-for="BHV" class="form-control" />
-                    <span asp-validation-for="BHV" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Admin" class="control-label"></label>
-                    <input asp-for="Admin" class="form-control" />
-                    <span asp-validation-for="Admin" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="submit" />
-                </div>
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control"  hidden/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BHV" class="control-label"></label>
+                <input asp-for="BHV" class="form-control" />
+                <span asp-validation-for="BHV" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Admin" class="control-label"></label>
+                <input asp-for="Admin" class="form-control" />
+                <span asp-validation-for="Admin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
 
             </form>
         </div>

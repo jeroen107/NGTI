@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\NGTI",
+    "\\NGTI\\Views",
+    "\\NGTI\\Views\\Dashboard"
   ],
+  "SelectedNode": "\\NGTI\\Views\\Dashboard\\Overview.cshtml",
   "PreviewInSolutionExplorer": false
 }
