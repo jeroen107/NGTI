@@ -109,7 +109,7 @@ namespace NGTI.Controllers
                     SqlMethods.QueryVoid("INSERT INTO teamMembers VALUES('"+teamName+"','"+a+"');");
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Overview");
         }
 
         public IActionResult EditTeam(string name)
@@ -158,7 +158,7 @@ namespace NGTI.Controllers
                     SqlMethods.QueryVoid("DELETE FROM teamMembers WHERE TeamName = '" + TeamName +"' AND UserId = '" + a +"'");
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Overview");
         }
         public IActionResult DetailsTeam(string name)
         {
@@ -177,7 +177,7 @@ namespace NGTI.Controllers
         {
             Deleterow("DELETE Teams WHERE TeamName = '" + name + "'");
             System.Diagnostics.Debug.WriteLine("DELETED " + name);
-            return RedirectToAction("Index");
+            return RedirectToAction("Overview");
         }
         public Team GetTeam(string name)
         {
