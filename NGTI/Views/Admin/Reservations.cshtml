@@ -19,7 +19,7 @@
                 <th>Date</th>
                 <th>Timeslot</th>
                 <th>Reason</th>
-                <th>Table Nr.</th>
+                <th>Seat Nr.</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -40,7 +40,7 @@
                     @Html.DisplayFor(modelItem => item.Reason)
                 </td>
                 <td class="tableid">
-                    @Html.DisplayFor(modelItem => item.TableId)
+                    @Html.DisplayFor(modelItem => item.Seat)
                 </td>
                 <td>
                     <a asp-action="EditSolo" asp-route-id="@item.IdSoloReservation">Edit</a> |
@@ -62,7 +62,7 @@
                 <th>Date</th>
                 <th>TimeSlot</th>
                 <th>Reason</th>
-                <th>Table Nr</th>
+                <th>Seat Nr</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -83,7 +83,7 @@
                     @Html.DisplayFor(modelItem => item.Reason)
                 </td>
                 <td class="tableid">
-                    @Html.DisplayFor(modelItem => item.TableId)
+                    @Html.DisplayFor(modelItem => item.Seat)
                 </td>
                 <td>
                     <a asp-action="EditGroup" asp-route-id="@item.IdGroupReservation">Edit</a> |
