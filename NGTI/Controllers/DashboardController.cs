@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 //using MongoDB.Driver.Core.Configuration;
 using NGTI.Models;
@@ -12,23 +13,33 @@ namespace NGTI.Controllers
 {
     public class DashboardController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManger;
         string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
+
+        public DashboardController( UserManager<ApplicationUser> userManager)
+        {
+            _userManger = userManager;
+        }
         public IActionResult Overview()
         {
+            var id = _userManger.GetUserId(HttpContext.User);
             // Sql connection
             SqlConnection conn = new SqlConnection(connectionString);
-            string sql = "SELECT * FROM SoloReservations ORDER BY Date ASC";
-            string sql2 = "SELECT * FROM GroupReservations ORDER BY Date ASC";
-            string[] sqls = new string[2] { sql, sql2 };
+            string sql = "SELECT * FROM SoloReservations Where Date <= CURRENT_TIMESTAMP + 7 and Date >= CURRENT_TIMESTAMP ORDER BY Date ASC";
+            string sql2 = "SELECT * FROM Groupreservations Where Date <= CURRENT_TIMESTAMP + 7 and Date >= CURRENT_TIMESTAMP ORDER BY Date ASC";
+            string sql3 = $"SELECT t.TeamName, COUNT(tm.UserId) AS count FROM Teams t LEFT JOIN TeamMembers tm ON t.TeamName = tm.TeamName WHERE t.teamname IN(SELECT DISTINCT teamname from teammembers WHERE userid = N'{id}') GROUP BY t.TeamName;";
+            string[] sqls = new string[3] { sql, sql2, sql3 };
 
             var solo = new List<SoloReservation>();
             var group = new List<GroupReservation>();
+            var mygroups = new List<string>();
+            var myGroupRes = new List<GroupReservation>();
 
             conn.Open();
             using (conn)
             {
                 //read all reservations and add them to tuple<solo,group>
-                for (int x = 0; x < 2; x++)
+                for (int x = 0; x < 3; x++)
                 {
                     SqlCommand cmd = new SqlCommand(sqls[x], conn);
                     SqlDataReader rdr = cmd.ExecuteReader();
@@ -42,7 +53,7 @@ namespace NGTI.Controllers
                             res.Date = (DateTime)rdr["Date"];
                             res.TimeSlot = (string)rdr["TimeSlot"];
                             res.Reason = (string)rdr["Reason"];
-                            res.TableId = (int)rdr["TableId"];
+                            res.Seat = (string)rdr["Seat"];
                             solo.Add(res);
                         }
                     }
@@ -57,14 +68,29 @@ namespace NGTI.Controllers
                             res.Date = (DateTime)rdr["Date"];
                             res.TimeSlot = (string)rdr["TimeSlot"];
                             res.Reason = (string)rdr["Reason"];
-                            res.TableId = (int)rdr["TableId"];
+                            res.Seat = (string)rdr["Seat"];
                             group.Add(res);
+                        }
+                    }
+                    else if (x == 2)
+                    {
+                        while (rdr.Read())
+                        {
+                            string TeamName = (string)rdr["TeamName"];
+                            mygroups.Add(TeamName);
                         }
                     }
                 }
             }
             conn.Close();
-            var model = new ReservationsViewModel() { soloList = solo, groupList = group };
+            foreach(GroupReservation res in group)
+            {
+                if (mygroups.Contains(res.Teamname))
+                {
+                    myGroupRes.Add(res);
+                }
+            }
+            var model = new DashboardViewModel() { soloList = solo, groupList = group, mygroupList = myGroupRes };
             return View(model);
         }
 

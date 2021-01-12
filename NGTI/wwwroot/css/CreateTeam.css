@@ -1,7 +1,9 @@
-﻿.card-header{
-margin-left: 225px;
-text-align: center;
-background: #9F8974;
+﻿.card-header {
+    margin-left: 225px;
+    text-align: center;
+    color: #9F8974;
+    background-color: #151517;
+    font-family: Arial;
 }
 
 .row {
@@ -9,16 +11,18 @@ background: #9F8974;
     left: 50%;
     margin-left: -100px;
     width: 57%;
-    color: white;
+    background: #636363;
+    color: #5F5F62;
 }
 
 
 
 
 .form-group {
-    margin-left: 50px;
+    margin-left: 25px;
     margin-right: -50px;
-    color: #9F8974;
+    color: #151517;
+    background-color: #636363;
 }
 
 .link a {
@@ -37,33 +41,54 @@ background: #9F8974;
     }
 
 .col-md-4 {
-    background: #151517;
+    background: #636363;
 }
-
 
 .form-control {
-    padding: 12px;
-    width: 62%;
-    border: none;
-    background-color: white !important;
-    color: #9F8974 !important;
-    margin-bottom: 50px;
+    margin-top:25px;
+    background-color: #1C1C20;
+    color: #9F8974;
+    border-color: #1C1C20
 }
 
-input[type=submit] {
-    color: black;
-    background-color: #9F8974;
-    border-color: #9F8974;
-}
-
-    input[type=submit]:hover {
-        color: black;
-        background-color: white;
-        border-color: white;
+    .form-control:active,
+    .form-control:hover {
+        background-color: #1C1C20;
+        color: #9F8974;
+        border-color: #1C1C20;
+        outline: none;
     }
 
-input[type=checkbox]:checked + span {
-    color: black;
-    background-color: white;
-    border-color: white;
+.control-label{
+    margin-top:100px;
+    font-weight:bold;
+    font-size:25px;
+
 }
+.submit {
+    background: #9F8974;
+    position: absolute;
+    display: inline-table;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #000;
+    margin-top: 25px;
+    margin-left: -95px;
+    border-radius: 100px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: Arial;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    transition: all 0.2s;
+    
+}
+
+    .submit:hover {
+        background: #1C1C20;
+        color: #9F8974;
+    }

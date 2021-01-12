@@ -2,6 +2,8 @@
 .personal {
     width: 25%;
     margin: 0 auto;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .top {
@@ -20,7 +22,7 @@
     vertical-align: top;
 }
 
-.down {
+.up {
     display: inline-block;
     vertical-align: top;
 }

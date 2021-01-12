@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NGTI.Models;
@@ -15,13 +14,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
 
+// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 namespace NGTI.Controllers
 {
-
+   
     public class AdminController : Controller
     {
-        //sql connectionstring
-        public string connectionString;
+        //sql connection var
+        public string connectionString; 
 
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ApplicationDbContext _context;
@@ -33,34 +34,72 @@ namespace NGTI.Controllers
             this.connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
         }
 
-        // index view
+        // GET: /<controller>/
         public IActionResult Index()
         {
             return View();
         }
-        //all reservations view
         public IActionResult Reservations()
         {
-            //get all reservations solo/group
+            // Sql connection
+            SqlConnection conn = new SqlConnection(connectionString);
             string sql = "SELECT * FROM SoloReservations ORDER BY Date ASC";
             string sql2 = "SELECT * FROM GroupReservations ORDER BY Date ASC";
-            List<SoloReservation> solo = SqlMethods.getSoloReservations(sql);
-            List<GroupReservation> group = SqlMethods.getGroupReservations(sql2);
+            string[] sqls = new string[2] { sql, sql2 };
 
-            // send object of reservationlists to view
+            var solo = new List<SoloReservation>();
+            var group = new List<GroupReservation>();
+
+            conn.Open();
+            using (conn)
+            {
+                //read all reservations and add them to tuple<solo,group>
+                for (int x = 0; x < 2; x++)
+                {
+                    SqlCommand cmd = new SqlCommand(sqls[x], conn);
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                    if (x == 0)
+                    {
+                        while (rdr.Read())
+                        {
+                            var res = new SoloReservation();
+                            res.IdSoloReservation = (int)rdr["IdSoloReservation"];
+                            res.Name = (string)rdr["Name"];
+                            res.Date = (DateTime)rdr["Date"];
+                            res.TimeSlot = (string)rdr["TimeSlot"];
+                            res.Reason = (string)rdr["Reason"];
+                            res.Seat = (string)rdr["Seat"];
+                            solo.Add(res);
+                        }
+                    }
+                    else if (x == 1)
+                    {
+                        while (rdr.Read())
+                        {
+                            var res = new GroupReservation();
+                            res.IdGroupReservation = (int)rdr["IdGroupReservation"];
+                            res.Teamname = (string)rdr["Teamname"];
+                            res.Name = (string)rdr["Name"];
+                            res.Date = (DateTime)rdr["Date"];
+                            res.TimeSlot = (string)rdr["TimeSlot"];
+                            res.Reason = (string)rdr["Reason"];
+                            res.Seat = (string)rdr["Seat"];
+                            group.Add(res);
+                        }
+                    }
+                }
+            }
+            conn.Close();
             var model = new ReservationsViewModel() { soloList = solo, groupList = group };
             return View(model);
         }
-        //users view
-        public IActionResult ListUsers(string search)
+        [HttpGet]
+        public IActionResult ListUsers()
         {
-            System.Diagnostics.Debug.WriteLine($"search = {search}");
-            var users = userManager.Users.Where(x => x.Email.Contains(search) || search == "" || search == null);
-
+            var users = userManager.Users;
             return View(users);
         }
 
-        //edit chosen user
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
@@ -111,8 +150,7 @@ namespace NGTI.Controllers
 
 
         }
-        //check if reservation is solo or group and redirect
-        public IActionResult Details(int id, string type) 
+        public IActionResult Details(int id, string type) //check if obj is solo or group and redirect
         {
             if (type == "Solo")
             {
@@ -127,7 +165,7 @@ namespace NGTI.Controllers
                 return NotFound();
             }
         }
-        // View details of soloreservation
+        // Details of solo or group model
         public IActionResult DetailsSolo(int id)
         {
             SqlConnection conn = new SqlConnection(connectionString);
@@ -146,22 +184,41 @@ namespace NGTI.Controllers
                     soloRes.Date = (DateTime)rdr["Date"];
                     soloRes.TimeSlot = (string)rdr["TimeSlot"];
                     soloRes.Reason = (string)rdr["Reason"];
-                    soloRes.TableId = (int)rdr["TableId"];
+                    soloRes.Seat = (string)rdr["Seat"];
                     model = soloRes;
                 }
             }
             conn.Close();
             return View(model);
         }
-        //View details of groupreservation
         public IActionResult DetailsGroup(int id)
         {
-            GroupReservation model = SqlMethods.getGroupReservation("SELECT * FROM GroupReservations WHERE IdGroupReservation = " + id);
-            
+            SqlConnection conn = new SqlConnection(connectionString);
+            string sql = "SELECT * FROM GroupReservations WHERE IdGroupReservation = " + id;
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            var model = new GroupReservation();
+            conn.Open();
+            using (conn)
+            {
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var res = new GroupReservation();
+                    res.IdGroupReservation = (int)rdr["IdGroupReservation"];
+                    res.Teamname = (string)rdr["Teamname"];
+                    res.Name = (string)rdr["Name"];
+                    res.Date = (DateTime)rdr["Date"];
+                    res.TimeSlot = (string)rdr["TimeSlot"];
+                    res.Reason = (string)rdr["Reason"];
+                    res.Seat = (string)rdr["Seat"];
+                    model = res;
+                }
+            }
+            conn.Close();
             return View(model);
         }
 
-        //check if type of reservation solo/group then redirect to delete view
+        // GET: /<controller>/
         public IActionResult Delete(int id, string type)
         {
             if (type == "Solo")
@@ -177,7 +234,6 @@ namespace NGTI.Controllers
                 return NotFound();
             }
         }
-        //delete soloreservation
         public IActionResult DeleteSolo(int id, string type)
         {
             System.Diagnostics.Debug.WriteLine("deleteSolo : [" + id + "] [" + type + "]");
@@ -197,14 +253,13 @@ namespace NGTI.Controllers
                     soloRes.Date = (DateTime)rdr["Date"];
                     soloRes.TimeSlot = (string)rdr["TimeSlot"];
                     soloRes.Reason = (string)rdr["Reason"];
-                    soloRes.TableId = (int)rdr["TableId"];
+                    soloRes.Seat = (string)rdr["Seat"];
                     model = soloRes;
                 }
             }
             conn.Close();
             return View(model);
         }
-        //delete groupreservation
         public IActionResult DeleteGroup(int id, string type)
         {
             System.Diagnostics.Debug.WriteLine("deleteGroup : [" + id + "] [" + type + "]");
@@ -226,7 +281,7 @@ namespace NGTI.Controllers
                     soloRes.Date = (DateTime)rdr["Date"];
                     soloRes.TimeSlot = (string)rdr["TimeSlot"];
                     soloRes.Reason = (string)rdr["Reason"];
-                    soloRes.TableId = (int)rdr["TableId"];
+                    soloRes.Seat = (string)rdr["Seat"];
                     model = soloRes;
                 }
             }
@@ -234,24 +289,38 @@ namespace NGTI.Controllers
             return View(model);
         }
 
-        //Delete reservation and go back to reservation view  
+        // POST: /<controller>/   
         [HttpPost]
         public IActionResult DeleteConfirmed(int id, string type)
         {
-            string sql = "";
-            if (type == "solo")
-            {
-                sql = "DELETE FROM SoloReservations WHERE IdSoloReservation = " + id;               
-            }
-            else if (type == "group")
-            {
-                sql = "DELETE FROM GroupReservations WHERE IdGroupReservation = " + id;
-            }
+            System.Diagnostics.Debug.WriteLine("deleteConfirmed : [" + id + "] [" + type + "]");
 
-            SqlMethods.QueryVoid(sql);
+            if (type == "Solo")
+            {
+                SqlConnection conn = new SqlConnection(connectionString);
+                string sql = "DELETE FROM SoloReservations WHERE IdSoloReservation = " + id;
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                conn.Open();
+                using (conn)
+                {
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                }
+                conn.Close();
+            }
+            else if (type == "Group")
+            {
+                SqlConnection conn = new SqlConnection(connectionString);
+                string sql = "DELETE FROM GroupReservations WHERE IdGroupReservation = " + id;
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                conn.Open();
+                using (conn)
+                {
+                    SqlDataReader rdr = cmd.ExecuteReader();
+                }
+                conn.Close();
+            }
             return RedirectToAction("Reservations");
         }
-        //editsolo view
         public ActionResult EditSolo(int id)
         {
             return View();
@@ -283,7 +352,7 @@ namespace NGTI.Controllers
             {
                 return NotFound();
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", groupReservation.Seat);
             return View(groupReservation);
         }
 
@@ -291,7 +360,7 @@ namespace NGTI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditGroup(int id, [Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,TableId")] GroupReservation groupReservation)
+        public async Task<IActionResult> EditGroup(int id, [Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,Seat")] GroupReservation groupReservation)
         {
             if (id != groupReservation.IdGroupReservation)
             {
@@ -318,7 +387,7 @@ namespace NGTI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", groupReservation.Seat);
             return View(groupReservation);
         }
 
@@ -326,14 +395,13 @@ namespace NGTI.Controllers
         {
             return _context.GroupReservations.Any(e => e.IdGroupReservation == id);
         }
-        //view covidmeasure
+
         public IActionResult covidmeasure()
         {
             int limit = SqlMethods.QueryLimit();
             TempData["limit"] = limit;
             return View();
         }
-        //change limit integer 
         [HttpPost]
         public IActionResult covidmeasure(string limit)
         {
@@ -341,42 +409,6 @@ namespace NGTI.Controllers
             System.Diagnostics.Debug.WriteLine(limit);
             SqlMethods.QueryVoid("UPDATE Limit SET limit = " + limit);
             return RedirectToAction("Index");
-        }
-        //user downloads txt of reservations
-        public FileStreamResult CreateFile()
-        {
-            DateTime w = DateTime.Now;
-            string data = $"{w} reservations of this week\n\n";
-            data += "--SoloReservations--\n\n";
-            List<SoloReservation> solo = SqlMethods.getSoloReservations("SELECT * FROM SoloReservations WHERE Date >= CAST(GETDATE() AS Date) AND Date <= CAST(GETDATE() + 7 AS Date) ORDER BY Date ASC;");
-            List<GroupReservation> group = SqlMethods.getGroupReservations("SELECT * FROM GroupReservations WHERE Date >= GETDATE() AND Date <= GETDATE() + 7 ORDER BY Date ASC;");
-            foreach (SoloReservation res in solo)
-            {
-                data += "{\n";
-                data += $"  IdSoloReservation = {res.IdSoloReservation} \n";
-                data += $"  Date = {res.Date} \n";
-                data += $"  Name = {res.Name} \n";
-                data += $"  TimeSlot = {res.TimeSlot} \n";
-                data += $"  Reason = {res.Reason} \n";
-                data += $"  TableId = {res.TableId} \n";
-                data += "}\n";
-            }
-            data += "\n--GroupReservations--\n\n";
-            foreach (GroupReservation res in group)
-            {
-                data += "{\n";
-                data += $"  IdGroupReservation = {res.IdGroupReservation} \n";
-                data += $"  Date = {res.Date} \n";
-                data += $"  Name = {res.Name} \n";
-                data += $"  TeamName = {res.Teamname} \n";
-                data += $"  TimeSlot = {res.TimeSlot} \n";
-                data += $"  Reason = {res.Reason} \n";
-                data += $"  TableId = {res.TableId} \n";
-                data += "}\n";
-            }
-            var bytearray = Encoding.ASCII.GetBytes(data);
-            var stream = new System.IO.MemoryStream(bytearray);
-            return File(stream, "text/plain", w.ToString()+".txt");
         }
     }
 }

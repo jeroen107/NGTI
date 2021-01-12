@@ -1,7 +1,14 @@
 ﻿.card-header {
-    margin-left:225px;
+    margin-left: 225px;
     text-align: center;
-    background: #9F8974;
+    color: #9F8974;
+    background-color: #151517;
+    font-family:Arial;
+}
+
+body {
+    color: #151517;
+    font-family: Arial;
 }
 
 .label {
@@ -18,18 +25,6 @@
     color: white;
 }
 
-.submit {
-    margin-left: 40%;
-    font-weight: bold;
-    color: #151517;
-    background: #9F8974;
-    border-radius: 15px;
-}
-
-    .submit:hover {
-        background: white;
-        color: #9F8974;
-    }
 
 input:focus {
     background-color: #9F8974
@@ -38,4 +33,403 @@ input:focus {
 
 select.focus {
     background-color: #9F8974
+}
+
+.submit {
+    background: #9F8974;
+    position: absolute;
+    display: inline-table;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #000;
+    margin-top: 75px;
+    margin-left: 125px;
+    border-radius: 100px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: Arial;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+    .submit:hover {
+        background: #1C1C20;
+        color: #9F8974;
+    }
+
+.submit2 {
+    background: #9F8974;
+    position: absolute;
+    display: inline-table;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #000;
+    margin-top: 75px;
+    margin-left: -100px;
+    border-radius: 100px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: Arial;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+    .submit2:hover {
+        background: #1C1C20;
+        color: #9F8974;
+    }
+
+.form-control {
+    background-color: #1C1C20;
+    color: #9F8974;
+    border-color: #1C1C20
+}
+
+.form-control:active,
+.form-control:hover{
+    background-color: #1C1C20;
+    color: #9F8974;
+    border-color: #1C1C20;
+    outline: none;
+}
+
+.control-lable {
+    background-color: #1C1C20;
+    color: #9F8974;
+    border-color: #1C1C20;
+    outline: none;
+}
+
+.form-group {
+    color:#1C1C20;
+}
+
+.container1 {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    margin-left:10px;
+    padding-bottom:20px;
+    border: 15px;
+    padding-right:10px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transform:scale(1);
+}
+
+.container2 {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-top: -24px;
+    margin-left: 35px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container3 {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-top: -32px;
+    margin-left: 100px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container4 {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-top: -32px;
+    margin-left: 170px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container5 {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-top: -32px;
+    margin-left: 240px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    .container1 input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    .container2 input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    .container3 input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    .container4 input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    .container5 input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+
+.checkmark1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+}
+
+.checkmark2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+}
+
+.checkmark3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+}
+
+.checkmark4 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+}
+
+.checkmark5 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+}
+
+
+
+.container1:hover
+input ~ .checkmark1 {
+    background-color: #9F8974;
+}
+
+.container2:hover
+input ~ .checkmark2 {
+    background-color: #9F8974;
+}
+
+.container3:hover
+input ~ .checkmark3 {
+    background-color: #9F8974;
+}
+
+.container4:hover
+input ~ .checkmark4 {
+    background-color: #9F8974;
+}
+
+.container5:hover
+input ~ .checkmark5 {
+    background-color: #9F8974;
+}
+
+
+
+.container1 input:checked ~ .checkmark1 {
+    background-color: #151517;
+}
+
+.container2 input:checked ~ .checkmark2 {
+    background-color: #151517;
+}
+
+.container3 input:checked ~ .checkmark3 {
+    background-color: #151517;
+}
+
+.container4 input:checked ~ .checkmark4 {
+    background-color: #151517;
+}
+
+.container5 input:checked ~ .checkmark5 {
+    background-color: #151517;
+}
+
+.checkmark1:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkmark2:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkmark3:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkmark4:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkmark5:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container1 input:checked ~ .checkmark1:after {
+    display: block;
+}
+
+.container2 input:checked ~ .checkmark2:after {
+    display: block;
+}
+
+.container3 input:checked ~ .checkmark3:after {
+    display: block;
+}
+
+.container4 input:checked ~ .checkmark4:after {
+    display: block;
+}
+
+.container5 input:checked ~ .checkmark5:after {
+    display: block;
+}
+
+.container1 .checkmark1:after {
+    left: 6px;
+    top: 0px;
+    width: 13px;
+    height: 20px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(40deg);
+    
+}
+
+.container2 .checkmark2:after {
+    left: 6px;
+    top: 0px;
+    width: 13px;
+    height: 20px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(40deg);
+}
+
+.container3 .checkmark3:after {
+    left: 6px;
+    top: 0px;
+    width: 13px;
+    height: 20px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(40deg);
+}
+
+.container4 .checkmark4:after {
+    left: 6px;
+    top: 0px;
+    width: 13px;
+    height: 20px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(40deg);
+}
+
+.container5 .checkmark5:after {
+    left: 6px;
+    top: 0px;
+    width: 13px;
+    height: 20px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(40deg);
 }

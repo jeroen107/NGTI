@@ -1,6 +1,6 @@
 
 .title {
-    font: sans-serif;
+    font: Arial;
     color: #151517;
     position: absolute;
     display: inline-table;
@@ -33,7 +33,8 @@
 }
 
     .btn:hover {
-        background: #5F5F62;
+        background: #1C1C20;
+        color: #9F8974;
     }
 
 .solo {
@@ -52,4 +53,9 @@
     top: 70%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+.title {
+    white-space: nowrap;
+    overflow: hidden;
 }
