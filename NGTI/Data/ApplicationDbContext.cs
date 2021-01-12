@@ -14,14 +14,14 @@ namespace NGTI.Data
         {
         }
         // tabllen die hij gaat aanmaken in de database dbset pakt de models
-        public DbSet<Table> Tables { get; set; }
+        //public DbSet<Seat> Seats { get; set; }
         public DbSet<GroupReservation> GroupReservations { get; set; }
         public DbSet<SoloReservation> SoloReservations { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<GroupReservation>().HasOne(groupreservation => groupreservation.Table).WithMany(table => table.GroupReservations);
-            modelBuilder.Entity<SoloReservation>().HasOne(soloreservation => soloreservation.Table).WithMany(table => table.SoloReservations);
+            //modelBuilder.Entity<GroupReservation>().HasOne(groupreservation => groupreservation.Seat).WithMany(table => table.GroupReservations);
+            //modelBuilder.Entity<SoloReservation>().HasOne(soloreservation => soloreservation.Seat).WithMany(table => table.SoloReservations);
         }
         public DbSet<NGTI.Models.Team> Team { get; set; }
 

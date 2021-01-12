@@ -22,7 +22,7 @@ namespace NGTI.Models
                 cmd.Parameters.AddWithValue("@Date", GroupReservationEntities.Date);
                 cmd.Parameters.AddWithValue("@TimeSlot", GroupReservationEntities.TimeSlot);
                 cmd.Parameters.AddWithValue("@Reason", GroupReservationEntities.Reason);
-                cmd.Parameters.AddWithValue("@TableId", GroupReservationEntities.TableId);
+                cmd.Parameters.AddWithValue("@Seat", GroupReservationEntities.Seat);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
