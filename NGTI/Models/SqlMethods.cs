@@ -111,7 +111,7 @@ namespace NGTI.Models
                     groupRes.Date = (DateTime)rdr["Date"];
                     groupRes.TimeSlot = (string)rdr["TimeSlot"];
                     groupRes.Reason = (string)rdr["Reason"];
-                    groupRes.TableId = (int)rdr["TableId"];
+                    groupRes.Seat = (string)rdr["Seat"];
                     model.Add(groupRes);
                 }
             }
@@ -137,7 +137,7 @@ namespace NGTI.Models
                     res.Date = (DateTime)rdr["Date"];
                     res.TimeSlot = (string)rdr["TimeSlot"];
                     res.Reason = (string)rdr["Reason"];
-                    res.TableId = (int)rdr["TableId"];
+                    res.Seat = (string)rdr["Seat"];
                     model = res;
                 }
             }
@@ -163,7 +163,7 @@ namespace NGTI.Models
                     soloRes.Date = (DateTime)rdr["Date"];
                     soloRes.TimeSlot = (string)rdr["TimeSlot"];
                     soloRes.Reason = (string)rdr["Reason"];
-                    soloRes.TableId = (int)rdr["TableId"];
+                    soloRes.Seat = (string)rdr["Seat"];
                     model.Add(soloRes);
                 }
             }
