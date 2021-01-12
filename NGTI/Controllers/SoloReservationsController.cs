@@ -29,7 +29,8 @@ namespace NGTI.Controllers
         public List<string> GoogleEvents = new List<string>();
         static string[] Scopes = { CalendarService.Scope.Calendar };
         static string ApplicationName = "Google Calendar API .NET NGTI";
-        
+        private readonly IHttpContextAccessor _contextAccessor;
+        private readonly ILogger<HomeController> _logger;
         public SoloReservationsController(ApplicationDbContext context)
         {
             _context = context;
