@@ -12,7 +12,6 @@ namespace NGTI.Models
         public int IdGroupReservation { get; set; }
         public string Name { get; set; }
         public string Teamname { get; set; }
-        public Teams TeamName { get; set;}
         public DateTime Date { get; set; }
         public string TimeSlot { get; set; }
         public string Reason { get; set; }
