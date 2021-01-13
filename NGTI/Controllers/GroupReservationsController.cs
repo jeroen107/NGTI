@@ -102,7 +102,7 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdGroupReservation,Teamname,TimeSlot,Reason,Seat")] GroupReservation groupReservation, bool entireWeek, IEnumerable<int> days, int selectedWeek)
+        public async Task<IActionResult> Create([Bind("IdGroupReservation,Name,Teamname,TimeSlot,Reason,Seat")] GroupReservation groupReservation, bool entireWeek, IEnumerable<int> days, int selectedWeek)
         {
 
             int year = DateTime.Now.Year;

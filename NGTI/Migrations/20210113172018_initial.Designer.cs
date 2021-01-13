@@ -10,8 +10,8 @@ using NGTI.Data;
 namespace NGTI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210112223149_fix")]
-    partial class fix
+    [Migration("20210113172018_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -205,12 +205,6 @@ namespace NGTI.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TokenKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TokenValue")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")

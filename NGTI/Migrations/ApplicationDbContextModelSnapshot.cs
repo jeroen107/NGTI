@@ -205,12 +205,6 @@ namespace NGTI.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TokenKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TokenValue")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 

@@ -49,15 +49,20 @@ namespace NGTI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tables",
+                name: "SoloReservations",
                 columns: table => new
                 {
-                    TableId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                    IdSoloReservation = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    TimeSlot = table.Column<string>(nullable: true),
+                    Reason = table.Column<string>(nullable: true),
+                    Seat = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tables", x => x.TableId);
+                    table.PrimaryKey("PK_SoloReservations", x => x.IdSoloReservation);
                 });
 
             migrationBuilder.CreateTable(
@@ -190,29 +195,6 @@ namespace NGTI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SoloReservations",
-                columns: table => new
-                {
-                    IdSoloReservation = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    TimeSlot = table.Column<string>(nullable: true),
-                    Reason = table.Column<string>(nullable: true),
-                    TableId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SoloReservations", x => x.IdSoloReservation);
-                    table.ForeignKey(
-                        name: "FK_SoloReservations_Tables_TableId",
-                        column: x => x.TableId,
-                        principalTable: "Tables",
-                        principalColumn: "TableId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "GroupReservations",
                 columns: table => new
                 {
@@ -224,17 +206,11 @@ namespace NGTI.Migrations
                     Date = table.Column<DateTime>(nullable: false),
                     TimeSlot = table.Column<string>(nullable: true),
                     Reason = table.Column<string>(nullable: true),
-                    TableId = table.Column<int>(nullable: false)
+                    Seat = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GroupReservations", x => x.IdGroupReservation);
-                    table.ForeignKey(
-                        name: "FK_GroupReservations_Tables_TableId",
-                        column: x => x.TableId,
-                        principalTable: "Tables",
-                        principalColumn: "TableId",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_GroupReservations_Teams_TeamName1",
                         column: x => x.TeamName1,
@@ -307,19 +283,9 @@ namespace NGTI.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroupReservations_TableId",
-                table: "GroupReservations",
-                column: "TableId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_GroupReservations_TeamName1",
                 table: "GroupReservations",
                 column: "TeamName1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SoloReservations_TableId",
-                table: "SoloReservations",
-                column: "TableId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TeamMembers_UserId",
@@ -358,9 +324,6 @@ namespace NGTI.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Tables");
 
             migrationBuilder.DropTable(
                 name: "Teams");

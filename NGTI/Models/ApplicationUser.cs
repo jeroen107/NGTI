@@ -14,12 +14,12 @@ namespace NGTI.Models
       
         public bool BHV { get; set; }
         public bool Admin { get; set; }
-
+/*
         public string TokenKey { get; set; }
 
         public string TokenValue { get; set; }
 
-
+*/
         public ICollection<TeamMember> TeamMembers { get; set; }
 
         /*public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager)
