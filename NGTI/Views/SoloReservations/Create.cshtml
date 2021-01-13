@@ -88,8 +88,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label asp-for="TimeSlot" class="control-label"></label>
-                        <select asp-for="TimeSlot" class="form-control">
+                        <label asp-for="TimeSlot" for="TimeSlot" class="control-label"></label>
+                        <select asp-for="TimeSlot" name="TimeSlot" id="TimeSlot" class="form-control" required>
                             <option value="">Choose a TimeSlot</option>
                             <option value="Morning">Morning: 8:00 - 12.00</option>
                             <option value="Afternoon">Afternoon: 12:00 - 16.00</option>
@@ -104,8 +104,8 @@
                         <span asp-validation-for="Reason" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Seat" class="control-label"></label>
-                        <select asp-for="Seat" class="form-control">
+                        <label asp-for="Seat" for="Seat" class="control-label"></label>
+                        <select asp-for="Seat" name="Seat" id="Seat" class="form-control" required>
                             <option value="">Choose a Seat</option>
                             <option value="Flex">Flex Seat</option>
                             <option value="Standing">Standing Desk</option>

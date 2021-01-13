@@ -99,9 +99,12 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,TimeSlot,Reason,TableId")] SoloReservation soloReservation, bool entireWeek, IEnumerable<int> days, int selectedWeek)
+        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,TimeSlot,Reason,Seat")] SoloReservation soloReservation, bool entireWeek, IEnumerable<int> days, int selectedWeek)
         {
-
+            if (soloReservation.Reason == null)
+            {
+                soloReservation.Reason = "no reason";
+            }
             int year = DateTime.Now.Year;
             DateTime firstDay = new DateTime(year, 1, 1);
             firstDay = correctToMonday(firstDay);
@@ -117,7 +120,7 @@ namespace NGTI.Controllers
                 {
                     for (int x = 0; x < 7; x++)
                     {
-                        if (soloReservation.Date >= DateTime.Today)
+                        if (soloReservation.Date >= DateTime.Today && !limitTest(soloReservation))
                         {
                             _context.Add(soloReservation);
                             await _context.SaveChangesAsync();
@@ -403,7 +406,8 @@ namespace NGTI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdSoloReservation,Name,Date,TimeSlot,Reason,Seat")] SoloReservation soloReservation)
         {
-            if (id != soloReservation.IdSoloReservation)
+            Console.WriteLine("arrived at edit");
+;            if (id != soloReservation.IdSoloReservation)
             {
                 return NotFound();
             }

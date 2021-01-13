@@ -50,8 +50,9 @@
         </dl>
     </div>
     <div class="exit">
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="IdSoloReservation" />
+        <form asp-action="DeleteConfirmed">
+            <input type="hidden" asp-for="IdSoloReservation" name="id" />
+            <input type="hidden" name="type" value="solo" />
             <input type="submit" value="Delete" class="submit" /> |
             <a asp-action="Index">Back to List</a>
         </form>
