@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NGTI.Models;
 
 namespace NGTI.Controllers
 {
+    
     public class Admin_TeamController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManger;

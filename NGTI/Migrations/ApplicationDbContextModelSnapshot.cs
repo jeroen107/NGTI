@@ -15,7 +15,7 @@ namespace NGTI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -205,6 +205,12 @@ namespace NGTI.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TokenKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TokenValue")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -241,8 +247,8 @@ namespace NGTI.Migrations
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TableId")
-                        .HasColumnType("int");
+                    b.Property<string>("Seat")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TeamName1")
                         .HasColumnType("nvarchar(450)");
@@ -254,8 +260,6 @@ namespace NGTI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdGroupReservation");
-
-                    b.HasIndex("TableId");
 
                     b.HasIndex("TeamName1");
 
@@ -278,29 +282,15 @@ namespace NGTI.Migrations
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TableId")
-                        .HasColumnType("int");
+                    b.Property<string>("Seat")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TimeSlot")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdSoloReservation");
 
-                    b.HasIndex("TableId");
-
                     b.ToTable("SoloReservations");
-                });
-
-            modelBuilder.Entity("NGTI.Models.Table", b =>
-                {
-                    b.Property<int>("TableId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("TableId");
-
-                    b.ToTable("Tables");
                 });
 
             modelBuilder.Entity("NGTI.Models.Team", b =>
@@ -394,24 +384,9 @@ namespace NGTI.Migrations
 
             modelBuilder.Entity("NGTI.Models.GroupReservation", b =>
                 {
-                    b.HasOne("NGTI.Models.Table", "Table")
-                        .WithMany("GroupReservations")
-                        .HasForeignKey("TableId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("NGTI.Models.Teams", "TeamName")
                         .WithMany()
                         .HasForeignKey("TeamName1");
-                });
-
-            modelBuilder.Entity("NGTI.Models.SoloReservation", b =>
-                {
-                    b.HasOne("NGTI.Models.Table", "Table")
-                        .WithMany("SoloReservations")
-                        .HasForeignKey("TableId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("NGTI.Models.TeamMember", b =>

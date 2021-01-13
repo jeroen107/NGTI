@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.OAuth;
+using NGTI.Models;
 
 namespace NGTI
 {
@@ -33,16 +34,23 @@ namespace NGTI
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<Models.ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactory>();
             services.AddControllersWithViews();
             services.AddRazorPages();
-            
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Admin", "True"));
+            });
+
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
                     
                    options.ClientId = "1013616790261-uc1b0io06jusji319pihjnbrcdmld36d.apps.googleusercontent.com";
                    options.ClientSecret = "ID_ZSHiH8PRppMNCmmqBDWSL";
+
                     /*
                    IConfigurationSection googleAuthNSection =
                        Configuration.GetSection("Authentication:Google");
@@ -51,8 +59,10 @@ namespace NGTI
                     options.ClientSecret = googleAuthNSection["ID_ZSHiH8PRppMNCmmqBDWSL"];
                    */
 
+
                 });
-            
+           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
