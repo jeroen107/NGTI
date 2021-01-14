@@ -51,7 +51,8 @@
     </div>
     <div class="exit">
         <form asp-action="Delete">
-            <input type="hidden" asp-for="IdGroupReservation" />
+            <input type="hidden" asp-for="IdGroupReservation" name="id" />
+            <input type="hidden" name="type" value="group" />
             <input type="submit" value="Delete" class="submit" /> |
             <a asp-action="Index">Back to List</a>
         </form>

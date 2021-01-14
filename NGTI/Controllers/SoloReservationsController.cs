@@ -19,6 +19,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
+using System.Data.SqlClient;
 
 namespace NGTI.Controllers
 {
@@ -101,7 +102,10 @@ namespace NGTI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,TimeSlot,Reason,Seat")] SoloReservation soloReservation, bool entireWeek, IEnumerable<int> days, int selectedWeek)
         {
-
+            if (soloReservation.Reason == null)
+            {
+                soloReservation.Reason = "no reason";
+            }
             int year = DateTime.Now.Year;
             DateTime firstDay = new DateTime(year, 1, 1);
             firstDay = correctToMonday(firstDay);
@@ -117,7 +121,7 @@ namespace NGTI.Controllers
                 {
                     for (int x = 0; x < 7; x++)
                     {
-                        if (soloReservation.Date >= DateTime.Today)
+                        if (soloReservation.Date >= DateTime.Today && !limitTest(soloReservation))
                         {
                             _context.Add(soloReservation);
                             await _context.SaveChangesAsync();
@@ -401,12 +405,12 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdSoloReservation,Name,Date,TimeSlot,Reason,Seat")] SoloReservation soloReservation)
+        public async Task<IActionResult> Edit([Bind("IdSoloReservation,Name,Date,TimeSlot,Reason,Seat")] SoloReservation soloReservation)
         {
-            if (id != soloReservation.IdSoloReservation)
-            {
-                return NotFound();
-            }
+            Console.WriteLine("arrived at edit");
+            System.Diagnostics.Debug.WriteLine(soloReservation.IdSoloReservation);
+            
+            
 
             if (ModelState.IsValid)
             {
@@ -454,14 +458,17 @@ namespace NGTI.Controllers
         // POST: SoloReservations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id, string type)
         {
-            var soloReservation = await _context.SoloReservations.FindAsync(id);
-            _context.SoloReservations.Remove(soloReservation);
-            await _context.SaveChangesAsync();
+            System.Diagnostics.Debug.WriteLine("deleteConfirmed : [" + id + "] [" + type + "]");
+
+            if (type == "solo")
+            {
+                string sql = "DELETE FROM SoloReservations WHERE IdSoloReservation = " + id;
+                SqlMethods.QueryVoid(sql);
+            }
             return RedirectToAction(nameof(Index));
         }
-
         private bool SoloReservationExists(int id)
         {
             return _context.SoloReservations.Any(e => e.IdSoloReservation == id);

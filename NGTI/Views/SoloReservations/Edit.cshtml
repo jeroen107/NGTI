@@ -2,6 +2,36 @@
 
 @{
     ViewData["Title"] = "Solo Reservations";
+
+    int year = DateTime.Now.Year;
+    DateTime firstDay = new DateTime(year, 1, 1);
+    firstDay = correctToMonday(firstDay);
+    int weken = 2;  //aantal weken dat je kan kiezen bij reservering
+    int weekNr = (DateTime.Today - firstDay).Days / 7 + 1;
+    //initialize selectlist for weeknrs and fill
+    int[] selectlist = new int[weken];
+    string[] selectdate = new string[weken];
+    //set weeks in select html
+    for (int x = 0; x < selectlist.Length; x++)
+    {
+        selectlist[x] = weekNr + x;
+        DateTime F = firstDay.AddDays((selectlist[x] - 1) * 7);
+        DateTime L = firstDay.AddDays(selectlist[x] * 7 - 1);
+        selectdate[x] = $"[{F.Day}-{F.Month}-{F.Year}] t/m [{L.Day}-{L.Month}-{L.Year}]";
+    }
+    //return date of the monday of the given date
+    DateTime correctToMonday(DateTime fday)
+    {
+        DayOfWeek dow = fday.DayOfWeek;
+        if (dow == DayOfWeek.Monday)
+        {
+            return fday;
+        }
+        else
+        {
+            return correctToMonday(fday.AddDays(-1));
+        }
+    }
 }
 
 
@@ -17,17 +47,20 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <form asp-action="Create">
+                <form asp-action="Edit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <!--<label asp-for="Name" class="control-label"></label>-->
-                        <input asp-for="Name" class="form-control" value="@User.Identity.Name" hidden />
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Date" class="control-label"></label>
+                        <!--<label asp-for="Date" class="control-label"></label>
                         <input asp-for="Date" type="date" asp-format="{0:dd:mm:yyyy}" class="form-control" />
-                        <span asp-validation-for="Date" class="text-danger"></span>
+                        <span asp-validation-for="Date" class="text-danger"></span>-->
+                        <!-- choose or entireweek -->
+                         <input asp-for="IdSoloReservation" name="IdSoloReservation" hidden />
+                        <input asp-for="Name" class="form-control" value="@User.Identity.Name" hidden />
+                        <div class="form-group">
+                            <label asp-for="Date" class="control-label"></label>
+                            <input asp-for="Date" type="date" asp-format="{0:mm:dd:yyyy}" class="form-control" />
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label asp-for="TimeSlot" class="control-label"></label>
@@ -54,7 +87,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Edit" class="submit" />
+                        <input type="submit" value="Save" class="submit" />
                     </div>
                 </form>
                 <a asp-action="Index" class="submit2">Go to Overview</a>

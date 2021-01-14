@@ -26,6 +26,8 @@ namespace NGTI.Data
         public DbSet<SoloReservation> SoloReservations { get; set; }
         public DbSet<Teams> Teams { get; set; }
 
+        public DbSet<Limit> Limit { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

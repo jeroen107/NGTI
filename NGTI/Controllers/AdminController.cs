@@ -93,10 +93,10 @@ namespace NGTI.Controllers
             var model = new ReservationsViewModel() { soloList = solo, groupList = group };
             return View(model);
         }
-        [HttpGet]
-        public IActionResult ListUsers()
+       
+        public IActionResult ListUsers(string search)
         {
-            var users = userManager.Users;
+            var users = userManager.Users.Where(x => x.Email.Contains(search) || search == "" || search == null);
             return View(users);
         }
 
@@ -218,6 +218,14 @@ namespace NGTI.Controllers
             return View(model);
         }
 
+        public IActionResult DeleteUser(string id) 
+        {
+            string sql = $"DELETE FROM AspNetUsers WHERE Id = '{id}';";
+            SqlMethods.QueryVoid(sql);
+            return RedirectToAction("ListUsers");
+        }
+
+
         // GET: /<controller>/
         public IActionResult Delete(int id, string type)
         {
@@ -227,7 +235,9 @@ namespace NGTI.Controllers
             }
             else if (type == "Group")
             {
+                System.Diagnostics.Debug.WriteLine("deleteGroup : [" + id + "] [" + type + "]");
                 return RedirectToAction("DeleteGroup", new { id = id, type = type });
+
             }
             else
             {
@@ -295,7 +305,7 @@ namespace NGTI.Controllers
         {
             System.Diagnostics.Debug.WriteLine("deleteConfirmed : [" + id + "] [" + type + "]");
 
-            if (type == "Solo")
+            if (type == "solo")
             {
                 SqlConnection conn = new SqlConnection(connectionString);
                 string sql = "DELETE FROM SoloReservations WHERE IdSoloReservation = " + id;
@@ -307,7 +317,7 @@ namespace NGTI.Controllers
                 }
                 conn.Close();
             }
-            else if (type == "Group")
+            else if (type == "group")
             {
                 SqlConnection conn = new SqlConnection(connectionString);
                 string sql = "DELETE FROM GroupReservations WHERE IdGroupReservation = " + id;
@@ -343,12 +353,8 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditSolo(int id, [Bind("IdSoloReservation,Name,Date,TimeSlot,Reason,TableId")] SoloReservation soloReservation)
+        public async Task<IActionResult> EditSolo([Bind("IdSoloReservation,Name,Date,TimeSlot,Reason,Seat")] SoloReservation soloReservation)
         {
-            if (id != soloReservation.IdSoloReservation)
-            {
-                return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
@@ -387,12 +393,9 @@ namespace NGTI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditGroup(int id, [Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,Seat")] GroupReservation groupReservation)
+        public async Task<IActionResult> EditGroup([Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,Seat")] GroupReservation groupReservation)
         {
-            if (id != groupReservation.IdGroupReservation)
-            {
-                return NotFound();
-            }
+            
 
             if (ModelState.IsValid)
             {
