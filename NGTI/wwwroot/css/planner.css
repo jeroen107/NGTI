@@ -1,7 +1,7 @@
 
 .title {
-    font: sans-serif;
-    color: #000;
+    font: Arial;
+    color: #151517;
     position: absolute;
     display: inline-table;
     left: 50%;
@@ -10,8 +10,14 @@
 }
 
 
+body {
+    background-color: #5F5F62;
+    color: white;
+    font: Arial;
+}
 
-.btn {
+.button {
+    background: #9F8974;
     position: absolute;
     display: inline-table;
     left: 50%;
@@ -21,15 +27,20 @@
     padding: 0.35em 1.2em;
     border: 0.1em solid #000;
     margin: 0 0.3em 0.3em 0;
-    border-radius: 0.12em;
+    border-radius: 50px;
     box-sizing: border-box;
     text-decoration: none;
     font-family: sans-serif;
-    font-weight: 300;
+    font-weight: 700;
     color: #000000;
     text-align: center;
     transition: all 0.2s;
 }
+
+    .button:hover {
+        background: #1C1C20;
+        color: #9F8974;
+    }
 
 .solo {
     color: #000;
@@ -47,4 +58,9 @@
     top: 70%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+.title {
+    white-space: nowrap;
+    overflow: hidden;
 }

@@ -1,0 +1,42 @@
+﻿@model NGTI.Models.Team
+
+@{
+    ViewData["Title"] = "CreateTeam";
+    if (TempData["msg"] != null)
+    {
+        <script>
+                alert('@TempData["msg"]')
+        </script>
+    }
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/CreateTeam.css" />
+</head>
+
+<div class="card-header">
+    <h1>Create New Team</h1>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateTeam">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TeamName" class="control-label"></label>
+                <input asp-for="TeamName" class="form-control" />
+                <span asp-validation-for="TeamName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="submit" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="link">
+    <a asp-controller="Admin_Team" asp-action="Overview">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

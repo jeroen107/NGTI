@@ -15,10 +15,11 @@
 	body {
 		/* min-width: (containers) */
 		min-width: 1200px;
+		
 	}
 
 	.container {
-		margin-left: auto;
+		margin-left: 17%;
 		margin-right: auto;
 		
 		/* width: (containers) */

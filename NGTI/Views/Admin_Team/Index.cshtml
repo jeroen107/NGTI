@@ -1,0 +1,61 @@
+﻿@model IEnumerable<NGTI.Models.Team>
+
+@{
+    ViewData["Title"] = "Teams";
+    if (TempData["msg"] != null)
+    {
+        <script>
+                alert('@TempData["msg"]')
+        </script>
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/IndexTeams.css" />
+</head>
+<body>
+    <div class="card-header">
+        <h1>Manage Teams</h1>
+    </div>
+    <h1>Teams</h1>
+
+    <p>
+        <a asp-action="CreateTeam" class="link2">Create New</a>
+    </p>
+    <div class="content">
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TeamName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Members)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeamName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Members)
+                    </td>
+
+                    <td>
+                    
+                        <a asp-action="EditTeam" asp-route-name="@item.TeamName">Edit</a> |
+                        <a asp-action="DetailsTeam" asp-route-name="@item.TeamName">Details</a> |
+                        <a asp-action="DeleteTeam" asp-route-name="@item.TeamName">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+        </div>
+</body>
+</html>

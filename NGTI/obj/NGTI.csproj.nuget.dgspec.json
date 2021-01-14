@@ -38,10 +38,6 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "Google.Apis.Calendar.v3": {
-              "target": "Package",
-              "version": "[1.40.3.1692, )"
-            },
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
               "version": "[3.1.9, )"
@@ -58,6 +54,16 @@
               "target": "Package",
               "version": "[3.1.9, )"
             },
+            "Microsoft.CodeAnalysis.Analyzers": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.9.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Analyzers": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[3.1.9, )"
@@ -68,9 +74,9 @@
               "target": "Package",
               "version": "[3.1.9, )"
             },
-            "MongoDB.Driver.Core": {
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[2.11.4, )"
+              "version": "[3.1.4, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",

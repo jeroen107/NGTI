@@ -1,0 +1,103 @@
+﻿.card-header {
+    margin-left: 225px;
+    text-align: center;
+    color: #9F8974;
+    background-color: #151517;
+    font-family:Arial;
+}
+
+body {
+    background-color: #5F5F62;
+    color: white;
+    font: Arial;
+}
+
+.content {
+    margin-top: 10em;
+    position: absolute;
+    left: 30%;
+    margin-left: -100px;
+    width: 75%;
+}
+
+.create {
+    margin-top: 25px;
+    margin-left:-525px;
+    text-align: center;
+    font-size:12px;
+}
+    .create a {
+        color: #9F8974;
+        transition: 0.2s
+    }
+
+    .create a:hover {
+        color: saddlebrown;
+    }
+
+
+.content-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    margin-left: 80px;
+    margin-top:-100px;
+    font-size: 0.9em;
+    min-width: 1000px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+}
+    .content-table a {
+        color: white;
+    }
+
+    .content-table tr:hover a{
+        color: saddlebrown;
+    }
+
+    .content-table thead tr {
+        text-align: center;
+        vertical-align: middle;
+        text-align: right;
+        vertical-align: middle;
+        background-color: #1C1C20;
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+
+    }
+
+    .content-table tbody tr:hover {
+        background: #ffebc7;
+        color: saddlebrown;
+    }
+
+    .content-table th,
+    .content-table td {
+        padding: 15px 18px;
+
+    }
+
+    .content-table tbody tr {
+        border-bottom: 1px solid #5F5F62;
+        margin-left: 5px;
+    }
+
+    .content-table tbody tr {
+        background-color: #9F8974;
+        border-bottom: 2px solid #5F5F62;
+        border-right: 2px solid #5F5F62;
+        border-left: 2px solid #5F5F62;
+    }
+
+        .content-table tbody tr:last-of-type {
+            border-bottom: 2px solid #5F5F62;
+            border-right: 2px solid #5F5F62;
+            border-left: 2px solid #5F5F62;
+        }
+
+        .content-table tbody tr.active-row {
+            font-weight: bold;
+            color: #FFFFFF;
+        }

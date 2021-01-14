@@ -1,0 +1,147 @@
+﻿.card-header {
+    margin-top:-36px;
+    margin-left: 225px;
+    text-align: center;
+    color: #9F8974;
+    background-color: #151517;
+    font-family: Arial;
+}
+
+
+body {
+    background-color: #5F5F62;
+    color: white;
+    font: Arial;
+}
+
+.content {
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+}
+
+.content-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    margin-left: -300px;
+    font-size: 0.9em;
+    min-width: 1000px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    
+}
+
+    .content-table a {
+        color: white;
+        transition: 0.2s
+    }
+
+    .content-table tr:hover a {
+        color: saddlebrown;
+    }
+
+    .content-table thead tr {
+        text-align: center;
+        vertical-align: middle;
+        text-align: right;
+        vertical-align: middle;
+        background-color: #1C1C20;
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .content-table tbody tr:hover {
+        background: #ffebc7;
+        color:saddlebrown;
+    }
+
+    .content-table th,
+    .content-table td {
+        padding: 15px 18px;
+    }
+
+    .content-table tbody tr {
+        border-bottom: 1px solid #5F5F62;
+        margin-left: 5px;
+    }
+
+    .content-table tbody tr {
+        background-color: #9F8974;
+        border-bottom: 2px solid #5F5F62;
+        border-right: 2px solid #5F5F62;
+        border-left: 2px solid #5F5F62;
+    }
+
+        .content-table tbody tr:last-of-type {
+            border-bottom: 2px solid #5F5F62;
+            border-right: 2px solid #5F5F62;
+            border-left: 2px solid #5F5F62;
+        }
+
+        .content-table tbody tr.active-row {
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+
+
+.form-control {
+    padding: 12px;
+    width: 20%;
+    border: none;
+    background-color: #5F5F62 !important;
+    color: white !important;
+    margin-left: 50px;
+    margin-bottom: 50px;
+}
+
+a {
+    color: white;
+    -webkit-transition: color 0.2s linear;
+    -moz-transition: color 0.2s linear;
+    -ms-transition: color 0.2s linear;
+    -o-transition: color 0.2s linear;
+    transition: color 0.2s linear;
+}
+
+    a:hover {
+        color: #9F8974;
+    }
+
+.form-control {
+    padding: 12px;
+    width: 62%;
+    border: none;
+    background-color: #5F5F62;
+    color: white;
+    margin-bottom: 50px;
+}
+
+.submit {
+    background: #9F8974;
+    position: absolute;
+    display: inline-table;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #000;
+    margin-top: 200px;
+    margin-left: -610px;
+    border-radius: 100px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: Arial;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    transition: all 0.2s;
+    
+}
+
+    .submit:hover {
+        background: #1C1C20;
+        color: #9F8974;
+    }

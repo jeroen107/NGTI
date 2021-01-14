@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,20 +13,25 @@ using NGTI.Models;
 
 namespace NGTI.Controllers
 {
+    [Authorize]
     public class GroupReservationsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManger;
+        string connectionString = "Server=(localdb)\\mssqllocaldb;Database=NGTI;Trusted_Connection=True;MultipleActiveResultSets=true";
 
-        public GroupReservationsController(ApplicationDbContext context)
+        public GroupReservationsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManger = userManager;
         }
 
         // GET: GroupReservations
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.GroupReservations.Include(g => g.Table);
-            return View(await applicationDbContext.ToListAsync());
+            var applicationDbContext = _context.GroupReservations;
+            var temp = applicationDbContext.OrderBy(x => x.Date).ToList();
+            return View(temp.ToList());
         }
 
         // GET: GroupReservations/Details/5
@@ -35,7 +43,7 @@ namespace NGTI.Controllers
             }
 
             var groupReservation = await _context.GroupReservations
-                .Include(g => g.Table)
+                .Include(g => g.Seat)
                 .FirstOrDefaultAsync(m => m.IdGroupReservation == id);
             if (groupReservation == null)
             {
@@ -48,7 +56,33 @@ namespace NGTI.Controllers
         // GET: GroupReservations/Create
         public IActionResult Create()
         {
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId");
+            var teams = new List<Team>();
+            var fake = new Team();
+            fake.TeamName = "Pick A Team";
+            fake.Members = 0;
+            teams.Add(fake);
+            SqlConnection conn = new SqlConnection(connectionString);
+            var id = _userManger.GetUserId(HttpContext.User);
+            string sql = $"SELECT t.TeamName, COUNT(tm.UserId) AS count FROM Teams t LEFT JOIN TeamMembers tm ON t.TeamName = tm.TeamName WHERE t.teamname IN(SELECT DISTINCT teamname from teammembers WHERE userid = N'{id}') GROUP BY t.TeamName;";
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            var model = new List<Team>();
+            conn.Open();
+            using (conn)
+            {
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var obj = new Team();
+                    obj.TeamName = (string)rdr["TeamName"];
+                    obj.Members = 1;
+                    teams.Add(obj);
+                    System.Diagnostics.Debug.WriteLine(teams.Count);
+                }
+            }
+            conn.Close();
+            ViewData["TeamName"] = new SelectList(teams, "TeamName", "TeamName");
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat");
+            System.Diagnostics.Debug.WriteLine(teams.Count);
             return View();
         }
 
@@ -57,16 +91,68 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,TableId")] GroupReservation groupReservation)
+        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,TimeSlot,Reason,Seat")] SoloReservation soloReservation, bool entireWeek, IEnumerable<int> days, int selectedWeek)
         {
-            if (ModelState.IsValid)
+
+            int year = DateTime.Now.Year;
+            DateTime firstDay = new DateTime(year, 1, 1);
+            firstDay = correctToMonday(firstDay);
+            firstDay = firstDay.AddDays(7 * (selectedWeek - 1));
+            soloReservation.Date = firstDay;
+            System.Diagnostics.Debug.WriteLine("entireweek = " + entireWeek.ToString());
+            //modelstate is not valid when trying to set multiple dates
+            if (ModelState.IsValid || !ModelState.IsValid)
             {
-                _context.Add(groupReservation);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                System.Diagnostics.Debug.WriteLine($"testbox = {entireWeek}");
+                //reserve whole week automatic
+                if (entireWeek == true)
+                {
+                    for (int x = 0; x < 7; x++)
+                    {
+                        if (soloReservation.Date >= DateTime.Today)
+                        {
+                            _context.Add(soloReservation);
+                            await _context.SaveChangesAsync();
+                            System.Diagnostics.Debug.WriteLine($"added {x}");
+                        }
+                        soloReservation.Date = soloReservation.Date.AddDays(1);
+                        soloReservation.IdSoloReservation = 0;
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                //reserve chosen days
+                else
+                {
+                    foreach (int day in days)
+                    {
+                        soloReservation.Date = soloReservation.Date.AddDays(day);
+                        if (soloReservation.Date >= DateTime.Today)
+                        {
+                            _context.Add(soloReservation);
+                            await _context.SaveChangesAsync();
+                            System.Diagnostics.Debug.WriteLine($"added {day}");
+                        }
+                        soloReservation.Date = firstDay;
+                        soloReservation.IdSoloReservation = 0;
+                    }
+                    return RedirectToAction(nameof(Index));
+
+                }
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
-            return View(groupReservation);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", soloReservation.Seat);
+            return View(soloReservation);
+        }
+        DateTime correctToMonday(DateTime fday)
+        {
+            DayOfWeek dow = fday.DayOfWeek;
+            if (dow == DayOfWeek.Monday)
+            {
+                return fday;
+            }
+            else
+            {
+                return correctToMonday(fday.AddDays(-1));
+            }
         }
 
         // GET: GroupReservations/Edit/5
@@ -82,7 +168,7 @@ namespace NGTI.Controllers
             {
                 return NotFound();
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", groupReservation.Seat);
             return View(groupReservation);
         }
 
@@ -91,7 +177,7 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,TableId")] GroupReservation groupReservation)
+        public async Task<IActionResult> Edit(int id, [Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,Seat")] GroupReservation groupReservation)
         {
             if (id != groupReservation.IdGroupReservation)
             {
@@ -118,7 +204,7 @@ namespace NGTI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TableId"] = new SelectList(_context.Tables, "TableId", "TableId", groupReservation.TableId);
+            //ViewData["Seat"] = new SelectList(_context.Seats, "Seat", "Seat", groupReservation.Seat);
             return View(groupReservation);
         }
 
@@ -131,7 +217,7 @@ namespace NGTI.Controllers
             }
 
             var groupReservation = await _context.GroupReservations
-                .Include(g => g.Table)
+                .Include(g => g.Seat)
                 .FirstOrDefaultAsync(m => m.IdGroupReservation == id);
             if (groupReservation == null)
             {

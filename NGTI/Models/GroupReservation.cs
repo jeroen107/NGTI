@@ -15,7 +15,7 @@ namespace NGTI.Models
         public DateTime Date { get; set; }
         public string TimeSlot { get; set; }
         public string Reason { get; set; }
-        public int TableId { get; set; }
-        public Table Table { get; set; }
+        public string Seat { get; set; }
+
     }
 }
