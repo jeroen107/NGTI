@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\NGTI.csproj": {}
+    "C:\\Users\\ertug\\source\\repos\\NGTI\\NGTI\\NGTI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\NGTI.csproj": {
+    "C:\\Users\\ertug\\source\\repos\\NGTI\\NGTI\\NGTI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\NGTI.csproj",
+        "projectUniqueName": "C:\\Users\\ertug\\source\\repos\\NGTI\\NGTI\\NGTI.csproj",
         "projectName": "NGTI",
-        "projectPath": "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\NGTI.csproj",
-        "packagesPath": "C:\\Users\\zoon_\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\obj\\",
+        "projectPath": "C:\\Users\\ertug\\source\\repos\\NGTI\\NGTI\\NGTI.csproj",
+        "packagesPath": "C:\\Users\\ertug\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ertug\\source\\repos\\NGTI\\NGTI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\zoon_\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ertug\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,7 +38,20 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Google.Apis.Calendar.v3": {
+              "target": "Package",
+              "version": "[1.49.0.2161, )"
+            },
+            "Microsoft.AspNet.Identity.Core": {
+              "target": "Package",
+              "version": "[2.2.3, )"
+            },
+            "Microsoft.AspNet.WebApi.Core": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
               "version": "[3.1.9, )"
@@ -66,13 +80,17 @@
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[3.1.9, )"
+              "version": "[3.1.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[3.1.10, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[3.1.9, )"
+              "version": "[3.1.10, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
@@ -101,7 +119,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NGTI.Models
 {
-    public class Table
+    public class Seat
     {
         [Key]
         // verbinding tussen groepreservatie en tafels

@@ -17,6 +17,7 @@ namespace NGTI.Models
         public string TimeSlot { get; set; }
         public string Reason { get; set; }
         public string Seat { get; set; }
+       
 
     }
 }
