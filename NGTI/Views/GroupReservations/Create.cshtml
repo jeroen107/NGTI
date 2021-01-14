@@ -72,11 +72,11 @@
             </div>
             <!-- choose days -->
             <div>
-                <label>Ma<input type="checkbox" name="days" value=0></label>
-                <label>Di<input type="checkbox" name="days" value=1></label>
-                <label>Wo<input type="checkbox" name="days" value=2></label>
-                <label>Do<input type="checkbox" name="days" value=3></label>
-                <label>Vr<input type="checkbox" name="days" value=4></label>
+                <label class="container1">Ma<input type="checkbox" checked="checked" name="days" value=0><span class="checkmark1"></span></label>
+                <label class="container2">Di<input type="checkbox" checked="checked" name="days" value=1><span class="checkmark2"></span></label>
+                <label class="container3">Wo<input type="checkbox" checked="checked" name="days" value=2><span class="checkmark3"></span></label>
+                <label class="container4">Do<input type="checkbox" checked="checked" name="days" value=3><span class="checkmark4"></span></label>
+                <label class="container5">Vr<input type="checkbox" checked="checked" name="days" value=4><span class="checkmark5"></span></label>
             </div>
             <div class="form-group">
                 <label asp-for="TimeSlot" class="control-label"></label>
@@ -105,7 +105,7 @@
                 <input type="submit" value="Create" class="submit" />
             </div>
         </form>
-        <a asp-action="Index">Go to Overview</a>
+        <a asp-action="Index" class="submit2">Go to Overview</a>
         </div>
     </div>
 

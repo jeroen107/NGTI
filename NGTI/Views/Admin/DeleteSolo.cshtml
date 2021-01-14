@@ -15,7 +15,6 @@
             <h1>Delete Reservation</h1>
             <h3 class="under">Are you sure you want to delete this?</h3>
         </div>
-        <hr />
         <dl class="row">
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Name):
@@ -53,8 +52,8 @@
         <form asp-action="DeleteConfirmed">
             <input type="hidden" asp-for="IdSoloReservation" name="id" />
             <input type="hidden" name="type" value="solo" />
-            <input type="submit" value="Delete" class="submit" /> |
-            <a asp-action="Index">Back to List</a>
+            <input type="submit" value="Delete" class="submit" />
+            <a asp-action="Index" class="submit2">Back to List</a>
         </form>
     </div>
 

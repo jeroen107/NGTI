@@ -1,30 +1,73 @@
-﻿
-input:focus {
-    background: #9F8974;
+﻿.card-header {
+    margin-left: 225px;
+    text-align: center;
+    color: #9F8974;
+    background-color: #151517;
+    font-family: Arial;
+    font-size: 38px;
+    margin-bottom: 50px;
 }
 
-.row {
-    position: absolute;
-    left: 50%;
-    margin-left: -100px;
-    width: 57%;
+body {
+    background-color: #5F5F62;
+    color: white;
+    font: Arial;
 }
+
+.form-control {
+    margin-top:50px;
+    margin-left: 140%;
+    background-color: #151517;
+    border-color: #151517;
+    color: white;
+    max-width: 400px;
+}
+
+    .form-control:active {
+        background-color: #1C1C20;
+        color: white;
+        border-color: #1C1C20;
+        outline: none;
+    }
+
+    .form-control:hover {
+        background-color: #1C1C20;
+        color: white;
+        border-color: #1C1C20;
+        outline: none;
+    }
+
+    .form-control:focus {
+        background-color: #1C1C20;
+        color: white;
+        border-color: #1C1C20;
+        outline: none;
+    }
 
 .submit {
-    margin-left: 40%;
-    font-weight: bold;
-    color: #151517;
     background: #9F8974;
-    border-radius: 15px;
+    position: absolute;
+    display: inline-table;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #000;
+    margin-top: 50px;
+    margin-left: 118%;
+    border-radius: 100px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: Arial;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    transition: all 0.2s;
 }
 
     .submit:hover {
-        background: white;
+        background: #1C1C20;
         color: #9F8974;
     }
 
-.card-header {
-    margin-left: 225px;
-    text-align: center;
-    background: #9F8974;
-}

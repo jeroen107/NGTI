@@ -10,8 +10,13 @@
 }
 
 
+body {
+    background-color: #5F5F62;
+    color: white;
+    font: Arial;
+}
 
-.btn {
+.button {
     background: #9F8974;
     position: absolute;
     display: inline-table;
@@ -32,7 +37,7 @@
     transition: all 0.2s;
 }
 
-    .btn:hover {
+    .button:hover {
         background: #1C1C20;
         color: #9F8974;
     }

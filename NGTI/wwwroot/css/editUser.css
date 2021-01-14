@@ -6,22 +6,74 @@
     color: white;
 }
 
+.label-control{
+    margin-top:100px !important;
+}
 
 .card-header {
     margin-left: 225px;
     text-align: center;
-    background: #9F8974;
+    color: #9F8974;
+    background-color: #151517;
+    font-family: Arial;
+}
+
+body {
+    background-color: #5F5F62;
+    color: white;
+    font: Arial;
 }
 
 .submit {
-    margin-left: 40%;
-    font-weight: bold;
-    color: #151517;
     background: #9F8974;
-    border-radius: 15px;
+    position: absolute;
+    display: inline-table;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #000;
+    border-radius: 100px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: Arial;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    transition: all 0.2s;
+    margin-left: 30%;
+    margin-top: 45%;
 }
 
     .submit:hover {
-        background: white;
+        background: #1C1C20;
         color: #9F8974;
+    }
+
+.submit2 {
+    background: #9F8974;
+    position: absolute;
+    display: inline-table;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #000;
+    margin-top: 20%;
+    margin-left: -80px;
+    border-radius: 100px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: Arial;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+    .submit2:hover {
+        background: #1C1C20;
+        color: #9F8974 ;
     }

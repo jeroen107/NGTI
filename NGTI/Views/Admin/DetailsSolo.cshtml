@@ -13,8 +13,8 @@
 </head>
 <body>
     <div>
-        <div class="card-header">
-            <h1>New Solo Reservation</h1>
+        <div class="card-header2">
+            <h1>Details Solo Reservation</h1>
         </div>
         <dl class="row">
             <dt class="col-sm-2">
@@ -48,8 +48,8 @@
                 @Html.DisplayFor(model => model.Seat)
             </dd>
         </dl>
-        <a asp-action="Edit" asp-route-id="@Model.IdSoloReservation">Edit</a> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Edit" asp-route-id="@Model.IdSoloReservation" class="submit3">Edit</a> |
+        <a asp-action="Index" class="submit4">Back to List</a>
     </div>
 
 

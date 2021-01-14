@@ -99,7 +99,7 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,TimeSlot,Reason,TableId")] SoloReservation soloReservation, bool entireWeek, IEnumerable<int> days, int selectedWeek)
+        public async Task<IActionResult> Create([Bind("IdSoloReservation,Name,TimeSlot,Reason,Seat")] SoloReservation soloReservation, bool entireWeek, IEnumerable<int> days, int selectedWeek)
         {
 
             int year = DateTime.Now.Year;

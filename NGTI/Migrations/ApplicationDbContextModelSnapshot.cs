@@ -15,7 +15,7 @@ namespace NGTI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.10")
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -205,12 +205,6 @@ namespace NGTI.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TokenKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TokenValue")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -250,9 +244,6 @@ namespace NGTI.Migrations
                     b.Property<string>("Seat")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TeamName1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Teamname")
                         .HasColumnType("nvarchar(max)");
 
@@ -260,8 +251,6 @@ namespace NGTI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdGroupReservation");
-
-                    b.HasIndex("TeamName1");
 
                     b.ToTable("GroupReservations");
                 });
@@ -380,13 +369,6 @@ namespace NGTI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("NGTI.Models.GroupReservation", b =>
-                {
-                    b.HasOne("NGTI.Models.Teams", "TeamName")
-                        .WithMany()
-                        .HasForeignKey("TeamName1");
                 });
 
             modelBuilder.Entity("NGTI.Models.TeamMember", b =>

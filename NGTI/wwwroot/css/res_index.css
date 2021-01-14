@@ -5,6 +5,12 @@
     background-color: #151517;
 }
 
+body {
+    background-color: #5F5F62;
+    color: white;
+    font: Arial;
+}
+
 .control-label {
     color: #151517;
 }
@@ -19,14 +25,23 @@
 .content-table {
     border-collapse: collapse;
     margin: 25px 0;
-    margin-left: 80px;
+    margin-top: 0px;
+    margin-left:5%;
     font-size: 0.9em;
     min-width: 1000px;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    color: #9F8974;
+
 }
+    
+    .content-table a{
+        color:white;
+    }
+
+    .content-table tr:hover a {
+        color: saddlebrown;
+    }
 
     .content-table thead tr {
         text-align: center;
@@ -37,11 +52,11 @@
         color: #ffffff;
         text-align: left;
         font-weight: bold;
-        color: #9F8974;
     }
 
     .content-table tbody tr:hover {
         background: #ffebc7;
+        color: saddlebrown;
     }
 
     .content-table th,
@@ -69,5 +84,5 @@
 
         .content-table tbody tr.active-row {
             font-weight: bold;
-            color:#9F8974;
+            color: #FFFFFF;
         }

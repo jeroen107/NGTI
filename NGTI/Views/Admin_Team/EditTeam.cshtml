@@ -11,13 +11,20 @@
 <script>
 </script>
 <body>
-    <form asp-action="EditTeam" asp-route-TeamName ="@teamName"  method="post" class="m25">
+    <div class="card-header">
+        <h1>Edit team</h1>
+    </div>
+    <p>
+    </p>
+
+    <form asp-action="EditTeam" asp-route-TeamName="@teamName" method="post" class="m25">
+
         <div class="form-group">
             <h4>Team name</h4>
             <label for="newTeamName" class="control-label"></label>
-            <input type="text" id="newTeamName" name="newTeamName" class="form-control" value="@teamName" style="width: 35%;"/>
+            <input type="text" id="newTeamName" name="newTeamName" class="form-control" value="@teamName" style="width: 35%;" />
         </div>
-        <h4>Remove members</h4>
+        <h5>Remove members</h5>
         <table class="content-table">
             <thead>
                 <tr>
@@ -55,7 +62,7 @@
                 }
             </tbody>
         </table>
-        <h4>Add members?</h4>
+        <h6>Add members?</h6>
         <table class="content-table2">
             <thead>
                 <tr>
@@ -93,9 +100,9 @@
                 }
             </tbody>
         </table>
-        <div class="button">
-            <input type="submit" value="Done" class="btn btn-primary" />
-        </div>
+        
+            <input type="submit" value="Done" class="button" />
+       
     </form>
 </body>
 

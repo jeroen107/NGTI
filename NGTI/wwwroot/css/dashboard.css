@@ -1,39 +1,26 @@
 ﻿
-.personal {
-    width: 25%;
-    margin: 0 auto;
-    display: inline-block;
-    vertical-align: top;
+
+body {
+    background-color: #5F5F62;
+    color: white;
+    font: Arial;
 }
 
-.top {
-    width: 50%;
-    margin: 0 auto;
+
+h2{
+    margin-top:25px;
+    margin-left:30%;
 }
 
-.everybody {
-    margin-left: 25%;
-    display: inline-block;
-    vertical-align: top;
-}
-
-.down {
-    display: inline-block;
-    vertical-align: top;
-}
-
-.up {
-    display: inline-block;
-    vertical-align: top;
-}
 
 
 .content-table {
-    margin: 0 auto;
     border-collapse: collapse;
     margin: 25px 0;
+    margin-left: 30%;
+    margin-top: 25px;
     font-size: 0.9em;
-    min-width: 400px;
+    min-width: 1000px;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -42,43 +29,45 @@
     .content-table thead tr {
         text-align: center;
         vertical-align: middle;
-        text-align: center;
+        text-align: right;
         vertical-align: middle;
         background-color: #1C1C20;
-        color: #f7d9ab;
+        color: #ffffff;
         text-align: left;
         font-weight: bold;
     }
 
+    .content-table tbody tr:hover {
+        background: #ffebc7;
+        color: saddlebrown;
+    }
+
     .content-table th,
     .content-table td {
-        padding: 9px 9px;
+        padding: 15px 18px;
     }
 
     .content-table tbody tr {
-        border-bottom: 1px solid #dddddd;
+        border-bottom: 1px solid #5F5F62;
+        margin-left: 5px;
     }
 
-        .content-table tbody tr:nth-of-type(even) {
-            background-color: #faeee1;
-        }
+    .content-table tbody tr {
+        background-color: #9F8974;
+        border-bottom: 2px solid #5F5F62;
+        border-right: 2px solid #5F5F62;
+        border-left: 2px solid #5F5F62;
+    }
 
-        .content-table tbody tr:hover {
-            background-color: #f7d9ab;
+        .content-table tbody tr:last-of-type {
+            border-bottom: 2px solid #5F5F62;
+            border-right: 2px solid #5F5F62;
+            border-left: 2px solid #5F5F62;
         }
-
-        .content-table tbody tr:nth-of-type(odd) {
-            background-color: #faeee1;
-        }
-
-        .content-table tbody tr:hover {
-            background-color: #f7d9ab;
-        }
-
 
         .content-table tbody tr.active-row {
             font-weight: bold;
-            color: #f5fff5;
+            color: #FFFFFF;
         }
 
 
