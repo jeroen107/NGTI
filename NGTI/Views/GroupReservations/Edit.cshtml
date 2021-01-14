@@ -49,10 +49,11 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="Create">
+            <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <!--<label asp-for="Name" class="control-label"></label>-->
+                    <input type="hidden" asp-for="IdGroupReservation" name="IdGroupreservation" />
                     <input asp-for="Name" class="form-control" value="@User.Identity.Name" hidden />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
@@ -63,23 +64,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="selectedWeek" class="control-label">Week</label>
-                    <select id="select_id" name="selectedWeek" class="form-control">
-                        @for (int x = 0; x < weken; x++)
-                        {
-                            <option value=@selectlist[x]>@selectlist[x] @selectdate[x].</option>
-                        }
-                    </select>
-                    <label>choose<input type="radio" name="entireWeek" checked="checked" onclick="clickWeek('false')" value=false /></label>
-                    <label>whole week<input type="radio" name="entireWeek" onclick="clickWeek('true')" value=true /></label>
-                </div>
-                <!-- choose days -->
-                <div>
-                    <label>Ma<input type="checkbox" name="days" value=0></label>
-                    <label>Di<input type="checkbox" name="days" value=1></label>
-                    <label>Wo<input type="checkbox" name="days" value=2></label>
-                    <label>Do<input type="checkbox" name="days" value=3></label>
-                    <label>Vr<input type="checkbox" name="days" value=4></label>
+                    <label asp-for="Date" class="control-label"></label>
+                    <input asp-for="Date" type="date" asp-format="{0:dd:mm:yyyy}" class="form-control" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="TimeSlot" class="control-label"></label>

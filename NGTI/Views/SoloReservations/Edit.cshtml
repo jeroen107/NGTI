@@ -47,31 +47,19 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <form asp-action="Create">
+                <form asp-action="Edit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <!--<label asp-for="Date" class="control-label"></label>
                         <input asp-for="Date" type="date" asp-format="{0:dd:mm:yyyy}" class="form-control" />
                         <span asp-validation-for="Date" class="text-danger"></span>-->
                         <!-- choose or entireweek -->
+                         <input asp-for="IdSoloReservation" name="IdSoloReservation" hidden />
+                        <input asp-for="Name" class="form-control" value="@User.Identity.Name" hidden />
                         <div class="form-group">
-                            <label for="selectedWeek" class="control-label">Week</label>
-                            <select id="select_id" name="selectedWeek" class="form-control">
-                                @for (int x = 0; x < weken; x++)
-                                {
-                                    <option value=@selectlist[x]>@selectlist[x] @selectdate[x].</option>
-                                }
-                            </select>
-                            <label>choose<input type="radio" name="entireWeek"  checked="checked" onclick="clickWeek('false')" value=false /></label>
-                            <label>whole week<input type="radio" name="entireWeek" onclick="clickWeek('true')" value=true /></label>
-                        </div>
-                        <!-- choose days -->
-                        <div class="form-group">
-                            <label class ="container1">Ma<input type="checkbox" checked="checked" name="days" value=0><span class="checkmark1"></span></label>
-                            <label class ="container2">Di<input type="checkbox" checked="checked" name="days" value=1><span class="checkmark2"></span></label>
-                            <label class ="container3">Wo<input type="checkbox" checked="checked" name="days" value=2><span class="checkmark3"></span></label>
-                            <label class ="container4">Do<input type="checkbox" checked="checked" name="days" value=3><span class="checkmark4"></span></label>
-                            <label class ="container5">Vr<input type="checkbox" checked="checked" name="days" value=4><span class="checkmark5"></span></label>
+                            <label asp-for="Date" class="control-label"></label>
+                            <input asp-for="Date" type="date" asp-format="{0:mm:dd:yyyy}" class="form-control" />
+                            <span asp-validation-for="Date" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -99,7 +87,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Edit" class="submit" />
+                        <input type="submit" value="Save" class="submit" />
                     </div>
                 </form>
                 <a asp-action="Index">Go to Overview</a>

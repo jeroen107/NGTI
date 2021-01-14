@@ -461,12 +461,8 @@ namespace NGTI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,Seat")] GroupReservation groupReservation)
+        public async Task<IActionResult> Edit([Bind("IdGroupReservation,Name,Teamname,Date,TimeSlot,Reason,Seat")] GroupReservation groupReservation)
         {
-            if (id != groupReservation.IdGroupReservation)
-            {
-                return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
@@ -501,7 +497,7 @@ namespace NGTI.Controllers
             }
 
             var groupReservation = await _context.GroupReservations
-                .Include(g => g.Seat)
+                //.Include(g => g.Seat)
                 .FirstOrDefaultAsync(m => m.IdGroupReservation == id);
             if (groupReservation == null)
             {
@@ -514,11 +510,11 @@ namespace NGTI.Controllers
         // POST: GroupReservations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id, string type)
         {
-            var groupReservation = await _context.GroupReservations.FindAsync(id);
-            _context.GroupReservations.Remove(groupReservation);
-            await _context.SaveChangesAsync();
+            System.Diagnostics.Debug.WriteLine("deleteConfirmed : [" + id + "] [" + type + "]");
+            string sql = "DELETE FROM GroupReservations WHERE IdGroupReservation = " + id;
+            SqlMethods.QueryVoid(sql);
             return RedirectToAction(nameof(Index));
         }
 

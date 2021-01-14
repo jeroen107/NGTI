@@ -58,7 +58,7 @@
                     <td>
                         <a asp-action="EditUser" asp-controller="Admin" asp-route-id="@user.Id">Edit</a> |
                         <a asp-action="Details" asp-route-id="@user.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+                        <a asp-action="DeleteUser" onclick="return confirm('Are you sure you want to delete the user?')" asp-route-id="@user.Id">Delete</a>
                     </td>
                 </tr>
             }
