@@ -10,8 +10,8 @@ using NGTI.Data;
 namespace NGTI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210114005125_adsdasda")]
-    partial class adsdasda
+    [Migration("20210114005357_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -207,12 +207,6 @@ namespace NGTI.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TokenKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TokenValue")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -261,6 +255,18 @@ namespace NGTI.Migrations
                     b.HasKey("IdGroupReservation");
 
                     b.ToTable("GroupReservations");
+                });
+
+            modelBuilder.Entity("NGTI.Models.Limit", b =>
+                {
+                    b.Property<int>("limit")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("limit");
+
+                    b.ToTable("Limit");
                 });
 
             modelBuilder.Entity("NGTI.Models.SoloReservation", b =>
