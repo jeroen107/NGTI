@@ -6,23 +6,33 @@
     font-family: Arial;
 }
 
+
+body {
+    background-color: #5F5F62;
+    color: white;
+    font: Arial;
+}
+
 .row {
     position: absolute;
     left: 50%;
     margin-left: -100px;
     width: 57%;
-    background: #636363;
+    background: #5F5F62;
     color: #5F5F62;
 }
 
-
+.control-label{
+    margin-top: -50px;
+    margin-left: -30%;
+}
 
 
 .form-group {
     margin-left: 25px;
     margin-right: -50px;
     color: #151517;
-    background-color: #636363;
+    background-color: #5F5F62;
 }
 
 .link a {
@@ -40,21 +50,31 @@
 
     }
 
-.col-md-4 {
-    background: #636363;
-}
 
 .form-control {
-    margin-top:25px;
-    background-color: #1C1C20;
-    color: #9F8974;
-    border-color: #1C1C20
+    margin-left: -30%;
+    background-color: #151517;
+    border-color: #151517;
+    color: white;
 }
 
-    .form-control:active,
+    .form-control:active {
+        background-color: #1C1C20;
+        color: white;
+        border-color: #1C1C20;
+        outline: none;
+    }
+
     .form-control:hover {
         background-color: #1C1C20;
-        color: #9F8974;
+        color: white;
+        border-color: #1C1C20;
+        outline: none;
+    }
+
+    .form-control:focus {
+        background-color: #1C1C20;
+        color: white;
         border-color: #1C1C20;
         outline: none;
     }
@@ -76,7 +96,7 @@
     padding: 0.35em 1.2em;
     border: 0.1em solid #000;
     margin-top: 25px;
-    margin-left: -95px;
+    margin-left: -30%;
     border-radius: 100px;
     box-sizing: border-box;
     text-decoration: none;

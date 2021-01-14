@@ -1,14 +1,26 @@
-﻿body {
-    background-color: #1C1C20;
+﻿.card-header {
+    margin-left: 225px;
+    text-align: center;
+    color: #9F8974;
+    background-color: #151517;
+    font-family: Arial;
+    font-size:45px;
+}
+
+
+
+body {
+    background-color: #5F5F62;
     color: white;
     font: Arial;
 }
 
-h4 {
-    background-color: #1C1C20;
-    color: #5F5F62;
+h7 {
+    background-color: #5F5F62;
+    color: #151517;
     border: 10px;
-    border-color: #1C1C20;
+    border-color: #9F8974;
+    margin-left: 30%;
 }
 
 .content-table {

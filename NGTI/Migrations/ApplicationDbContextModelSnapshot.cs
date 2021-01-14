@@ -241,11 +241,8 @@ namespace NGTI.Migrations
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TableId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TeamName1")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Seat")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Teamname")
                         .HasColumnType("nvarchar(max)");
@@ -254,10 +251,6 @@ namespace NGTI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdGroupReservation");
-
-                    b.HasIndex("TableId");
-
-                    b.HasIndex("TeamName1");
 
                     b.ToTable("GroupReservations");
                 });
@@ -278,29 +271,15 @@ namespace NGTI.Migrations
                     b.Property<string>("Reason")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TableId")
-                        .HasColumnType("int");
+                    b.Property<string>("Seat")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TimeSlot")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdSoloReservation");
 
-                    b.HasIndex("TableId");
-
                     b.ToTable("SoloReservations");
-                });
-
-            modelBuilder.Entity("NGTI.Models.Table", b =>
-                {
-                    b.Property<int>("TableId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("TableId");
-
-                    b.ToTable("Tables");
                 });
 
             modelBuilder.Entity("NGTI.Models.Team", b =>
@@ -388,28 +367,6 @@ namespace NGTI.Migrations
                     b.HasOne("NGTI.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("NGTI.Models.GroupReservation", b =>
-                {
-                    b.HasOne("NGTI.Models.Table", "Table")
-                        .WithMany("GroupReservations")
-                        .HasForeignKey("TableId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NGTI.Models.Teams", "TeamName")
-                        .WithMany()
-                        .HasForeignKey("TeamName1");
-                });
-
-            modelBuilder.Entity("NGTI.Models.SoloReservation", b =>
-                {
-                    b.HasOne("NGTI.Models.Table", "Table")
-                        .WithMany("SoloReservations")
-                        .HasForeignKey("TableId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
