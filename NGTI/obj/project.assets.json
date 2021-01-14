@@ -9607,19 +9607,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jeroe\\.nuget\\packages\\": {}
+    "C:\\Users\\zoon_\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jeroe\\source\\repos\\NGTI\\NGTI\\NGTI.csproj",
+      "projectUniqueName": "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\NGTI.csproj",
       "projectName": "NGTI",
-      "projectPath": "C:\\Users\\jeroe\\source\\repos\\NGTI\\NGTI\\NGTI.csproj",
-      "packagesPath": "C:\\Users\\jeroe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jeroe\\source\\repos\\NGTI\\NGTI\\obj\\",
+      "projectPath": "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\NGTI.csproj",
+      "packagesPath": "C:\\Users\\zoon_\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\zoon_\\source\\repos\\NGTI2\\NGTI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jeroe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\zoon_\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9722,7 +9722,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
       }
     }
   },
