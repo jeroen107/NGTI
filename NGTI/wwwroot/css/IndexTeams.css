@@ -6,6 +6,12 @@
     font-family:Arial;
 }
 
+body {
+    background-color: #5F5F62;
+    color: white;
+    font: Arial;
+}
+
 .content {
     margin-top: 10em;
     position: absolute;
@@ -15,32 +21,40 @@
 }
 
 .create {
-    margin-top: 3em;
-    background: #2b2b2b;
-    position: absolute;
+    margin-top: 25px;
+    margin-left:-525px;
     text-align: center;
-    color: #9F8974;
-    margin-left: 50%;
-    font-weight: 100;
+    font-size:12px;
 }
+    .create a {
+        color: #9F8974;
+        transition: 0.2s
+    }
 
-h1 {
-    margin-left:-50px;
-    background-color: #636363;
-    border-color: #636363;
-    text-decoration-color: #636363;
-}
+    .create a:hover {
+        color: saddlebrown;
+    }
+
 
 .content-table {
     border-collapse: collapse;
     margin: 25px 0;
     margin-left: 80px;
+    margin-top:-100px;
     font-size: 0.9em;
     min-width: 1000px;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
 }
+    .content-table a {
+        color: white;
+    }
+
+    .content-table tr:hover a{
+        color: saddlebrown;
+    }
 
     .content-table thead tr {
         text-align: center;
@@ -51,15 +65,18 @@ h1 {
         color: #ffffff;
         text-align: left;
         font-weight: bold;
+
     }
 
     .content-table tbody tr:hover {
         background: #ffebc7;
+        color: saddlebrown;
     }
 
     .content-table th,
     .content-table td {
         padding: 15px 18px;
+
     }
 
     .content-table tbody tr {

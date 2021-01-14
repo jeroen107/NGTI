@@ -6,9 +6,11 @@
     font-family:Arial;
 }
 
+
 body {
-    color: #151517;
-    font-family: Arial;
+    background-color: #5F5F62;
+    color: white;
+    font: Arial;
 }
 
 .label {
@@ -45,8 +47,6 @@ select.focus {
     display: inline-block;
     padding: 0.35em 1.2em;
     border: 0.1em solid #000;
-    margin-top: 75px;
-    margin-left: 125px;
     border-radius: 100px;
     box-sizing: border-box;
     text-decoration: none;
@@ -55,6 +55,8 @@ select.focus {
     color: #000000;
     text-align: center;
     transition: all 0.2s;
+    margin-left:30%;
+    margin-top:20%;
 }
 
     .submit:hover {
@@ -72,8 +74,8 @@ select.focus {
     display: inline-block;
     padding: 0.35em 1.2em;
     border: 0.1em solid #000;
-    margin-top: 75px;
-    margin-left: -100px;
+    margin-top: 20%;
+    margin-left: -80px;
     border-radius: 100px;
     box-sizing: border-box;
     text-decoration: none;
@@ -96,7 +98,8 @@ select.focus {
 }
 
 .form-control:active,
-.form-control:hover{
+.form-control:hover,
+.form-control:focus{
     background-color: #1C1C20;
     color: #9F8974;
     border-color: #1C1C20;
@@ -117,7 +120,7 @@ select.focus {
 .container1 {
     display: block;
     position: relative;
-    padding-left: 25px;
+    padding-left: 35px;
     margin-bottom: 12px;
     margin-left:10px;
     padding-bottom:20px;
@@ -136,8 +139,8 @@ select.focus {
     display: block;
     position: relative;
     padding-left: 35px;
-    margin-top: -24px;
-    margin-left: 35px;
+    margin-top: -56px;
+    margin-left: 75px;
     cursor: pointer;
     font-size: 16px;
     -webkit-user-select: none;
@@ -151,7 +154,7 @@ select.focus {
     position: relative;
     padding-left: 35px;
     margin-top: -32px;
-    margin-left: 100px;
+    margin-left: 140px;
     cursor: pointer;
     font-size: 16px;
     -webkit-user-select: none;
@@ -165,7 +168,7 @@ select.focus {
     position: relative;
     padding-left: 35px;
     margin-top: -32px;
-    margin-left: 170px;
+    margin-left: 205px;
     cursor: pointer;
     font-size: 16px;
     -webkit-user-select: none;
@@ -179,7 +182,7 @@ select.focus {
     position: relative;
     padding-left: 35px;
     margin-top: -32px;
-    margin-left: 240px;
+    margin-left: 270px;
     cursor: pointer;
     font-size: 16px;
     -webkit-user-select: none;

@@ -10,45 +10,44 @@
     <link rel="stylesheet" href="~/css/details.css" />
 </head>
 <body>
-    <h1>Details</h1>
-
-    <div>
-        <h4>GroupReservation</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Teamname):
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Teamname)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Date):
-            </dt>
-            <dd class="col-sm-10">
-                                           @Convert.ToString(string.Format("{0:ddd d MMMM}", Model.Date))
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TimeSlot):
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TimeSlot)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Reason):
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Reason)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Seat):
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Seat)
-            </dd>
-        </dl>
-        <a asp-action="Edit" asp-route-id="@Model.IdGroupReservation">Edit</a> |
-        <a asp-action="Index">Back to List</a>
+    <div class="card-header2">
+        <h1>Details Group Reservation</h1>
+    </div>
+    <h4>GroupReservation</h4>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Teamname):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Teamname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Date):
+        </dt>
+        <dd class="col-sm-10">
+            @Convert.ToString(string.Format("{0:ddd d MMMM}", Model.Date))
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TimeSlot):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TimeSlot)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Reason):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Reason)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Seat):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Seat)
+        </dd>
+    </dl>
+    <a asp-action="Edit" asp-route-id="@Model.IdGroupReservation" class="submit3">Edit</a> |
+    <a asp-action="Index" class="submit4">Back to List</a>
     </div>
 
 

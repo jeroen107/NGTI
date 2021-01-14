@@ -1,14 +1,37 @@
 ﻿.card-header {
     margin-left: 225px;
     text-align: center;
-    background: #9F8974;
+    color: #9F8974;
+    background-color: #151517;
+    font-family: Arial;
+    font-size: 38px;
+    margin-bottom: 50px;
 }
+
+
+.card-header2 {
+    margin-left: 225px;
+    text-align: center;
+    color: #9F8974;
+    background-color: #151517;
+    font-family: Arial;
+    font-size: 38px;
+    margin-top: -56px;
+}
+
+body {
+    background-color: #5F5F62;
+    color: white;
+    font: Arial;
+}
+
 
 .row {
     text-align: match-parent;
     position: absolute;
     left: 50%;
     margin-left: -100px;
+    margin-top:50px;
     width: 50%;
     color: white;
 }
@@ -19,3 +42,123 @@
     position: absolute;
     left: 50%;
 }
+
+
+
+
+.submit {
+    background: #9F8974;
+    position: absolute;
+    display: inline-table;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #000;
+    border-radius: 100px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: Arial;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    transition: all 0.2s;
+    margin-left: 125px;
+    margin-top: 150px;
+}
+
+    .submit:hover {
+        background: #1C1C20;
+        color: #9F8974;
+    }
+
+.submit2 {
+    background: #9F8974;
+    position: absolute;
+    display: inline-table;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #000;
+    margin-top: 150px;
+    margin-left: -10px;
+    border-radius: 100px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: Arial;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    transition: all 0.2s;
+    white-space:nowrap;
+}
+
+
+
+
+    .submit2:hover {
+        background: #1C1C20;
+        color: #9F8974;
+    }
+
+
+.submit3 {
+    background: #9F8974;
+    position: absolute;
+    display: inline-table;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #000;
+    border-radius: 100px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: Arial;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    transition: all 0.2s;
+    margin-left: 125px;
+    margin-top: 300px;
+}
+
+    .submit3:hover {
+        background: #1C1C20;
+        color: #9F8974;
+    }
+
+.submit4{
+    background: #9F8974;
+    position: absolute;
+    display: inline-table;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #000;
+    margin-top: 300px;
+    margin-left: -10px;
+    border-radius: 100px;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: Arial;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+
+
+
+    .submit4:hover {
+        background: #1C1C20;
+        color: #9F8974;
+    }

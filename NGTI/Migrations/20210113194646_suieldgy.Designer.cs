@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NGTI.Data;
 
 namespace NGTI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210113194646_suieldgy")]
+    partial class suieldgy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,18 +255,6 @@ namespace NGTI.Migrations
                     b.HasKey("IdGroupReservation");
 
                     b.ToTable("GroupReservations");
-                });
-
-            modelBuilder.Entity("NGTI.Models.Limit", b =>
-                {
-                    b.Property<int>("limit")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("limit");
-
-                    b.ToTable("Limit");
                 });
 
             modelBuilder.Entity("NGTI.Models.SoloReservation", b =>
