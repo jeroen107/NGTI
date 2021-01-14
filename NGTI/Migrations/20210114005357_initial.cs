@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NGTI.Migrations
 {
-    public partial class suieldgy : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,6 +64,18 @@ namespace NGTI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GroupReservations", x => x.IdGroupReservation);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Limit",
+                columns: table => new
+                {
+                    limit = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Limit", x => x.limit);
                 });
 
             migrationBuilder.CreateTable(
@@ -300,6 +312,9 @@ namespace NGTI.Migrations
 
             migrationBuilder.DropTable(
                 name: "GroupReservations");
+
+            migrationBuilder.DropTable(
+                name: "Limit");
 
             migrationBuilder.DropTable(
                 name: "SoloReservations");
