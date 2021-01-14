@@ -10,8 +10,8 @@ using NGTI.Data;
 namespace NGTI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210112223149_fix")]
-    partial class fix
+    [Migration("20210114005125_adsdasda")]
+    partial class adsdasda
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -252,9 +252,6 @@ namespace NGTI.Migrations
                     b.Property<string>("Seat")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TeamName1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Teamname")
                         .HasColumnType("nvarchar(max)");
 
@@ -262,8 +259,6 @@ namespace NGTI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdGroupReservation");
-
-                    b.HasIndex("TeamName1");
 
                     b.ToTable("GroupReservations");
                 });
@@ -382,13 +377,6 @@ namespace NGTI.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("NGTI.Models.GroupReservation", b =>
-                {
-                    b.HasOne("NGTI.Models.Teams", "TeamName")
-                        .WithMany()
-                        .HasForeignKey("TeamName1");
                 });
 
             modelBuilder.Entity("NGTI.Models.TeamMember", b =>

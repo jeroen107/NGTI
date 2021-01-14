@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NGTI.Migrations
 {
-    public partial class suieldgy : Migration
+    public partial class adsdasda : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,7 +41,9 @@ namespace NGTI.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     BHV = table.Column<bool>(nullable: false),
-                    Admin = table.Column<bool>(nullable: false)
+                    Admin = table.Column<bool>(nullable: false),
+                    TokenKey = table.Column<string>(nullable: true),
+                    TokenValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
